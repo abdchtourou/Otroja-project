@@ -1,4 +1,4 @@
-import 'package:admins/src/otroja/presentation/screens/Login/login_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,7 +31,6 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
                 fontFamily: 'DIN Next LT Arabic',
                 ),
-            home: LoginScreen(),
           );
         });
   }
