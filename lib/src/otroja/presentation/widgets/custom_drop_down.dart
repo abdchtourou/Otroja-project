@@ -33,7 +33,7 @@ class CustomDropdown extends StatelessWidget {
               ),
             ),
           DropdownButtonFormField<String>(
-            hint:  Text(
+            hint: Text(
               textDirection: TextDirection.rtl,
               hint!,
               style: const TextStyle(
@@ -69,7 +69,7 @@ class CustomDropdown extends StatelessWidget {
               color: Colors.black,
             ),
             onChanged: (value) {
-              print(value); // Handle change here
+              print(value);
             },
             items: list.map<DropdownMenuItem<String>>((String value) {
               return DropdownMenuItem<String>(
