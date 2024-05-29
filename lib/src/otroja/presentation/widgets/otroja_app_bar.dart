@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class LoginAppBar extends StatelessWidget {
-  const LoginAppBar({super.key});
+class OtrojaAppBar extends StatelessWidget {
+  final String mainText;
+  final String secText;
+
+  // Constructor
+  const OtrojaAppBar({super.key, required this.mainText, required this.secText});
 
   @override
   Widget build(BuildContext context) {
@@ -52,12 +56,12 @@ class LoginAppBar extends StatelessWidget {
             height:40.sp,
           ),
           Text(
-            'تسجيل الدخول',
+            mainText,
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 10), // Optional spacing between texts
           Text(
-            'مرحبا بعودتك , قم بإدخال بياناتك لتسجيل الدخول',
+            secText,
             style: TextStyle(fontSize: 15, fontWeight: FontWeight.normal, color: Color.fromARGB(255, 119, 119, 119)),
           ),
         ],
