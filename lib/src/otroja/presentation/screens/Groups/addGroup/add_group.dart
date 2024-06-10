@@ -88,7 +88,7 @@ class _AddGroupState extends State<AddGroup> {
                                 icon:
                                     AssetImage('assets/icons/studentWhite.png'),
                                 backgroundColor: const Color(0xFF85313C),
-                                text: "طلاب الحلقة",
+                                text: "إضافة طلاب للحلقة",
                                 textColor: const Color(0xffEEEAE4),
                               ),
                             ],
