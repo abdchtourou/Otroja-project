@@ -6,7 +6,7 @@ import 'package:admins/src/otroja/presentation/widgets/otroja_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../widgets/custom_buttom.dart';
+import '../../../widgets/custom_button.dart';
 import '../../../widgets/otroja_text_field.dart';
 
 class AddGroup extends StatefulWidget {
@@ -96,11 +96,11 @@ class _AddGroupState extends State<AddGroup> {
                           SizedBox(
                             height: 60.h,
                           ),
-                          CustomButtom(
-                            onTap: () async {
+                          CustomButton(
+                            onPressed: () async {
                               if (formKey.currentState!.validate()) {}
                             },
-                            title: 'إنشاء حلقة',
+                            text: 'إنشاء حلقة',
                           ),
                         ],
                       ),
@@ -115,3 +115,4 @@ class _AddGroupState extends State<AddGroup> {
     );
   }
 }
+

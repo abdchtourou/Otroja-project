@@ -23,7 +23,7 @@ class CustomIconButton extends StatelessWidget {
     return Container(
       width: size,
       height: size,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Color(0xFF85313C),
         borderRadius: BorderRadius.all(Radius.circular(50)),
       ),
