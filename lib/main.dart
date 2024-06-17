@@ -1,22 +1,26 @@
 
-import 'package:admins/src/otroja/presentation/screens/Groups/addGroup/add_group.dart';
+import 'package:admins/src/otroja/core/di/dependency_injection.dart';
+import 'package:admins/src/otroja/core/routing/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() {
-  runApp(const MyApp());
+  setUpGetIt();
+
+  runApp( MyApp(appRouter: AppRouter(),));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+   MyApp({super.key, required this.appRouter});
+  final  AppRouter appRouter;
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
 
   // Set the status bar color to transparent
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent, // Make status bar transparent
       statusBarIconBrightness: Brightness.dark, // Optionally, set status bar icons to dark
     ));
@@ -32,7 +36,8 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
                 fontFamily: 'DIN Next LT Arabic',
                 ),
-              home: AddGroup()
+            onGenerateRoute: appRouter.generateRoute,
+
           );
         });
   }
