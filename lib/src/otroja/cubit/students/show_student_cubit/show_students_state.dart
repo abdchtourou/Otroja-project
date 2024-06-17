@@ -1,0 +1,14 @@
+
+import '../../../data/models/student_model/show_students.dart';
+
+sealed class ShowStudentsState {}
+
+final class ShowStudentsInitial extends ShowStudentsState {}
+
+final class ShowStudentsLoading extends ShowStudentsState {}
+
+final class ShowStudentsLoaded extends ShowStudentsState {
+  final List<ShowStudentsModel> students;
+
+  ShowStudentsLoaded(this.students);
+}
