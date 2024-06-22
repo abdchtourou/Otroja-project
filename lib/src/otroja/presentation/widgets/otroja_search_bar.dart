@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class SearchBarStudents extends StatelessWidget {
-  const SearchBarStudents({Key? key}) : super(key: key);
+class OtrojaSearchBar extends StatelessWidget {
+  const OtrojaSearchBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
