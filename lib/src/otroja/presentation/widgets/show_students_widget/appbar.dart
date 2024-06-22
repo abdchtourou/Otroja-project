@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class OtrojaAppBar extends StatelessWidget implements PreferredSizeWidget {
+class Appbar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? optionalWidget;
   String? mainText;
   String? secText;
 
-  OtrojaAppBar({super.key, this.optionalWidget, required this.mainText, this.secText});
+  Appbar({super.key, this.optionalWidget, required this.mainText, this.secText});
 
   @override
   Widget build(BuildContext context) {
