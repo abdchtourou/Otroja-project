@@ -1,3 +1,4 @@
+import 'package:admins/src/otroja/cubit/students/add_studnet/add_studnet_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
@@ -10,6 +11,7 @@ Future<void> setUpGetIt()async{
   ApiServices apiServices = ApiServices();
   getIt.registerLazySingleton<ShowStudentsRepo>(() => ShowStudentsRepo(apiServices));
   getIt.registerLazySingleton<ShowStudentsCubit>(() => ShowStudentsCubit( getIt()));
+  getIt.registerLazySingleton<AddStudentCubit>(()=>AddStudentCubit());
 
 
 

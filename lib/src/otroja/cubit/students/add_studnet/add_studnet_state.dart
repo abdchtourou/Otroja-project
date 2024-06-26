@@ -1,6 +1,16 @@
 part of 'add_studnet_cubit.dart';
 
 @immutable
-sealed class AddStudnetState {}
+sealed class AddStudentState {}
 
-final class AddStudnetInitial extends AddStudnetState {}
+final class AddStudentInitial extends AddStudentState {}
+final class ImageLoaded extends AddStudentState {
+  String? imagePath;
+
+  ImageLoaded(this.imagePath);
+}
+final class ImageError  extends AddStudentState {
+  String? errorMessage;
+
+  ImageError(this.errorMessage);
+}

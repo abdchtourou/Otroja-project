@@ -1,17 +1,20 @@
+import 'dart:io';
 import 'dart:ui';
 
+import 'package:admins/src/otroja/cubit/students/add_studnet/add_studnet_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ImageStudent extends StatelessWidget {
-  ImageStudent({super.key, this.isEdit=false});
+  ImageStudent({super.key, this.isEdit = false});
 
-
-
-  bool? isEdit ;
+  bool? isEdit;
 
   @override
   Widget build(BuildContext context) {
+    print("/////////////////////////////////////////////////////////////////////");
+    print(context.read<AddStudentCubit>().image);
     return Container(
       width: 120,
       height: 150,
@@ -22,15 +25,20 @@ class ImageStudent extends StatelessWidget {
         children: [
           Positioned(
             top: 0,
-            child: Container(
+            child:Container(
               width: 94,
               height: 91,
               margin: const EdgeInsets.only(top: 20),
-              decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  color: Color(0xffbacEEEAE4),
-                  image: DecorationImage(
-                      image: AssetImage('assets/images/people (1) 1.png'))),
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
+                color: const Color(0xffbacEEEAE4),
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: context.read<AddStudentCubit>().image == 'assets/images/people (1) 1.png'
+                      ? AssetImage('assets/images/people (1) 1.png') as ImageProvider
+                      : FileImage(File(context.read<AddStudentCubit>().image)),
+                ),
+              ),
             ),
           ),
           Positioned(
@@ -49,7 +57,9 @@ class ImageStudent extends StatelessWidget {
                   size: 20,
                 ),
                 iconSize: 35,
-                onPressed: () {},
+                onPressed: () {
+                  context.read<AddStudentCubit>().pickImage();
+                },
 
                 constraints: const BoxConstraints.tightFor(
                   width: 35,

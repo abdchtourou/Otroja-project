@@ -28,8 +28,8 @@ class _AddStudentState extends State<AddStudent> {
           mainText: 'إضافة طالب',
           secText: 'املأ الحقول الموجودة في الأسفل ثم اضغط على زر إضافة طالب ',
       ),
-      body: BlocBuilder<AddStudentCubit, AddStudnetState>(
-        builder: (BuildContext context, AddStudnetState state) {
+      body: BlocBuilder<AddStudentCubit, AddStudentState>(
+        builder: (BuildContext context, AddStudentState state) {
           return Form(
             key: BlocProvider.of<AddStudentCubit>(context).formKey,
             child: Column(
