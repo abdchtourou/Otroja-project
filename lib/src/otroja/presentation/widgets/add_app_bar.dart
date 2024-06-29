@@ -14,7 +14,7 @@ class AddAppBar extends StatelessWidget {
         height: 35,
         decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('assets/images/add 1.png'))),
+                image: AssetImage('assets/icons/add.png'))),
       ),
     );
   }

@@ -46,34 +46,9 @@ class OtrojaAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           ),
         ),
-        Center(
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 40,
-              ),
-              Text(
-                mainText!,
-                style:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 10), // Optional spacing between texts
-              Text(
-                secText ?? " ",
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                    height: 1.47,
-                    letterSpacing: 0.02,
-                    fontSize: 15,
-                    fontWeight: FontWeight.normal,
-                    color: Color.fromARGB(255, 119, 119, 119)),
-              ),
-            ],
-          ),
-        ),
-        Positioned(
-          top: 30,
-          child: IconButton(
+        Row(
+          children: [
+         IconButton(
             onPressed: () {},
             icon: const Icon(
               Icons.arrow_back_ios,
@@ -81,13 +56,38 @@ class OtrojaAppBar extends StatelessWidget implements PreferredSizeWidget {
               size: 30,
             ),
           ),
-        ),
+          Center(
+            
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  Text(
+                    mainText!,
+                    style:
+                        const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 10), // Optional spacing between texts
+                  Text(
+                    secText ?? " ",
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        height: 1.47,
+                        letterSpacing: 0.02,
+                        fontSize: 15,
+                        fontWeight: FontWeight.normal,
+                        color: Color.fromARGB(255, 119, 119, 119)),
+                  ),
+                ],
+              ),
+            ),
         if (optionalWidget != null)
-          Positioned(
-            right: 10,
-            top: 40,
-            child: optionalWidget!,
-          ),
+          optionalWidget!
+          
+          ],
+        ),
+        
       ],
     );
   }
