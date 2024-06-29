@@ -17,7 +17,8 @@ class AddStudentToGroupScreen extends StatelessWidget {
           mainText: "حدد طلاب الحلقة",
           secText:
               "في حال أردت إضافة طالب جديد غير موجود مسبقا فاضغط على زر الإضافة يمينا",
-              optionalWidget: AddAppBar(onTap: (){}),),
+              optionalWidget: AddAppBar(onTap: (){}),
+              ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(

@@ -7,15 +7,14 @@ class AddAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  InkWell(
-      onTap: onTap,
-      child: Container(
-        width: 35,
-        height: 35,
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('assets/icons/add.png'))),
-      ),
-    );
+     return 
+    IconButton(
+        onPressed: onTap,
+        icon: Image.asset(
+          "assets/icons/add.png",
+          color: Color(0xFF85313C),
+          width: 30, // Specify width instead of size
+          height: 30, // Specify height instead of size
+        ));
   }
 }
