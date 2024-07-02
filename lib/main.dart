@@ -31,11 +31,6 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
                 fontFamily: 'DIN Next LT Arabic',
                 ),
-             
-
-            
-
-
           );
         });
   }
