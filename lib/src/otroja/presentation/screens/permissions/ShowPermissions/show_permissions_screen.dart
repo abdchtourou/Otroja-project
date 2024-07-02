@@ -1,3 +1,4 @@
+import 'package:admins/src/otroja/presentation/screens/permissions/ShowPermissions/widgets/permission_card.dart';
 import 'package:admins/src/otroja/presentation/widgets/add_app_bar.dart';
 import 'package:admins/src/otroja/presentation/widgets/otroja_app_bar.dart';
 import 'package:admins/src/otroja/presentation/widgets/otroja_search_bar.dart';
@@ -6,19 +7,43 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../widgets/otroja_button.dart';
 
-class AddStudentToGroupScreen extends StatelessWidget {
-  const AddStudentToGroupScreen({super.key});
+class ShowPermissionsScreen extends StatelessWidget {
+  const ShowPermissionsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    List<String> students = ["islam", "Abd","islam", "Abd","islam", "Abd","islam", "Abd","islam", "Abd","islam", "Abd","islam", "Abd","islam", "Abd","islam", "Abd","islam", "Abd","islam", "Abd","islam", "Abd",];
+    List<String> students = [
+      "islam",
+      "Abd",
+      "islam",
+      "Abd",
+      "islam",
+      "Abd",
+      "islam",
+      "Abd",
+      "islam",
+      "Abd",
+      "islam",
+      "Abd",
+      "islam",
+      "Abd",
+      "islam",
+      "Abd",
+      "islam",
+      "Abd",
+      "islam",
+      "Abd",
+      "islam",
+      "Abd",
+      "islam",
+      "Abd",
+    ];
     return Scaffold(
       appBar: OtrojaAppBar(
-          mainText: "حدد طلاب الحلقة",
-          secText:
-              "في حال أردت إضافة طالب جديد غير موجود مسبقا فاضغط على زر الإضافة يمينا",
-              optionalWidget: AddAppBar(onTap: (){}),
-              ),
+        mainText: "الصلاحيات",
+        secText:
+            "ابحث عن أي صلاحية أو اضغط على الصلاحية لعرض تفاصيلها",
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -30,16 +55,14 @@ class AddStudentToGroupScreen extends StatelessWidget {
               child: ListView.builder(
                 itemCount: students.length,
                 itemBuilder: (context, index) {
-                  return UserCard(
-                    name: students[index],
-                    imagePath: "assets/images/kidsNew.png",
-                    iconPath: "assets/icons/add.png",
-                    onPressed: (){},
+                  return PermissionCard(
+                    title: students[index],
+                    numberOfAuthorizedAdmins: "5",
+                    onPressed: () {},
                   );
                 },
               ),
             ),
-            OtrojaButton(text: "إضافة", onPressed:(){} )
           ],
         ),
       ),

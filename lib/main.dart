@@ -1,6 +1,4 @@
-import 'package:admins/src/otroja/presentation/screens/Groups/addGroup/add_group.dart';
-import 'package:admins/src/otroja/presentation/screens/Groups/addStudentToGroup/add_student_to_group_screen.dart';
-import 'package:admins/src/otroja/presentation/screens/Groups/groupStudents/group_students_screen.dart';
+import 'package:admins/src/otroja/presentation/screens/permissions/ShowAuthorizedAdmins/show_authorized_admins.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -34,11 +32,7 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
                 fontFamily: 'DIN Next LT Arabic',
                 ),
-              home: AddStudentToGroupScreen()
-
-            
-
-
+                home: ShowAuthorizedAdminsScreen(),
           );
         });
   }
