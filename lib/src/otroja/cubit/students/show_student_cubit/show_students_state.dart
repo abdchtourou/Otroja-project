@@ -8,7 +8,7 @@ final class ShowStudentsInitial extends ShowStudentsState {}
 final class ShowStudentsLoading extends ShowStudentsState {}
 
 final class ShowStudentsLoaded extends ShowStudentsState {
-  final List<ShowStudentsModel> students;
+  final List<ShowStudentModel> students;
 
   ShowStudentsLoaded(this.students);
 }

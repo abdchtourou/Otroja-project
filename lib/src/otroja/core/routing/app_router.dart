@@ -13,16 +13,15 @@ class AppRouter {
       case '/':
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
-                  create: (context) => getIt<AddStudentCubit>(),
-                  child: const AddStudent(),
+                  create: (context) => getIt<ShowStudentsCubit>(),
+                  child: const ShowStudents(),
                 )
             );
       case'showStudent':
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
               create: (context) => getIt<ShowStudentsCubit>(),
-              child: const AddStudent(),
-            )
+              child: const ShowStudents(),)
         );
 
 

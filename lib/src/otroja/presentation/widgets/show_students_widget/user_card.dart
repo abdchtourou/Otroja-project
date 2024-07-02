@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 class StudentCard extends StatelessWidget {
   final String name;
+  final int id;
 
-  const StudentCard({Key? key, required this.name}) : super(key: key);
+  const StudentCard({Key? key, required this.name,required this.id}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +35,8 @@ class StudentCard extends StatelessWidget {
                     textAlign: TextAlign.right,
                     style: const TextStyle(color: Colors.white, fontSize: 20),
                   ),
-                  const Text(
-                    "الرقم الشخصي: {student.ID} ?? ",
+                   Text(
+                    "${id}: الرقم الشخصي   ",
                     textAlign: TextAlign.right,
                     style: TextStyle(color: Colors.white, fontSize: 16),
                   ),

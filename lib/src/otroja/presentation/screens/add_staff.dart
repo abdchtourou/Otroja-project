@@ -6,8 +6,8 @@ import '../widgets/add_user/image_student.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/show_students_widget/appbar.dart';
 
-class AddOverseer extends StatelessWidget {
-  const AddOverseer({super.key});
+class AddStaff extends StatelessWidget {
+  const AddStaff({super.key});
 
   @override
   Widget build(BuildContext context) {

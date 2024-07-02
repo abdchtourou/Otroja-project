@@ -14,5 +14,4 @@ Future<void> setUpGetIt()async{
   getIt.registerLazySingleton<AddStudentCubit>(()=>AddStudentCubit());
 
 
-
 }

@@ -14,13 +14,11 @@ class NoStudents extends StatelessWidget {
             width: 226,
             decoration: const BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage(
-                        "assets/images/muslim 1.png"))),
+                    image: AssetImage("assets/images/muslim 1.png"))),
           ),
           const Text(
             "عرض الطلاب",
-            style: TextStyle(
-                fontWeight: FontWeight.bold, fontSize: 20),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
           const Text(
             "يبدو أنك لم تضف طالب حتى الأن قم بلضغط على زر الإضافة في الأعلى للقيام بذلك",

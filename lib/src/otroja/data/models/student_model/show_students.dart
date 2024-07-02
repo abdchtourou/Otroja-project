@@ -1,116 +1,60 @@
-// user_model.dart
+class ShowStudentModel {
+  int? id;
+  int? userId;
+  int? parentId;
+  int? groupId;
+  String? firstName;
+  String? lastName;
+  String? birthDate;
+  String? grade;
+  String? address;
+  String? phoneNumber;
+  String? createdAt;
+  String? updatedAt;
 
-class ShowStudentsModel {
-  final String gender;
-  final Name name;
-  final Location location;
-  final String email;
-  final String phone;
-  final String cell;
-  final Picture picture;
+  ShowStudentModel(
+      {this.id,
+        this.userId,
+        this.parentId,
+        this.groupId,
+        this.firstName,
+        this.lastName,
+        this.birthDate,
+        this.grade,
+        this.address,
+        this.phoneNumber,
+        this.createdAt,
+        this.updatedAt});
 
-  ShowStudentsModel({
-    required this.gender,
-    required this.name,
-    required this.location,
-    required this.email,
-    required this.phone,
-    required this.cell,
-    required this.picture,
-  });
-
-  factory ShowStudentsModel.fromJson(Map<String, dynamic> json) {
-    return ShowStudentsModel(
-      gender: json['gender'],
-      name: Name.fromJson(json['name']),
-      location: Location.fromJson(json['location']),
-      email: json['email'],
-      phone: json['phone'],
-      cell: json['cell'],
-      picture: Picture.fromJson(json['picture']),
-    );
+  ShowStudentModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    userId = json['user_id'];
+    parentId = json['parent_id'];
+    groupId = json['group_id'];
+    firstName = json['first_name'];
+    lastName = json['last_name'];
+    birthDate = json['birth_date'];
+    grade = json['grade'];
+    address = json['address'];
+    phoneNumber = json['phone_number'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
   }
-}
 
-class Name {
-  final String title;
-  final String first;
-  final String last;
-
-  Name({
-    required this.title,
-    required this.first,
-    required this.last,
-  });
-
-  factory Name.fromJson(Map<String, dynamic> json) {
-    return Name(
-      title: json['title'],
-      first: json['first'],
-      last: json['last'],
-    );
-  }
-}
-
-class Location {
-  final Street street;
-  final String city;
-  final String state;
-  final String country;
-   var postcode;
-
-  Location({
-    required this.street,
-    required this.city,
-    required this.state,
-    required this.country,
-    required this.postcode,
-  });
-
-  factory Location.fromJson(Map<String, dynamic> json) {
-    return Location(
-      street: Street.fromJson(json['street']),
-      city: json['city'],
-      state: json['state'],
-      country: json['country'],
-      postcode: json['postcode'],
-    );
-  }
-}
-
-class Street {
-   var number;
-  final String name;
-
-  Street({
-    required this.number,
-    required this.name,
-  });
-
-  factory Street.fromJson(Map<String, dynamic> json) {
-    return Street(
-      number: json['number'],
-      name: json['name'],
-    );
-  }
-}
-
-class Picture {
-  final String large;
-  final String medium;
-  final String thumbnail;
-
-  Picture({
-    required this.large,
-    required this.medium,
-    required this.thumbnail,
-  });
-
-  factory Picture.fromJson(Map<String, dynamic> json) {
-    return Picture(
-      large: json['large'],
-      medium: json['medium'],
-      thumbnail: json['thumbnail'],
-    );
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['user_id'] = this.userId;
+    data['parent_id'] = this.parentId;
+    data['group_id'] = this.groupId;
+    data['first_name'] = this.firstName;
+    data['last_name'] = this.lastName;
+    data['birth_date'] = this.birthDate;
+    data['grade'] = this.grade;
+    data['address'] = this.address;
+    data['phone_number'] = this.phoneNumber;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
+    return data;
   }
 }

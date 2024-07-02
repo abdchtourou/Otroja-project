@@ -15,8 +15,10 @@ class ApiServices {
     dio = Dio(options);
   }
 
-  Future<Map<String, dynamic>> Get() async {
-    Response response = await dio.get('');
+  Future<Map<String, dynamic>> Get(String url) async {
+    Response response = await dio.get(url);
+
+
 
     return response.data;
   }

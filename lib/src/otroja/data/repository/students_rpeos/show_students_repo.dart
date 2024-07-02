@@ -10,7 +10,7 @@ final  ApiServices showStudentServices;
 ShowStudentsRepo(this.showStudentServices);
 
   getStudents() async{
-    final students= await showStudentServices.Get();
+    final students= await showStudentServices.Get("students");
 
     return students;
 
