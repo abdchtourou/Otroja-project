@@ -84,7 +84,7 @@ Row(
       ),
     ),
    ...optionalWidget!= null? [Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(6.0),
       child: optionalWidget!,
     )] : [SizedBox(
     width: 40.w,
