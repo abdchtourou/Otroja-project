@@ -8,7 +8,7 @@ import '../networking/api_services.dart';
 
 final getIt=GetIt.instance;
 Future<void> setUpGetIt()async{
-  ApiServices apiServices = ApiServices();
+  ApiService apiServices = ApiService();
   getIt.registerLazySingleton<ShowStudentsRepo>(() => ShowStudentsRepo(apiServices));
   getIt.registerLazySingleton<ShowStudentsCubit>(() => ShowStudentsCubit( getIt()));
   getIt.registerLazySingleton<AddStudentCubit>(()=>AddStudentCubit());
