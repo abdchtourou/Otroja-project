@@ -1,15 +1,19 @@
-import 'package:admins/src/otroja/presentation/screens/permissions/ShowAuthorizedAdmins/show_authorized_admins.dart';
+
+import 'package:admins/src/otroja/core/di/dependency_injection.dart';
+import 'package:admins/src/otroja/core/routing/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() {
-  runApp( MyApp());
+  setUpGetIt();
+
+  runApp( MyApp(appRouter: AppRouter(),));
 }
 
 class MyApp extends StatelessWidget {
-   MyApp({super.key});
- 
+   MyApp({super.key, required this.appRouter});
+  final  AppRouter appRouter;
 
   // This widget is the root of your application.
   @override
@@ -32,7 +36,8 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
                 fontFamily: 'DIN Next LT Arabic',
                 ),
-                home: ShowAuthorizedAdminsScreen(),
+            onGenerateRoute: appRouter.generateRoute,
+
           );
         });
   }
