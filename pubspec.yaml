@@ -20,6 +20,7 @@ dependencies:
   intl:
   dio:
   get_it: ^7.7.0
+  image_picker: ^1.1.2
 
 dev_dependencies:
   flutter_lints: ^3.0.0
