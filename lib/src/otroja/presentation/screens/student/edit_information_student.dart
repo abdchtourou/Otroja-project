@@ -1,4 +1,3 @@
-import 'package:admins/src/otroja/presentation/widgets/otroja_app_bar.dart';
 import 'package:admins/src/otroja/presentation/widgets/otroja_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +11,7 @@ import '../../widgets/add_user/custom_text_date.dart';
 import '../../widgets/add_user/custom_text_field.dart';
 import '../../widgets/add_user/custom_text_date.dart';
 import '../../widgets/add_user/image_student.dart';
+import '../../widgets/show_students_widget/appbar.dart';
 
 class EditInformationStudent extends StatelessWidget {
   const EditInformationStudent({super.key});
@@ -19,7 +19,7 @@ class EditInformationStudent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: OtrojaAppBar(
+      appBar: Appbar(
         mainText: 'إضافة طالب',
         secText: 'املأ الحقول الموجودة في الأسفل ثم اضغط على زر إضافة طالب ',
       ),
