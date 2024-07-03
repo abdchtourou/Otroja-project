@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 class AddAppBar extends StatelessWidget {
   AddAppBar({super.key, required this.onTap});
-
   void Function()? onTap;
 
   @override
