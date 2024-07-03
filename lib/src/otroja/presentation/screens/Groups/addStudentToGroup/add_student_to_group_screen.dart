@@ -1,10 +1,10 @@
-import 'package:admins/src/otroja/presentation/widgets/add_app_bar.dart';
+import 'package:admins/src/otroja/presentation/widgets/buttons/add_app_bar.dart';
 import 'package:admins/src/otroja/presentation/widgets/otroja_app_bar.dart';
 import 'package:admins/src/otroja/presentation/widgets/otroja_search_bar.dart';
 import 'package:admins/src/otroja/presentation/widgets/user_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../widgets/otroja_button.dart';
+import '../../../widgets/buttons/otroja_button.dart';
 
 class AddStudentToGroupScreen extends StatelessWidget {
   const AddStudentToGroupScreen({super.key});

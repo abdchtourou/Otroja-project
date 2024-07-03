@@ -1,5 +1,5 @@
 import 'package:admins/src/otroja/presentation/widgets/otroja_app_bar.dart';
-import 'package:admins/src/otroja/presentation/widgets/otroja_button.dart';
+import 'package:admins/src/otroja/presentation/widgets/buttons/otroja_button.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/add_user/add_parent.dart';

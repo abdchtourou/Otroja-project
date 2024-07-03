@@ -1,12 +1,12 @@
 import 'package:admins/src/otroja/presentation/screens/Groups/addGroup/widgets/group_number_widget.dart';
-import 'package:admins/src/otroja/presentation/widgets/add_button.dart';
-import 'package:admins/src/otroja/presentation/widgets/view_button.dart';
+import 'package:admins/src/otroja/presentation/widgets/buttons/add_button.dart';
+import 'package:admins/src/otroja/presentation/widgets/buttons/view_button.dart';
 import 'package:admins/src/otroja/presentation/widgets/otroja_drop_down.dart';
 import 'package:admins/src/otroja/presentation/widgets/otroja_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../widgets/otroja_button.dart';
+import '../../../widgets/buttons/otroja_button.dart';
 import '../../../widgets/otroja_text_field.dart';
 
 class AddGroup extends StatefulWidget {
