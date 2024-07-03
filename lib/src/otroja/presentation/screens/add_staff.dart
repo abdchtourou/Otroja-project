@@ -1,10 +1,11 @@
+import 'package:admins/src/otroja/presentation/widgets/otroja_app_bar.dart';
+import 'package:admins/src/otroja/presentation/widgets/otroja_button.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/add_user/add_parent.dart';
 import '../widgets/add_user/custom_text_field.dart';
 import '../widgets/add_user/image_student.dart';
-import '../widgets/custom_button.dart';
-import '../widgets/show_students_widget/appbar.dart';
+
 
 class AddStaff extends StatelessWidget {
   const AddStaff({super.key});
@@ -14,7 +15,7 @@ class AddStaff extends StatelessWidget {
     final dimensions = MediaQuery.of(context).size; // Get screen size
 
     return Scaffold(
-      appBar: Appbar(
+      appBar: OtrojaAppBar(
         mainText: "إضافة مشرف",
         secText: 'املأ الحقول الموجودة في الأسفل ثم اضغط على زر إضافة المشرف',
       ),
@@ -114,7 +115,7 @@ class AddStaff extends StatelessWidget {
             hintText: "اختر مهنة ",
             type: TextInputType.text,
           ),
-          CustomButton(text: "إضافة المشرف", onPressed: (){})
+          OtrojaButton(text: "إضافة المشرف", onPressed: (){})
 
         ],
       ),

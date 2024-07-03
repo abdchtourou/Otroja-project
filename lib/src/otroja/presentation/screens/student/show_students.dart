@@ -1,11 +1,10 @@
+import 'package:admins/src/otroja/presentation/widgets/otroja_app_bar.dart';
+import 'package:admins/src/otroja/presentation/widgets/otroja_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../cubit/students/show_student_cubit/show_students_cubit.dart';
 import '../../../cubit/students/show_student_cubit/show_students_state.dart';
-import '../../widgets/show_students_widget/appbar.dart';
-import '../../widgets/show_students_widget/filter_bar.dart';
 import '../../widgets/show_students_widget/no_students.dart';
-import '../../widgets/show_students_widget/search_bar.dart';
 import '../../widgets/show_students_widget/user_card.dart';
 
 class ShowStudents extends StatelessWidget {
@@ -14,7 +13,7 @@ class ShowStudents extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Appbar(
+      appBar: OtrojaAppBar(
         mainText: 'الطلاب',
         secText: 'ابحث عن أي طالب أو اضغط على الطالب لعرض تفاصيله',
         optionalWidget: Container(
@@ -28,7 +27,7 @@ class ShowStudents extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const SearchBarStudents(),
+          const OtrojaSearchBar(),
           const SizedBox(height: 10),
           BlocBuilder<ShowStudentsCubit, ShowStudentsState>(
             builder: (context, state) {

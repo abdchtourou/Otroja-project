@@ -1,3 +1,5 @@
+import 'package:admins/src/otroja/presentation/widgets/otroja_app_bar.dart';
+import 'package:admins/src/otroja/presentation/widgets/otroja_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,8 +12,7 @@ import '../../widgets/add_user/custom_text_date.dart';
 import '../../widgets/add_user/custom_text_field.dart';
 import '../../widgets/add_user/custom_text_date.dart';
 import '../../widgets/add_user/image_student.dart';
-import '../../widgets/custom_button.dart';
-import '../../widgets/show_students_widget/appbar.dart';
+
 
 class AddStudent extends StatefulWidget {
   const AddStudent({super.key});
@@ -24,7 +25,7 @@ class _AddStudentState extends State<AddStudent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Appbar(
+      appBar: OtrojaAppBar(
           mainText: 'إضافة طالب',
           secText: 'املأ الحقول الموجودة في الأسفل ثم اضغط على زر إضافة طالب ',
       ),
@@ -162,7 +163,7 @@ class _AddStudentState extends State<AddStudent> {
                             'South Africa',
                           ],
                         ),
-                        CustomButton(
+                        OtrojaButton(
                           text: 'إضافة الطالب',
                           onPressed: () {
                             showDialog(

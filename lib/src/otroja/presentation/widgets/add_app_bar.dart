@@ -8,7 +8,6 @@ class AddAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
      return 
     IconButton(
         onPressed: onTap,
@@ -18,17 +17,5 @@ class AddAppBar extends StatelessWidget {
           width: 30, // Specify width instead of size
           height: 30, // Specify height instead of size
         ));
-=======
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        width: 35,
-        height: 35,
-        decoration: const BoxDecoration(
-            image:
-                DecorationImage(image: AssetImage('assets/images/add 1.png'))),
-      ),
-    );
->>>>>>> origin/rest-api-page-show-student
   }
 }
