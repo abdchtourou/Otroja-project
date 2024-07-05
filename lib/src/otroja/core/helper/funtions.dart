@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Functions{
+
   static void adjustDimensionsBasedOnOrientation(BuildContext context) {
     var mediaQuery = MediaQuery.of(context);
     bool isPortrait = mediaQuery.orientation == Orientation.portrait;
@@ -9,6 +10,16 @@ class Functions{
     double width =  mediaQuery.size.width ;
 
     Dimensions().setDimensions(height, width,isPortrait);
+  }
+  
+  static List search( {required List list,required  searchBy,required String value}){
+    List suggestionList = list
+        .where((item) => item.searchBy
+        .toString()
+        .toLowerCase().startsWith(value)
+        )
+        .toList();
+    return suggestionList;
   }
 
 

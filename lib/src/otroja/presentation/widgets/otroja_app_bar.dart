@@ -50,15 +50,17 @@ class OtrojaAppBar extends StatelessWidget implements PreferredSizeWidget {
 Row(
   children: [
     IconButton(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.pop(context);
+      },
       icon: const Icon(
         Icons.arrow_back_ios,
         color: Color(0xFF85313C),
         size: 30,
       ),
     ),
-    Expanded( // Keep the Expanded widget to allow the Column to expand
-      child: Center( // Wrap the Column with a Center widget
+    Expanded(
+      child: Center(
         child: Column(
           children: [
             const SizedBox(

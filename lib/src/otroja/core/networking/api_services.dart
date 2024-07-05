@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:dio/dio.dart';
 
@@ -17,8 +16,6 @@ class ApiServices {
 
   Future<Map<String, dynamic>> Get(String url) async {
     Response response = await dio.get(url);
-
-
 
     return response.data;
   }

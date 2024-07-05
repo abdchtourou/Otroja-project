@@ -9,8 +9,9 @@ final  ApiServices showStudentServices;
 
 ShowStudentsRepo(this.showStudentServices);
 
-  getStudents() async{
-    final students= await showStudentServices.Get("students");
+  getStudents(page ) async{
+
+    final students= await showStudentServices.Get("students?page=$page");
 
     return students;
 

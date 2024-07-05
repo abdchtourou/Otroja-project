@@ -15,7 +15,7 @@ class FilterBar extends StatelessWidget {
             topLeft: Radius.circular(7),
             topRight: Radius.circular(7),
           ),
-          color: Colors.red,
+          color:   Color(0xbbEEEAE4),
         ),
         child: Padding(
           padding: const EdgeInsets.only(left: 14.0, right: 14),

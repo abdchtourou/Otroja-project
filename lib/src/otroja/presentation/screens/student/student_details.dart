@@ -1,3 +1,4 @@
+import 'package:admins/src/otroja/presentation/widgets/otroja_app_bar.dart';
 import 'package:flutter/material.dart';
 
 import '../../widgets/student_details/custom_data_row.dart';
@@ -22,7 +23,7 @@ class StudentDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Appbar(
+      appBar: OtrojaAppBar(
         mainText: 'معلومات الطالب',
         secText: 'في حال اردت تعديل المعلومات اضغط على أيقونة القلم يمينا',
       ) ,
