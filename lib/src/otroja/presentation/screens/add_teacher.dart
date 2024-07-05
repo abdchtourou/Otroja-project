@@ -1,6 +1,9 @@
 import 'package:admins/src/otroja/presentation/widgets/buttons/otroja_button.dart';
+import 'package:admins/src/otroja/presentation/widgets/otroja_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../cubit/students/edit_info_student_cubit/edit_info_student_cubit.dart';
 import '../widgets/add_user/add_parent.dart';
 import '../widgets/add_user/custom_text_field.dart';
 import '../widgets/add_user/image_student.dart';
@@ -12,9 +15,11 @@ class AddTeacher extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<EditInfoStudentCubit>();
+
 
     return Scaffold(
-      appBar: Appbar(
+      appBar: OtrojaAppBar(
         mainText: "إضافة أستاذ",
         secText: 'املأ الحقول الموجودة في الأسفل ثم اضغط علىزر إضافة الأستاذ',
       ),
@@ -26,7 +31,7 @@ class AddTeacher extends StatelessWidget {
               children: [
                 Align(
                   alignment: Alignment.topCenter,
-                  child: ImageStudent(),
+                  child: ImageStudent(image: "null", onPressed: () {  },),
                 ),
                 Positioned(
                   left: 45,
@@ -66,7 +71,7 @@ class AddTeacher extends StatelessWidget {
                     obscureText: false,
                     onChange: (data) {},
                     hintText: "أكتب اسمك",
-                    type: TextInputType.text,
+                    type: TextInputType.text, myController: cubit.phoneNumberController,
                   ),
                 ),
                 SizedBox(width: 16),
@@ -83,7 +88,7 @@ class AddTeacher extends StatelessWidget {
                     obscureText: true,
                     onChange: (data) {},
                     hintText: "أكتب اسمك",
-                    type: TextInputType.visiblePassword,
+                    type: TextInputType.visiblePassword, myController: cubit.phoneNumberController,
                   ),
                 ),
               ],
@@ -101,7 +106,7 @@ class AddTeacher extends StatelessWidget {
             obscureText: true,
             onChange: (data) {},
             hintText: "اكتب رقم الهاتف",
-            type: TextInputType.number,
+            type: TextInputType.number, myController: cubit.phoneNumberController,
           ),
           CustomTextFormField(
             labelText: 'المهنة',
@@ -115,7 +120,7 @@ class AddTeacher extends StatelessWidget {
             obscureText: true,
             onChange: (data) {},
             hintText: "اختر مهنة ",
-            type: TextInputType.text,
+            type: TextInputType.text, myController: cubit.phoneNumberController,
           ),
           OtrojaButton(text: "إضافة الأستاذ", onPressed: () {})
         ],

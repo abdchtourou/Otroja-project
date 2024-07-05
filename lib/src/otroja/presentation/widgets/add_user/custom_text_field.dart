@@ -11,6 +11,7 @@ class CustomTextFormField extends StatelessWidget {
     this.suffixIcon,
     this.isRtl = true,
     this.type,
+    required this.myController,
   });
 
   final String? labelText;
@@ -21,6 +22,7 @@ class CustomTextFormField extends StatelessWidget {
   final Widget? suffixIcon; // Change type to Widget
   final bool isRtl;
   final TextInputType? type;
+  final TextEditingController myController;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +44,7 @@ class CustomTextFormField extends StatelessWidget {
               ),
             ),
           TextFormField(
+            controller: myController,
             obscureText: obscureText,
             style: const TextStyle(color: Colors.black),
             validator: (value) {

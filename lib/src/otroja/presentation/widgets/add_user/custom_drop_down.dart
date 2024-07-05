@@ -1,17 +1,19 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
+import '../../../core/utils/constants/colors.dart';
 class CustomDropdown extends StatelessWidget {
   final List<String> list;
-  String? labelText;
-  String? hint;
+  final String? labelText;
+  final String? hint;
+  final ValueChanged<String?> onChanged; // Callback function
 
-  CustomDropdown(
-      {super.key,
-      required this.list,
-      required this.labelText,
-      required this.hint});
+  CustomDropdown({
+    Key? key,
+    required this.list,
+    required this.labelText,
+    required this.hint,
+    required this.onChanged, // Add this parameter
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +38,13 @@ class CustomDropdown extends StatelessWidget {
             isExpanded: true,
             isDense: true,
             hint: Align(
-                alignment: Alignment.centerRight,
-                child: Text(hint!, style: const TextStyle(fontSize: 20))),
-            dropdownColor: const Color(0xff24292f),
+              alignment: Alignment.centerRight,
+              child: Text(
+                hint!,
+                style: const TextStyle(fontSize: 20),
+              ),
+            ),
+            dropdownColor: OtrojaColors.primary2Color,
             menuMaxHeight: 200,
             iconSize: 32,
             iconEnabledColor: const Color(0xFFE6E6E6),
@@ -64,9 +70,7 @@ class CustomDropdown extends StatelessWidget {
               fontSize: 17.75,
               color: Colors.black,
             ),
-            onChanged: (value) {
-              print(value);
-            },
+            onChanged: onChanged, // Call the callback function here
             items: list.map<DropdownMenuItem<String>>((String value) {
               return DropdownMenuItem<String>(
                 value: value,
