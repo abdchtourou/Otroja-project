@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class SearchBarStudents extends StatelessWidget {
-  const SearchBarStudents({Key? key}) : super(key: key);
+  final ValueNotifier<String> searchNotifier;
+
+  const SearchBarStudents({Key? key, required this.searchNotifier}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,17 +20,18 @@ class SearchBarStudents extends StatelessWidget {
             ),
             border: const OutlineInputBorder(
               borderSide: BorderSide(color: Colors.red),
-              // Changed color to red
             ),
             focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: Colors.red),
-              // Changed color to red when focused
             ),
             suffixIcon: Image.asset('assets/images/search (1) 1.png'),
             hintText: 'بحث',
             hintTextDirection: TextDirection.rtl,
             hintStyle: const TextStyle(color: Colors.black),
           ),
+          onChanged: (value) {
+            searchNotifier.value = value;
+          },
         ),
       ),
     );

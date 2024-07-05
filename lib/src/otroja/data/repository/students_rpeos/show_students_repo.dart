@@ -1,15 +1,20 @@
-import 'dart:convert';
+
+
 
 import '../../../core/networking/api_services.dart';
 
-class ShowStudentsRepo {
-  final ApiService showStudentServices;
+class ShowStudentsRepo{
+final  ApiService showStudentServices;
 
-  ShowStudentsRepo(this.showStudentServices);
+ShowStudentsRepo(this.showStudentServices);
 
-  getStudents() async {
-    final students = await showStudentServices.get("students");
+  getStudents(page ) async{
+
+    final students= await showStudentServices.get("students?page=$page");
 
     return students;
-  }
+
+
+ }
+
 }

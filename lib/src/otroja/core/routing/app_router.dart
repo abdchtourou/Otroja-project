@@ -14,14 +14,14 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
                   create: (context) => getIt<ShowStudentsCubit>(),
-                  child: const ShowStudents(),
+                  child:  ShowStudents(),
                 )
             );
-      case'showStudent':
+      case'':
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
               create: (context) => getIt<ShowStudentsCubit>(),
-              child: const ShowStudents(),)
+              child:  ShowStudents(),)
         );
 
 

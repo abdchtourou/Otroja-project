@@ -1,21 +1,24 @@
 import 'package:dio/dio.dart';
 
+import '../helper/constant.dart';
+
 class ApiService {
   final Dio _dio = Dio();
   final String _baseUrl = 'https://api.example.com'; // Replace with your API base URL
 
   ApiService() {
-    _dio.options.baseUrl = _baseUrl;
+    _dio.options.baseUrl = baseUrl;
     _dio.options.connectTimeout = const Duration(seconds: 5);
     _dio.options.receiveTimeout = const Duration(seconds: 3);
     // You can add more default configurations here
   }
 
   // GET request
-  Future<Response> get(String path, {Map<String, dynamic>? queryParameters}) async {
+  Future<Map<String, dynamic>> get(String path) async {
     try {
-      final response = await _dio.get(path, queryParameters: queryParameters);
-      return response;
+      print('aaaaaaaaaaaaaaaaaaaaaaa');
+      final response = await _dio.get(path);
+      return response.data;
     } on DioException catch (e) {
       throw _handleError(e);
     }

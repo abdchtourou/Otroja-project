@@ -9,6 +9,7 @@ final class ShowStudentsLoading extends ShowStudentsState {}
 
 final class ShowStudentsLoaded extends ShowStudentsState {
   final List<ShowStudentModel> students;
+  bool isLoadingMore;
 
-  ShowStudentsLoaded(this.students);
+  ShowStudentsLoaded(this.students,this.isLoadingMore);
 }
