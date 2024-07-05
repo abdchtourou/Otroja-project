@@ -1,3 +1,4 @@
+import 'package:admins/src/otroja/core/helper/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -52,6 +53,7 @@ Row(
     IconButton(
       onPressed: () {
         Navigator.pop(context);
+        context.pop();
       },
       icon: const Icon(
         Icons.arrow_back_ios,
