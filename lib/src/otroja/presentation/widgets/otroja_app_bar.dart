@@ -1,3 +1,4 @@
+import 'package:admins/src/otroja/core/helper/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -50,15 +51,18 @@ class OtrojaAppBar extends StatelessWidget implements PreferredSizeWidget {
 Row(
   children: [
     IconButton(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.pop(context);
+        context.pop();
+      },
       icon: const Icon(
         Icons.arrow_back_ios,
         color: Color(0xFF85313C),
         size: 30,
       ),
     ),
-    Expanded( // Keep the Expanded widget to allow the Column to expand
-      child: Center( // Wrap the Column with a Center widget
+    Expanded(
+      child: Center(
         child: Column(
           children: [
             const SizedBox(

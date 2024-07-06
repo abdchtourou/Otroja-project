@@ -13,8 +13,7 @@ class ImageStudent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("/////////////////////////////////////////////////////////////////////");
-    print(context.read<AddStudentCubit>().image);
+
     return Container(
       width: 120,
       height: 150,
