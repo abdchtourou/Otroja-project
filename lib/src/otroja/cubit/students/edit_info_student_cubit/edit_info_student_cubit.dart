@@ -53,7 +53,7 @@ class EditInfoStudentCubit extends Cubit<EditInfoStudentState> {
       studentId: studentId,
     );
     try {
-      final response = await editInfoStudentRepo.postInfo(dataEdit.toJson());
+       await editInfoStudentRepo.postInfo(dataEdit.toJson());
 
         emit(EditInfoStudentLoaded());
 
