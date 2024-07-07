@@ -1,7 +1,11 @@
+import 'package:admins/src/otroja/cubit/add_staff/add_staff_cubit.dart';
 import 'package:admins/src/otroja/presentation/widgets/otroja_app_bar.dart';
 import 'package:admins/src/otroja/presentation/widgets/buttons/otroja_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../cubit/students/edit_info_student_cubit/edit_info_student_cubit.dart';
 import '../widgets/add_user/add_parent.dart';
 import '../widgets/add_user/custom_text_field.dart';
 import '../widgets/add_user/image_student.dart';
@@ -12,7 +16,7 @@ class AddStaff extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dimensions = MediaQuery.of(context).size; // Get screen size
+    final cubit = context.read<AddStaffCubit>();
 
     return Scaffold(
       appBar: OtrojaAppBar(
@@ -21,13 +25,13 @@ class AddStaff extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Container(
-            height: 180,
+          SizedBox(
+            height: 140.h,
             child: Stack(
               children: [
                 Align(
                   alignment: Alignment.topCenter,
-                  child: ImageStudent(),
+                  child: ImageStudent(image: "a", onPressed: () {  },),
                 ),
                 Positioned(
                   left: 45,
@@ -66,9 +70,10 @@ class AddStaff extends StatelessWidget {
                   onChange: (data) {},
                   hintText: "أكتب اسمك",
                   type: TextInputType.text,
+                  myController: cubit.secondNameController,
                 ),
               ),
-              SizedBox(width: 16), // Add space between the text fields
+              const SizedBox(width: 16),
               Expanded(
                 child: CustomTextFormField(
                   labelText: 'الاسم الأول',
@@ -79,10 +84,10 @@ class AddStaff extends StatelessWidget {
                       color: Color(0xFFE6E6E6),
                     ),
                   ),
-                  obscureText: true,
+                  obscureText: false,
                   onChange: (data) {},
                   hintText: "أكتب اسمك",
-                  type: TextInputType.visiblePassword,
+                  type: TextInputType.text, myController: cubit.firstNameController,
                 ),
               ),
             ],
@@ -96,10 +101,10 @@ class AddStaff extends StatelessWidget {
                 color: Color(0xFFE6E6E6),
               ),
             ),
-            obscureText: true,
+            obscureText: false,
             onChange: (data) {},
             hintText: "اكتب رقم الهاتف",
-            type: TextInputType.number,
+            type: TextInputType.number, myController: cubit.phoneNumberController,
           ),
           CustomTextFormField(
             labelText: 'المهنة',
@@ -110,10 +115,10 @@ class AddStaff extends StatelessWidget {
                 color: Color(0xFFE6E6E6),
               ),
             ),
-            obscureText: true,
+            obscureText: false,
             onChange: (data) {},
             hintText: "اختر مهنة ",
-            type: TextInputType.text,
+            type: TextInputType.text, myController: cubit.careerController ,
           ),
           OtrojaButton(text: "إضافة المشرف", onPressed: (){})
 

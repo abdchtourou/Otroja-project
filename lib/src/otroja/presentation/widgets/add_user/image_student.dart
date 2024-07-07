@@ -7,9 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ImageStudent extends StatelessWidget {
-  ImageStudent({super.key, this.isEdit = false});
+  ImageStudent({super.key, this.isEdit = false, required this.image,required this.onPressed});
 
   bool? isEdit;
+  final image;
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +35,9 @@ class ImageStudent extends StatelessWidget {
                 color: const Color(0xffbacEEEAE4),
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: context.read<AddStudentCubit>().image == 'assets/images/people (1) 1.png'
+                  image: image == 'assets/images/people (1) 1.png'
                       ? AssetImage('assets/images/people (1) 1.png') as ImageProvider
-                      : FileImage(File(context.read<AddStudentCubit>().image)),
+                      : FileImage(File(image)),
                 ),
               ),
             ),
@@ -56,9 +58,7 @@ class ImageStudent extends StatelessWidget {
                   size: 20,
                 ),
                 iconSize: 35,
-                onPressed: () {
-                  context.read<AddStudentCubit>().pickImage();
-                },
+                onPressed: onPressed,
 
                 constraints: const BoxConstraints.tightFor(
                   width: 35,

@@ -1,4 +1,4 @@
-class ShowStudentModel {
+class   ShowStudentModel {
   int? id;
   int? userId;
   int? parentId;

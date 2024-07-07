@@ -1,9 +1,12 @@
+import 'package:admins/src/otroja/cubit/students/show_student_cubit/show_students_cubit.dart';
 import 'package:admins/src/otroja/presentation/widgets/buttons/otroja_button.dart';
+import 'package:admins/src/otroja/presentation/widgets/otroja_app_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../cubit/students/add_studnet/add_studnet_cubit.dart';
+import '../../../cubit/students/edit_info_student_cubit/edit_info_student_cubit.dart';
 import '../../widgets/add_user/add_parent.dart';
 import '../../widgets/add_user/custom_dialog.dart';
 import '../../widgets/add_user/custom_drop_down.dart';
@@ -11,203 +14,81 @@ import '../../widgets/add_user/custom_text_date.dart';
 import '../../widgets/add_user/custom_text_field.dart';
 import '../../widgets/add_user/custom_text_date.dart';
 import '../../widgets/add_user/image_student.dart';
+import '../../widgets/buttons/save_cancel_button.dart';
 import '../../widgets/show_students_widget/appbar.dart';
-
+import '../../widgets/show_students_widget/student_info_form.dart';
 class EditInformationStudent extends StatelessWidget {
-  const EditInformationStudent({super.key});
+  const EditInformationStudent({super.key, required this.studentId});
+
+  final String studentId;
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<EditInfoStudentCubit>();
     return Scaffold(
-      appBar: Appbar(
-        mainText: 'إضافة طالب',
-        secText: 'املأ الحقول الموجودة في الأسفل ثم اضغط على زر إضافة طالب ',
+      appBar: OtrojaAppBar(
+        mainText: "تعديل المعلومات",
+        secText: "املأ الحقول الموجودة في الأسفل بالبيانات الجديدة ثم اضغط على زر حفظ التغييرات",
       ),
-      body: BlocBuilder<AddStudentCubit, AddStudentState>(
-        builder: (BuildContext context, AddStudentState state) {
-          return Form(
-            key: BlocProvider.of<AddStudentCubit>(context).formKey,
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ImageStudent(
-                        isEdit: true,
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      ImageTextCard(imagePath: 'assets/icons/add-group 1.png', text: 'إضافة ولي أمر ', onTap: () {  },),
-                    ],
-                  ),
-                  CustomTextFormField(
-                      labelText: 'الاسم الكامل',
-                      onChange: (data) {},
-                      hintText: "اكتب اسمك",
-                      prefixIcon: Transform.scale(
-                        scale: 0.60,
-                        child: const ImageIcon(
-                          AssetImage('assets/icons/person.png'),
-                          color: Color(0xFFE6E6E6),
-                        ),
-                      )),
-                  CustomTextFormField(
-                    labelText: 'ادخل البريد الإلكتروني',
-                    prefixIcon: Transform.scale(
-                      scale: 1.2,
-                      child: const Icon(
-                        Icons.email_outlined,
-                        color: Color(0xFFE6E6E6),
-                      ),
-                    ),
-                    obscureText: false,
-                    onChange: (data) {},
-                    hintText: "ادخل البريد الإلكتروني",
-                    type: TextInputType.emailAddress,
-                  ),
-                  CustomTextFormField(
-                    labelText: "كلمة المرور",
-                    prefixIcon: Transform.scale(
-                      scale: 0.6,
-                      child: const ImageIcon(
-                        AssetImage('assets/icons/Lock.png'),
-                        color: Color(0xFFE6E6E6),
-                      ),
-                    ),
-                    suffixIcon: Transform.scale(
-                      scale: 0.6,
-                      child: const ImageIcon(
-                        AssetImage('assets/icons/eye.png'),
-                        color: Color(0xFFE6E6E6),
-                      ),
-                    ),
-                    obscureText: true,
-                    onChange: (data) {},
-                    hintText: "اكتب كلمة مرورك",
-                    type: TextInputType.visiblePassword,
-                  ),
-                  CustomTextDate(
-                    labelText: "تاريخ الميلاد",
-                    prefixIcon: Transform.scale(
-                      scale: 1,
-                      child: const Icon(
-                        Icons.date_range,
-                        color: Color(0xFFE6E6E6),
-                      ),
-                    ),
-                    obscureText: false,
-                    onChange: (data) {},
-                    hintText: "اختر تاريخ ",
-                  ),
-                  CustomTextFormField(
-                    labelText: 'رقم الهاتف',
-                    prefixIcon: Transform.scale(
-                      scale: 1,
-                      child: const Icon(
-                        Icons.phone_enabled_outlined,
-                        color: Color(0xFFE6E6E6),
-                      ),
-                    ),
-                    obscureText: false,
-                    onChange: (data) {},
-                    hintText: "ادخل رقمك ",
-                    type: TextInputType.phone,
-                  ),
-                  CustomDropdown(
-                    labelText: "المدينة",
-                    list: const [
-                      'United States',
-                      'Canada',
-                      'Mexico',
-                      'United Kingdom',
-                      'Germany',
-                      'France',
-                      'Italy',
-                      'Spain',
-                      'China',
-                      'Japan',
-                      'Australia',
-                      'India',
-                      'Brazil',
-                      'South Africa',
-                    ],
-                    hint: 'مدينة',
-                  ),
-                  CustomDropdown(
-                    labelText: "الحلقة",
-                    hint: "حلقة",
-                    list: const [
-                      'United States',
-                      'Canada',
-                      'Mexico',
-                      'United Kingdom',
-                      'Germany',
-                      'France',
-                      'Italy',
-                      'Spain',
-                      'China',
-                      'Japan',
-                      'Australia',
-                      'India',
-                      'Brazil',
-                      'South Africa',
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
+      body: BlocListener<EditInfoStudentCubit, EditInfoStudentState>(
+        listener: (context, state) {
+          if (state is EditInfoStudentLoaded) {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) => MyDialog(),
+            );
+          }
 
+        },
+        child: BlocBuilder<EditInfoStudentCubit, EditInfoStudentState>(
+          builder: (context, state) {
+            return Form(
+              key: cubit.formKey,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Expanded(
-                          child: InkWell(
-                            onTap: (){},
-                            child: Container(
-                              margin: EdgeInsets.all(4),
-                              height: 60,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(Radius.circular(15)),
-                                border: Border.all(
-                                    color: const Color(0xFF85313C),
-                                    width: 2
-                                ),
-
-                              ),
-                              child: const Center(
-                                child: Text("إلغاء",style: TextStyle(
-                                    color: Color(0xFF85313C),
-                                    fontSize: 20
-                                ),
-                                ),
-                              ),
-                            ),
-                          ),
+                        ImageStudent(
+                          isEdit: true,
+                          image: cubit.image,
+                          onPressed: () {
+                            cubit.pickImage();
+                          },
                         ),
-                        Expanded(
-                          child: OtrojaButton(
-                            text: 'إضافة الطالب',
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return MyDialog();
-                                },
-                              );
-                            },
-                          ),
+                        const SizedBox(width: 20),
+                        ImageTextCard(
+                          imagePath: 'assets/icons/add-group 1.png',
+                          text: 'إضافة ولي أمر ',
+                          onTap: () {},
                         ),
-
                       ],
                     ),
-                  )
-                ],
+                    StudentInfoForm(
+                      fullNameController: cubit.fullNameController,
+                      emailController: cubit.emailController,
+                      passwordController: cubit.passwordController,
+                      phoneNumberController: cubit.phoneNumberController,
+                      dateController: cubit.dateController,
+                      onChanged: (value) {
+                        cubit.address = value!;
+                      },
+                    ),
+                    SaveCancelButtons(
+                      onPressedSave: () {
+                        cubit.postData(studentId);
+                      },
+                    ),
+                  ],
+                ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
 }
+
