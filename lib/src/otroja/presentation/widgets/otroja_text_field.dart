@@ -10,8 +10,10 @@ class OtrojaTextFormField extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.isRtl = true,
+    this.myController,
     required this.label,
   });
+  final TextEditingController? myController;
 
   final String label;
   final String? hintText;
@@ -38,6 +40,7 @@ class OtrojaTextFormField extends StatelessWidget {
           ),
         ),
         TextFormField(
+          controller: myController,
           obscureText: obscureText,
           style: const TextStyle(color: Colors.black),
           validator: (value) {

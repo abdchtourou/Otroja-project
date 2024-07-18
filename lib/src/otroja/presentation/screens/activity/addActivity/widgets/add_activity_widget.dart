@@ -75,7 +75,7 @@ class AddOtrojaWidget extends StatelessWidget {
           Positioned(
             left: 150.w,
             top: 121.h,
-            child: BlocConsumer<AddActivityCubit, ActivityState>(
+            child: BlocConsumer<AddActivityCubit, AddActivityState>(
               listener: (context, state) {},
               builder: (context, state) {
                 return Text(

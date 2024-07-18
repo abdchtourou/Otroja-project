@@ -1,7 +1,7 @@
 class AddActivityModel {
   final String name;
   final String description;
-  final String points;
+  final int points;
 
   AddActivityModel({
     required this.name,
@@ -13,7 +13,7 @@ class AddActivityModel {
     return AddActivityModel(
       name: json['name'] as String,
       description: json['description'] as String,
-      points: json['points'] as String,
+      points: json['points'] ,
     );
   }
 

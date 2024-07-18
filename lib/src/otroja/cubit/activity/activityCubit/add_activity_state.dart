@@ -1,10 +1,13 @@
 part of 'add_activity_cubit.dart';
 
 @immutable
-sealed class ActivityState {}
+sealed class AddActivityState {}
 
-final class ActivityInitial extends ActivityState {}
+final class ActivityInitial extends AddActivityState {}
 
-final class UpdateOtrojaState extends ActivityState {
+final class UpdateOtrojaState extends AddActivityState {
+
   UpdateOtrojaState();
 }
+final class AddActivityLoading extends AddActivityState{}
+final class AddActivityLoaded extends AddActivityState{}
