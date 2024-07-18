@@ -16,7 +16,6 @@ class ApiService {
   // GET request
   Future<Map<String, dynamic>> get(String path) async {
     try {
-      print('aaaaaaaaaaaaaaaaaaaaaaa');
       final response = await _dio.get(path);
       return response.data;
     } on DioException catch (e) {
@@ -25,11 +24,13 @@ class ApiService {
   }
 
   // POST request
-  Future<Response> post(String path, {dynamic data, Map<String, dynamic>? queryParameters}) async {
+  Future<Map<String, dynamic>> post(String path, {dynamic data, Map<String, dynamic>? queryParameters}) async {
     try {
+      print("post $data");
       final response = await _dio.post(path, data: data, queryParameters: queryParameters);
-      return response;
+      return response.data;
     } on DioException catch (e) {
+      print(e);
       throw _handleError(e);
     }
   }

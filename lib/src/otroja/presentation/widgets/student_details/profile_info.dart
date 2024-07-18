@@ -40,7 +40,6 @@ class ProfileInfo extends StatelessWidget {
           height: 74,
           width: 74,
           decoration: BoxDecoration(
-            color: Colors.red,
             borderRadius: const BorderRadius.all(Radius.circular(13)),
             image: DecorationImage(
               image: AssetImage(imagePath),

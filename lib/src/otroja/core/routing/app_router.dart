@@ -1,3 +1,10 @@
+import 'package:admins/src/otroja/core/routing/routes.dart';
+import 'package:admins/src/otroja/cubit/add_staff/add_staff_cubit.dart';
+import 'package:admins/src/otroja/cubit/students/edit_info_student_cubit/edit_info_student_cubit.dart';
+import 'package:admins/src/otroja/data/models/student_model/show_students.dart';
+import 'package:admins/src/otroja/presentation/screens/add_staff.dart';
+import 'package:admins/src/otroja/presentation/screens/student/edit_information_student.dart';
+import 'package:admins/src/otroja/presentation/screens/student/student_details.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,16 +20,25 @@ class AppRouter {
       case '/':
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
-                  create: (context) => getIt<ShowStudentsCubit>(),
-                  child:  ShowStudents(),
+                  create: (context) => getIt<AddStaffCubit>(),
+                  child:  AddStaff(),
                 )
             );
-      case'':
+      case Routes.studentDetails:
+        final ShowStudentModel? showStudentModel = settings.arguments as ShowStudentModel?;
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
               create: (context) => getIt<ShowStudentsCubit>(),
-              child:  ShowStudents(),)
+              child:  StudentDetails(showStudentModel: showStudentModel!,),)
         );
+        case Routes.editStudentInfo:
+          final studentId=settings.arguments as String;
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+              create: (context) => getIt<EditInfoStudentCubit>(),
+              child:  EditInformationStudent(studentId: studentId,),)
+        );
+
 
 
     }

@@ -15,7 +15,7 @@ class OtrojaAppBar extends StatelessWidget implements PreferredSizeWidget {
       children: [
         Container(
           width: double.infinity,
-          height: 130,
+          height: 130.h,
           decoration: const BoxDecoration(
             border: Border(
               bottom: BorderSide(
@@ -52,8 +52,7 @@ Row(
   children: [
     IconButton(
       onPressed: () {
-        Navigator.pop(context);
-        context.pop();
+        Navigator.pop(context,true);
       },
       icon: const Icon(
         Icons.arrow_back_ios,
@@ -87,7 +86,8 @@ Row(
         ),
       ),
     ),
-   ...optionalWidget!= null? [Padding(
+   ...optionalWidget!= null? [
+     Padding(
       padding: const EdgeInsets.all(8.0),
       child: optionalWidget!,
     )] : [SizedBox(

@@ -35,6 +35,8 @@ flutter:
     - assets/icons/
 
 
+
+
   fonts:
     - family: DIN Next LT Arabic
       fonts:

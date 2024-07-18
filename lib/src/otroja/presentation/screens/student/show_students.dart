@@ -1,8 +1,10 @@
+import 'package:admins/src/otroja/core/helper/extensions.dart';
 import 'package:admins/src/otroja/presentation/screens/student/student_details.dart';
 import 'package:admins/src/otroja/presentation/widgets/otroja_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/helper/constant.dart';
+import '../../../core/routing/routes.dart';
 import '../../../cubit/students/show_student_cubit/show_students_cubit.dart';
 import '../../../cubit/students/show_student_cubit/show_students_state.dart';
 import '../../widgets/show_students_widget/appbar.dart';
@@ -74,12 +76,22 @@ class ShowStudents extends StatelessWidget {
                                   itemBuilder: (context, index) {
                                     if (index < filteredStudents.length) {
                                       return InkWell(
-                                        onTap: () {
-                                          studentId=filteredStudents[index].id!.toString();
-                                          print(studentId);
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(builder: (context) => StudentDetails()),);
+                                        onTap: () async {
+                                          final studentId =
+                                              filteredStudents[index];
+                                          context
+                                              .pushNamed(Routes.studentDetails,
+                                                  arguments: studentId)
+                                              .then((_) {
+                                            context
+                                                .read<ShowStudentsCubit>()
+                                                .studentList
+                                                .clear();
+
+                                            context
+                                                .read<ShowStudentsCubit>()
+                                                .getStudents();
+                                          });
                                         },
                                         child: StudentCard(
                                           name: filteredStudents[index]
@@ -96,12 +108,10 @@ class ShowStudents extends StatelessWidget {
                                                   child:
                                                       CircularProgressIndicator()),
                                             )
-                                          : Container(
-                                              child: Text(
-                                                "no more data to load",
-                                                style: TextStyle(
-                                                    color: Colors.white),
-                                              ),
+                                          : const Text(
+                                              "no more data to load",
+                                              style: TextStyle(
+                                                  color: Colors.white),
                                             ); // Return an empty container if not loading more
                                     }
                                   },

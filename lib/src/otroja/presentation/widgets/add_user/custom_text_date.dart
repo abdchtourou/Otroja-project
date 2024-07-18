@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class CustomTextDate extends StatelessWidget {
+class CustomTextDate extends StatefulWidget {
   CustomTextDate({
-
     super.key,
     this.hintText,
     this.labelText,
@@ -12,17 +11,24 @@ class CustomTextDate extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.isRtl = true,
+    required this.myController
   });
-  final String? labelText;
 
+  final String? labelText;
   final String? hintText;
-  Function(String)? onChange;
-  bool obscureText;
+  final Function(String)? onChange;
+  final bool obscureText;
   final Widget? prefixIcon; // Change type to Widget
   final Widget? suffixIcon; // Change type to Widget
   final bool isRtl;
-  TextEditingController myController=TextEditingController();
+  TextEditingController myController ;
 
+
+  @override
+  _CustomTextDateState createState() => _CustomTextDateState();
+}
+
+class _CustomTextDateState extends State<CustomTextDate> {
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +36,12 @@ class CustomTextDate extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
-
         children: [
-          if (labelText != null)
+          if (widget.labelText != null)
             Padding(
-              padding: const EdgeInsets.only(bottom: 20.0,right: 15),
+              padding: const EdgeInsets.only(bottom: 20.0, right: 15),
               child: Text(
-                labelText!,
+                widget.labelText!,
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
@@ -45,22 +50,21 @@ class CustomTextDate extends StatelessWidget {
               ),
             ),
           TextFormField(
-
-            controller: myController,
-
-            obscureText: obscureText,
+            controller: widget.myController,
+            obscureText: widget.obscureText,
             style: const TextStyle(color: Colors.black),
             validator: (value) {
               if (value!.isEmpty) {
                 return 'field is required';
               }
+              return null; // Add return statement to avoid lint error
             },
-            onChanged: onChange,
+            onChanged: widget.onChange,
             decoration: InputDecoration(
-              hintText: hintText,
+              hintText: widget.hintText,
               hintStyle: const TextStyle(color: Color(0xFFC2C0C0)),
-              prefixIcon: isRtl ? suffixIcon : prefixIcon,
-              suffixIcon: isRtl ? prefixIcon : suffixIcon,
+              prefixIcon: widget.isRtl ? widget.suffixIcon : widget.prefixIcon,
+              suffixIcon: widget.isRtl ? widget.prefixIcon : widget.suffixIcon,
               enabledBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: Color(0xFFE6E6E6)),
                 borderRadius: BorderRadius.all(Radius.circular(18)),
@@ -68,22 +72,27 @@ class CustomTextDate extends StatelessWidget {
               border: const OutlineInputBorder(
                 borderSide: BorderSide(color: Color(0xFFE6E6E6)),
               ),
-              contentPadding: isRtl
+              contentPadding: widget.isRtl
                   ? const EdgeInsets.only(right: 16.0)
                   : const EdgeInsets.only(left: 16.0),
             ),
-            textAlign: isRtl ? TextAlign.right : TextAlign.left,
+            textAlign: widget.isRtl ? TextAlign.right : TextAlign.left,
             onTap: () async {
+              FocusScope.of(context).requestFocus(new FocusNode()); // To prevent keyboard from appearing
               DateTime? pickedDate = await showDatePicker(
-
-                  context: context,
-                  initialDate: DateTime.now(),
-                  firstDate: DateTime(2000),
-                  lastDate: DateTime(2101));
-              if(pickedDate != null)
-              {
-                myController.text= DateFormat("yyyy-MM-dd").format(pickedDate);
-                myController.text= DateTime.now() as String;
+                context: context,
+                initialDate: DateTime.now(),
+                firstDate: DateTime(2000),
+                lastDate: DateTime(2101),
+              );
+              if (pickedDate != null) {
+                String formattedDate = DateFormat("yyyy-MM-dd").format(pickedDate);
+                setState(() {
+                 widget. myController.text = formattedDate;
+                });
+                if (widget.onChange != null) {
+                  widget.onChange!(formattedDate);
+                }
               }
             },
           ),

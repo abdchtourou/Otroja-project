@@ -1,4 +1,5 @@
 
+import 'package:admins/src/otroja/core/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomDataRow extends StatelessWidget {
@@ -13,7 +14,7 @@ class CustomDataRow extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Container(
         padding: const EdgeInsets.only(bottom: 30),
-        color: const Color(0xbbEEEAE4),
+        color: OtrojaColors.primary2Color,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
