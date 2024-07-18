@@ -5,7 +5,6 @@ sealed class ActivityState {}
 
 final class ActivityInitial extends ActivityState {}
 
-final class UpdateOtroja extends ActivityState {
-  int otrojaCount;
-  UpdateOtroja(this.otrojaCount);
+final class UpdateOtrojaState extends ActivityState {
+  UpdateOtrojaState();
 }

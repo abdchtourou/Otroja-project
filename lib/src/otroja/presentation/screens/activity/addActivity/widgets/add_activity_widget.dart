@@ -1,4 +1,6 @@
+import 'package:admins/src/otroja/cubit/activityCubit/activity_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AddOtrojaWidget extends StatelessWidget {
@@ -13,9 +15,8 @@ class AddOtrojaWidget extends StatelessWidget {
       height: 250.h,
       child: Stack(
         children: [
-              
           Positioned(
-            left:70,
+            left: 70,
             child: Container(
               width: 200.w,
               height: 180.h,
@@ -24,7 +25,7 @@ class AddOtrojaWidget extends StatelessWidget {
           ),
           Positioned(
             left: 70.w,
-            top: -10.h,
+            top: -8.h,
             child: Transform.rotate(
               angle: 3.14 / 4,
               child: Container(
@@ -70,12 +71,17 @@ class AddOtrojaWidget extends StatelessWidget {
           Positioned(
             left: 163.w,
             top: 121.h,
-            child: Text(
-              '5',
-              style: TextStyle(
-                  fontSize: 22.5,
-                  fontWeight: FontWeight.w500,
-                  color: Color(0xffEEEAE4)),
+            child: BlocConsumer<ActivityCubit, ActivityState>(
+              listener: (context, state) {},
+              builder: (context, state) {
+                return Text(
+                  ' ${BlocProvider.of<ActivityCubit>(context).otrojaCount}',
+                  style: TextStyle(
+                      fontSize: 22.5,
+                      fontWeight: FontWeight.w500,
+                      color: Color(0xffEEEAE4)),
+                );
+              },
             ),
           ),
           Positioned(
@@ -91,9 +97,12 @@ class AddOtrojaWidget extends StatelessWidget {
                     ),
                     Positioned(
                       left: 47,
-                      top: 50,
+                      top: 53,
                       child: InkWell(
-                        onTap: (){},
+                        onTap: () {
+                          BlocProvider.of<ActivityCubit>(context)
+                              .updateOtroja(false);
+                        },
                         child: SizedBox(
                           width: 30.w,
                           height: 30.h,
@@ -103,7 +112,9 @@ class AddOtrojaWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(width: 90,),
+                SizedBox(
+                  width: 90,
+                ),
                 Stack(
                   children: [
                     SizedBox(
@@ -113,9 +124,12 @@ class AddOtrojaWidget extends StatelessWidget {
                     ),
                     Positioned(
                       left: 47,
-                      top: 50,
+                      top: 53,
                       child: InkWell(
-                        onTap: (){},
+                        onTap: () {
+                          BlocProvider.of<ActivityCubit>(context)
+                              .updateOtroja(true);
+                        },
                         child: SizedBox(
                           width: 30.w,
                           height: 30.h,
@@ -125,11 +139,9 @@ class AddOtrojaWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-              
               ],
             ),
           )
-              
         ],
       ),
     );

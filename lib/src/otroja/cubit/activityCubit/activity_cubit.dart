@@ -10,9 +10,11 @@ class ActivityCubit extends Cubit<ActivityState> {
   updateOtroja(bool increment) {
     if (increment) {
       otrojaCount++;
+      emit(UpdateOtrojaState());
     } else if (otrojaCount == 1) {
     } else {
       otrojaCount--;
+      emit(UpdateOtrojaState());
     }
   }
 }
