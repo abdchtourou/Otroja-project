@@ -1,12 +1,12 @@
 import 'package:admins/src/otroja/core/di/dependency_injection.dart';
 import 'package:admins/src/otroja/core/routing/app_router.dart';
-import 'package:admins/src/otroja/cubit/activityCubit/activity_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'src/otroja/presentation/screens/activity/addActivity/addActivityScreen.dart';
-import 'src/otroja/presentation/screens/tasme3/tasmeaaScreen.dart';
+
+import 'src/otroja/presentation/screens/absence/teachersAbsence/checkGroupsScreen.dart';
+
 
 void main() {
   setUpGetIt();
@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
               fontFamily: 'DIN Next LT Arabic',
             ),
             onGenerateRoute: appRouter.generateRoute,
-            home: TasmeaaScreen(),
+            home: CheckGroupsScreen(),
           );
         });
   }
