@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'src/otroja/presentation/screens/activity/addActivity/addActivityScreen.dart';
+import 'src/otroja/presentation/screens/tasme3/tasmeaaScreen.dart';
 
 void main() {
   setUpGetIt();
@@ -41,10 +42,7 @@ class MyApp extends StatelessWidget {
               fontFamily: 'DIN Next LT Arabic',
             ),
             onGenerateRoute: appRouter.generateRoute,
-            home: BlocProvider(
-              create: (context) => ActivityCubit(),
-              child: AddActivityScreen(),
-            ),
+            home: TasmeaaScreen(),
           );
         });
   }
