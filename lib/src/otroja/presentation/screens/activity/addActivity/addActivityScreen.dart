@@ -16,9 +16,9 @@ class AddActivityScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 249, 245, 239),
       appBar: OtrojaAppBar(
-        mainText: "تفقد الطلاب ",
+        mainText: "إضافة نشاط",
         secText:
-            'حدد تاريخ اليوم والحلقة المرادة واضغك على انهاء \n  التفقد عند الانتهاء ',
+            'املأ الحقول الموجودة في الأسفل ثم اضغط على زر إضافة النشاط',
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -28,7 +28,7 @@ class AddActivityScreen extends StatelessWidget {
               OtrojaTextFormField(
                 label: "الاسم",
                 prefixIcon: 'assets/icons/product-development(1).png',
-                hintText: "اكتب اسم العمل ",
+                hintText: "اكتب اسم النشاط ",
               ),
               SizedBox(
                 height: 10.h,
@@ -36,13 +36,13 @@ class AddActivityScreen extends StatelessWidget {
               OtrojaTextFormField(
                 label: "الوصف",
                 prefixIcon: 'assets/icons/info.png',
-                hintText: "اكتب وصف عن العمل",
+                hintText: "اكتب وصف عن النشاط",
               ),
               SizedBox(
                 height: 15.h,
               ),
               const Text(
-                'عدد أترجات العمل ',
+                'عدد أترجات النشاط ',
                 style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.w500,
@@ -54,7 +54,7 @@ class AddActivityScreen extends StatelessWidget {
               Column(
                 children: [
                   AddOtrojaWidget(),
-                  OtrojaButton(text: "عرض المجموعة", onPressed: () {}),
+                  OtrojaButton(text: "إضافة النشاط", onPressed: () {}),
                 ],
               ),
             ],
