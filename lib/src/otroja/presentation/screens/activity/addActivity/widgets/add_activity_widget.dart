@@ -24,13 +24,13 @@ class AddOtrojaWidget extends StatelessWidget {
             ),
           ),
           Positioned(
-            left: 70.w,
-            top: -8.h,
+            left: 68.w,
+            top: -7.h,
             child: Transform.rotate(
               angle: 3.14 / 4,
               child: Container(
                 margin: EdgeInsets.only(left: 72, top: 32.5),
-                width: 100.w,
+                width: 105.w,
                 height: 100.h,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(2),
@@ -41,7 +41,8 @@ class AddOtrojaWidget extends StatelessWidget {
             ),
           ),
           Positioned(
-            left: 74.w,
+            left: 75.w,
+            top: 7.h,
             child: Transform.rotate(
               angle: 3.14 / 4,
               child: Container(
@@ -69,8 +70,8 @@ class AddOtrojaWidget extends StatelessWidget {
             ),
           ),
           Positioned(
-            left: 163.w,
-            top: 121.h,
+            left: 155.w,
+            top: 123.h,
             child: BlocConsumer<ActivityCubit, ActivityState>(
               listener: (context, state) {},
               builder: (context, state) {
