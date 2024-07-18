@@ -14,9 +14,9 @@ class ActivityScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 249, 245, 239),
       appBar: OtrojaAppBar(
-          mainText: "الأعمال ",
+          mainText: "الأنشطة ",
           secText:
-              'ابحث عن أي عمل أو اضغط على زر الإضافة يمينا \n  لإضافة عمل ',
+              'ابحث عن أي نشاط أو اضغط على زر الإضافة يمينا \n  لإضافة نشاط ',
           optionalWidget: AddAppBar(
             onTap: () {},
           )),
