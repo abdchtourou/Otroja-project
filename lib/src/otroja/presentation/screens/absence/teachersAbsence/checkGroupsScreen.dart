@@ -1,4 +1,3 @@
-
 import 'package:admins/src/otroja/presentation/screens/absence/teachersAbsence/widgets/teachers_absence_item.dart';
 import 'package:admins/src/otroja/presentation/widgets/buttons/otroja_button.dart';
 import 'package:admins/src/otroja/presentation/widgets/custumDropDown.dart';
@@ -14,23 +13,10 @@ import '../../../widgets/karamDatePicker.dart';
 import 'widgets/absence_date_picker.dart';
 import 'widgets/teachers_absence_table_title.dart';
 
+class CheckGroupsScreen extends StatelessWidget {
+  CheckGroupsScreen({super.key});
 
-
-class CheckGroupsScreen extends StatefulWidget {
-  const CheckGroupsScreen({super.key});
-
-  @override
-  _CheckGroupsScreenState createState() => _CheckGroupsScreenState();
-}
-
-class _CheckGroupsScreenState extends State<CheckGroupsScreen> {
   List<bool> attendanceStatus = [false, false, false, true, true];
-
-  void updateAttendanceStatus(int index, bool isPresent) {
-    setState(() {
-      attendanceStatus[index] = isPresent;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +25,14 @@ class _CheckGroupsScreenState extends State<CheckGroupsScreen> {
       appBar: OtrojaAppBar(
         mainText: "تفقد الحلقات",
         secText:
-        'حدد تاريخ اليوم والحلقة المرادة واضغك على انهاء \n  التفقد عند الانتهاء ',
+            'حدد تاريخ اليوم الدورة المرادة واضغك على انهاء \n  التفقد عند الانتهاء ',
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            AbsenceDatePicker(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              AbsenceDatePicker(
                 labelText: 'اختر تاريخ',
                 containerColor: Color(0xffffffff),
                 containerWidth: 340.w,
@@ -53,41 +41,44 @@ class _CheckGroupsScreenState extends State<CheckGroupsScreen> {
                 imagePath: 'assets/icons/calendar.png',
                 textDirection: TextDirection.rtl,
               ),
-            SizedBox(
-              height: 10.h,
-            ),
-           OtrojaDropdown(list: list, labelText: labelText, hint: hint),
-            SizedBox(
-              height: 20.h,
-            ),
-            Column(
-              children: [
-                Column(
-                  children: [
-                    const TeachersAbsenceTableTitle(),
-                    Container(
-                      width: 340.w,
-                      height: 300.h,
-                      decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 245, 236, 224),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: ListView.builder(
-                        itemBuilder: (context, index) {
-                          return TeachersAbsenceItem(absence: attendanceStatus[index], onTap: (){}) ;
-                        },
-                        itemCount: attendanceStatus.length,
-                      ),
-                    ),
-                  ],
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10.0),
+                child: OtrojaDropdown(
+                  list: ["دورة وزدناهم هدى", "دورة يشفعان"],
+                  hint: "الدورة",
+                  labelText: "اختر دورة",
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-                OtrojaButton(text: 'إنهاء التفقد', onPressed: (){}),
-              ],
-            ),
-          ],
+              ),
+              Column(
+                children: [
+                  Column(
+                    children: [
+                      const TeachersAbsenceTableTitle(),
+                      Container(
+                        width: 340.w,
+                        height: 300.h,
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 245, 236, 224),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: ListView.builder(
+                          itemBuilder: (context, index) {
+                            return TeachersAbsenceItem(
+                                absence: attendanceStatus[index], onTap: () {});
+                          },
+                          itemCount: attendanceStatus.length,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: OtrojaButton(text: 'إنهاء التفقد', onPressed: () {}),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

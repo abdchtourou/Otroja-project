@@ -1,37 +1,35 @@
-import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OtrojaDropdown extends StatelessWidget {
   final List<String> list;
-  String? labelText;
-  String hint;
-  Function(String?)? onChange;
+  final String? labelText;
+  final String hint;
+  final Function(String?)? onChange;
   final ImageProvider? prefixIcon;
   final ImageProvider? suffixIcon;
   final bool isRtl;
+  final String? value;
 
-  OtrojaDropdown({
-    super.key,
+  const OtrojaDropdown({
+    Key? key,
     required this.list,
-    required this.labelText,
+    this.labelText,
     required this.hint,
     this.onChange,
     this.prefixIcon,
     this.suffixIcon,
     this.isRtl = true,
-  });
+    this.value,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         if (labelText != null)
           Padding(
-            padding: const EdgeInsets.only(bottom: 15, right: 15),
+            padding: const EdgeInsets.only(bottom: 15),
             child: Text(
               labelText!,
               style: const TextStyle(
@@ -41,59 +39,53 @@ class OtrojaDropdown extends StatelessWidget {
               textAlign: TextAlign.right,
             ),
           ),
-        DropdownButtonFormField<String>(
-          style: const TextStyle(color: Colors.white),
-          validator: (value) {
-            if (value!.isEmpty) {
-              return 'field is required';
-            }
-          },
-          onChanged: onChange,
-          isExpanded: true,
-          hint: Align(
-            alignment: Alignment.centerRight,
-            child: Text(
-              hint,
-              style: const TextStyle(
-                  fontFamily: 'DIN Next LT Arabic', color: Color(0xFFC2C0C0)),
+        SizedBox(
+          width: MediaQuery.of(context).size.width,
+          child: Directionality(
+            textDirection:TextDirection.rtl,
+            child: DropdownMenu<String>(
+              width: MediaQuery.of(context).size.width - 15,
+              initialSelection: value,
+              onSelected: onChange,
+              dropdownMenuEntries: list.map<DropdownMenuEntry<String>>((String value) {
+                return DropdownMenuEntry<String>(
+                  value: value,
+                  label: value,
+                );
+              }).toList(),
+              textStyle: const TextStyle(color: Colors.black),
+              leadingIcon: prefixIcon != null
+                  ? ImageIcon(
+                isRtl ? suffixIcon! : prefixIcon!,
+                color: const Color(0xFFE6E6E6),
+              )
+                  : null,
+              trailingIcon: suffixIcon != null
+                  ? ImageIcon(
+                isRtl ? prefixIcon! : suffixIcon!,
+                color: const Color(0xFFE6E6E6),
+              )
+                  : null,
+              inputDecorationTheme: InputDecorationTheme(
+                filled: true,
+                fillColor: Colors.white,
+                enabledBorder: OutlineInputBorder(
+                  
+                  borderSide: BorderSide(color: Color(0xFFE6E6E6), width: 2),
+                  borderRadius: BorderRadius.all(Radius.circular(18)),
+                ),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Color(0xFFE6E6E6)),
+                ),
+                contentPadding: isRtl
+                    ? const EdgeInsets.only(right: 16.0)
+                    : const EdgeInsets.only(left: 16.0),
+              ),
+              menuStyle: MenuStyle(
+                alignment: isRtl ? Alignment.centerRight : Alignment.centerLeft,
+              ),
             ),
           ),
-          decoration: InputDecoration(
-            prefixIcon: prefixIcon != null
-                ? Transform.scale(
-                    scale: 0.6.sp,
-                    child: ImageIcon(
-                      isRtl ? suffixIcon : prefixIcon,
-                      color: Color(0xFFE6E6E6),
-                    ),
-                  )
-                : null,
-            suffixIcon: suffixIcon != null
-                ? Transform.scale(
-                    scale: 0.6.sp,
-                    child: ImageIcon(
-                      isRtl ? prefixIcon : suffixIcon,
-                      color: Color(0xFFE6E6E6),
-                    ),
-                  )
-                : null,
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Color(0xFFE6E6E6), width: 2.w),
-              borderRadius: BorderRadius.all(Radius.circular(18)),
-            ),
-            border: const OutlineInputBorder(
-              borderSide: BorderSide(color: Color(0xFFE6E6E6)),
-            ),
-            contentPadding: isRtl
-                ? const EdgeInsets.only(right: 16.0)
-                : const EdgeInsets.only(left: 16.0),
-          ),
-          items: list.map<DropdownMenuItem<String>>((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(value),
-            );
-          }).toList(),
         ),
       ],
     );

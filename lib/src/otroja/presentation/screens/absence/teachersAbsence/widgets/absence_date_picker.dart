@@ -37,7 +37,7 @@ class _DatePickerWidgetState extends State<AbsenceDatePicker> {
       builder: (BuildContext context, Widget? child) {
         return Theme(
           data: ThemeData.light().copyWith(
-            colorScheme: ColorScheme.light(
+            colorScheme: const ColorScheme.light(
               primary: Color(0xff85313C), // لون الاختيار
               onPrimary: Colors.white, // لون النص عند الاختيار
               surface: Color.fromARGB(223, 239, 227, 211), // لون الخلفية
@@ -62,16 +62,16 @@ class _DatePickerWidgetState extends State<AbsenceDatePicker> {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         Padding(
-          padding: const EdgeInsets.only(bottom: 15.0, right: 15),
-          child: Text(
-            widget.labelText,
-            textAlign: TextAlign.right,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
+            padding: const EdgeInsets.only(bottom: 15),
+            child: Text(
+              widget.labelText!,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+              ),
+              textAlign: TextAlign.right,
             ),
           ),
-        ),
         GestureDetector(
           onTap: () => _selectDate(context),
           child: Container(
@@ -84,7 +84,7 @@ class _DatePickerWidgetState extends State<AbsenceDatePicker> {
                 color: widget.borderColor,
                 width: widget.borderThickness,
               ),
-              borderRadius: BorderRadius.circular(8.0),
+              borderRadius: BorderRadius.circular(18.0),
             ),
             child: Row(
               textDirection: TextDirection.rtl,
