@@ -17,8 +17,8 @@ class OtrojaTextFormField extends StatelessWidget {
   final String? hintText;
   Function(String)? onChange;
   bool obscureText;
-  final ImageProvider? prefixIcon;
-  final ImageProvider? suffixIcon;
+  final String? prefixIcon;
+  final String? suffixIcon;
   final bool isRtl;
 
   @override
@@ -27,7 +27,7 @@ class OtrojaTextFormField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         Padding(
-           padding: const EdgeInsets.only(bottom: 15.0, right: 15),
+          padding: const EdgeInsets.only(bottom: 15.0, right: 15),
           child: Text(
             label,
             textAlign: TextAlign.right,
@@ -47,26 +47,40 @@ class OtrojaTextFormField extends StatelessWidget {
           },
           onChanged: onChange,
           decoration: InputDecoration(
+            filled: true,
+            fillColor: Colors.white,
             hintText: hintText,
             hintStyle: const TextStyle(color: Color(0xFFC2C0C0)),
-            prefixIcon: prefixIcon != null
-                ? Transform.scale(
-                    scale: 0.6.sp,
-                    child: ImageIcon(
-                      isRtl ? suffixIcon : prefixIcon,
-                      color: Color(0xFFE6E6E6),
+            prefixIcon: isRtl && suffixIcon != null
+                ? Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image.asset(
+                      suffixIcon!,
                     ),
-                  )
-                : null,
-            suffixIcon: suffixIcon != null
-                ? Transform.scale(
-                    scale: 0.6.sp,
-                    child: ImageIcon(
-                      isRtl ? prefixIcon : suffixIcon,
-                      color: Color(0xFFE6E6E6),
+                )
+                : !isRtl && prefixIcon != null
+                    ? Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.asset(
+                          prefixIcon!,
+                          scale: 15,
+                        ),
+                    )
+                    : null,
+            suffixIcon: isRtl && prefixIcon != null
+                ? Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image.asset(
+                      prefixIcon!,
+                      scale: 15,
                     ),
-                  )
-                : null,
+                )
+                : !isRtl && suffixIcon != null
+                    ? Image.asset(
+                        suffixIcon!,
+                        scale: 15,
+                      )
+                    : null,
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Color(0xFFE6E6E6), width: 2.w),
               borderRadius: BorderRadius.all(Radius.circular(18)),

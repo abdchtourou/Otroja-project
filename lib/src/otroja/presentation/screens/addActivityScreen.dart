@@ -1,33 +1,13 @@
 import 'package:admins/src/otroja/presentation/widgets/otroja_app_bar.dart';
+import 'package:admins/src/otroja/presentation/widgets/otroja_text_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../widgets/text field.dart';
 
-class AddActivityScreen extends StatefulWidget {
+class AddActivityScreen extends StatelessWidget {
   const AddActivityScreen({super.key});
-
-  @override
-  _AddActivityScreenState createState() => _AddActivityScreenState();
-}
-
-class _AddActivityScreenState extends State<AddActivityScreen> {
-  int activityCount = 1;
-
-  void _incrementActivityCount() {
-    setState(() {
-      activityCount++;
-    });
-  }
-
-  void _decrementActivityCount() {
-    if (activityCount > 1) {
-      setState(() {
-        activityCount--;
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +17,6 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
         mainText: "تفقد الطلاب ",
         secText:
         'حدد تاريخ اليوم والحلقة المرادة واضغك على انهاء \n  التفقد عند الانتهاء ',
-        optionalWidget: SizedBox(
-          width: 35.w,
-          height: 35.h,
-          child: Image.asset('assets/icons/add.png'),
-        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -55,6 +30,7 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
                 borderColor: Color(0xffE6E6E6),
                 imagePath: 'assets/icons/product-development(1).png',
                 textDirection: TextDirection.rtl),
+                OtrojaTextFormField(label: "الاسم" , prefixIcon: 'assets/icons/product-development(1).png',),
             PlatyTextField(
                 hintText: "اكتب نبذة عن العمل ",
                 labelText: 'النبذة ',
@@ -140,7 +116,7 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
                         left: 163.w,
                         top: 121.h,
                         child: Text(
-                          '$activityCount',
+                          '5',
                           style: TextStyle(
                               fontSize: 22.5,
                               fontWeight: FontWeight.w500,
@@ -162,7 +138,7 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
                                   left: 47,
                                   top: 50,
                                   child: InkWell(
-                                    onTap: _decrementActivityCount,
+                                    onTap: (){},
                                     child: SizedBox(
                                       width: 30.w,
                                       height: 30.h,
@@ -184,7 +160,7 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
                                   left: 47,
                                   top: 50,
                                   child: InkWell(
-                                    onTap: _incrementActivityCount,
+                                    onTap: (){},
                                     child: SizedBox(
                                       width: 30.w,
                                       height: 30.h,

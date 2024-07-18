@@ -55,8 +55,7 @@ class _AddGroupState extends State<AddGroup> {
                                 userName = data;
                               },
                               hintText: "اسم الحلقة",
-                              prefixIcon:
-                                  const AssetImage('assets/icons/person.png')),
+                              prefixIcon: 'assets/icons/person.png'),
                           SizedBox(height: 20.h),
                           OtrojaDropdown(
                             labelText: "الأستاذ ",

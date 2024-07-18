@@ -4,8 +4,7 @@ import 'package:admins/src/otroja/core/routing/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'src/otroja/presentation/screens/activityScreen.dart';
+import 'src/otroja/presentation/screens/addActivityScreen.dart';
 
 void main() {
   setUpGetIt();
@@ -39,7 +38,7 @@ class MyApp extends StatelessWidget {
                 fontFamily: 'DIN Next LT Arabic',
                 ),
             onGenerateRoute: appRouter.generateRoute,
-            home: ActivityScreen(),
+            home: AddActivityScreen(),
           );
         });
   }
