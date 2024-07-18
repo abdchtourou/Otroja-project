@@ -52,29 +52,20 @@ class OtrojaTextFormField extends StatelessWidget {
             hintText: hintText,
             hintStyle: const TextStyle(color: Color(0xFFC2C0C0)),
             prefixIcon: isRtl && suffixIcon != null
-                ? Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Image.asset(
-                      suffixIcon!,
-                    ),
-                )
+                ? Image.asset(
+                    suffixIcon!,
+                  )
                 : !isRtl && prefixIcon != null
-                    ? Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Image.asset(
-                          prefixIcon!,
-                          scale: 15,
-                        ),
-                    )
+                    ? Image.asset(
+                        prefixIcon!,
+                        scale: 15,
+                      )
                     : null,
             suffixIcon: isRtl && prefixIcon != null
-                ? Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Image.asset(
-                      prefixIcon!,
-                      scale: 15,
-                    ),
-                )
+                ? Image.asset(
+                    prefixIcon!,
+                    scale: 15,
+                  )
                 : !isRtl && suffixIcon != null
                     ? Image.asset(
                         suffixIcon!,
