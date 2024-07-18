@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
                 fontFamily: 'DIN Next LT Arabic',
                 ),
             onGenerateRoute: appRouter.generateRoute,
-            home: AddActivityScreen(),
+            // home: AddActivityScreen(),
           );
         });
   }

@@ -8,13 +8,13 @@ final  ApiService showStudentServices;
 
 ShowStudentsRepo(this.showStudentServices);
 
-  getStudents(page ) async{
+    getStudents(page ) async{
 
-    final students= await showStudentServices.get("students?page=$page");
+      final students= await showStudentServices.get("students?page=$page");
 
-    return students;
+      return students;
 
 
- }
+   }
 
 }

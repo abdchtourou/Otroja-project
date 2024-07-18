@@ -38,6 +38,8 @@ class EditInfoStudentCubit extends Cubit<EditInfoStudentState> {
       }
     } catch (e) {
       emit(ImageError("Error picking image"));
+    }finally{
+      close();
     }
   }
 
