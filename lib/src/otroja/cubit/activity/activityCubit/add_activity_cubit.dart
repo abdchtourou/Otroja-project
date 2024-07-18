@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
-part 'activity_state.dart';
+part 'add_activity_state.dart';
 
-class ActivityCubit extends Cubit<ActivityState> {
-  ActivityCubit() : super(ActivityInitial());
+class AddActivityCubit extends Cubit<ActivityState> {
+  AddActivityCubit() : super(ActivityInitial());
   int otrojaCount = 1;
 
   updateOtroja(bool increment) {

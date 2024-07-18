@@ -1,4 +1,4 @@
-part of 'activity_cubit.dart';
+part of 'add_activity_cubit.dart';
 
 @immutable
 sealed class ActivityState {}
