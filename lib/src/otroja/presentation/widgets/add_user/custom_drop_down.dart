@@ -5,14 +5,14 @@ class CustomDropdown extends StatelessWidget {
   final List<String> list;
   final String? labelText;
   final String? hint;
-  final ValueChanged<String?> onChanged; // Callback function
+  final ValueChanged<String?> onChanged;
 
   CustomDropdown({
     Key? key,
     required this.list,
     required this.labelText,
     required this.hint,
-    required this.onChanged, // Add this parameter
+    required this.onChanged,
   }) : super(key: key);
 
   @override
@@ -73,8 +73,9 @@ class CustomDropdown extends StatelessWidget {
             onChanged: onChanged, // Call the callback function here
             items: list.map<DropdownMenuItem<String>>((String value) {
               return DropdownMenuItem<String>(
+                alignment:AlignmentDirectional.center ,
                 value: value,
-                child: Text(value),
+                child: Text(value,textAlign: TextAlign.left,),
               );
             }).toList(),
           ),

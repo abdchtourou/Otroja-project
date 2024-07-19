@@ -18,27 +18,7 @@ class ShowAuthorizedAdminsScreen extends StatelessWidget {
       "islam",
       "Abd",
       "islam",
-      "Abd",
-      "islam",
-      "Abd",
-      "islam",
-      "Abd",
-      "islam",
-      "Abd",
-      "islam",
-      "Abd",
-      "islam",
-      "Abd",
-      "islam",
-      "Abd",
-      "islam",
-      "Abd",
-      "islam",
-      "Abd",
-      "islam",
-      "Abd",
-      "islam",
-      "Abd",
+
     ];
     return Scaffold(
       appBar: OtrojaAppBar(

@@ -53,7 +53,7 @@ final String name;
               ),
               const SizedBox(width: 10),
               ClipRRect(
-                borderRadius: BorderRadius.circular(10.0), // Adjust the radius as needed
+                borderRadius: BorderRadius.circular(10.0),
                 child: Image.asset(
                   imagePath,
                   width: 60, // Specify the desired width
