@@ -1,7 +1,9 @@
 import 'package:admins/src/otroja/cubit/add_staff/add_staff_cubit.dart';
 import 'package:admins/src/otroja/cubit/students/add_studnet/add_studnet_cubit.dart';
+import 'package:admins/src/otroja/cubit/students/check_student/check_student_cubit.dart';
 import 'package:admins/src/otroja/cubit/students/edit_info_student_cubit/edit_info_student_cubit.dart';
 import 'package:admins/src/otroja/data/repository/students_rpeos/edit_info_student_repo.dart';
+import 'package:admins/src/otroja/presentation/screens/student/checkStudentsScreen.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../cubit/students/show_student_cubit/show_students_cubit.dart';
@@ -18,6 +20,9 @@ Future<void> setUpGetIt()async{
 
   getIt.registerLazySingleton<EditInfoStudentCubit>(()=>EditInfoStudentCubit(getIt()));
   getIt.registerLazySingleton<AddStaffCubit>(()=>AddStaffCubit());
+
+
+  getIt.registerLazySingleton<CheckStudentCubit>(()=>CheckStudentCubit());
 
 
 }
