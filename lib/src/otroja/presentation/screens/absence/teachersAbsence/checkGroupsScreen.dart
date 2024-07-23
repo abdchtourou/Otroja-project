@@ -12,11 +12,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../widgets/karamDatePicker.dart';
 import 'widgets/absence_date_picker.dart';
 import 'widgets/teachers_absence_table_title.dart';
-
+import 'widgets/ttt.dart';
 class CheckGroupsScreen extends StatelessWidget {
   CheckGroupsScreen({super.key});
 
-  List<bool> attendanceStatus = [false, false, false, true, true];
+  List<bool> attendanceStatus = [false, false, false, true, true, false, false, true, true];
 
   @override
   Widget build(BuildContext context) {
@@ -51,31 +51,31 @@ class CheckGroupsScreen extends StatelessWidget {
               ),
               Column(
                 children: [
-                  Column(
-                    children: [
-                      const TeachersAbsenceTableTitle(),
-                      Container(
-                        width: 340.w,
-                        height: 300.h,
-                        decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 245, 236, 224),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: ListView.builder(
-                          itemBuilder: (context, index) {
-                            return TeachersAbsenceItem(
-                                absence: attendanceStatus[index], onTap: () {});
-                          },
-                          itemCount: attendanceStatus.length,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: OtrojaButton(text: 'إنهاء التفقد', onPressed: () {}),
+                  const TeachersAbsenceTableTitle(),
+                  Container(
+                    height: 280.h,
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 245, 236, 224),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: ListView.builder(
+                      shrinkWrap: true, // Add this line to avoid unbounded height error
+                      itemBuilder: (context, index) {
+                        return TeachersAbsenceItem(
+                          absence: attendanceStatus[index],
+                          onTap: () {},
+                          teachersName: "إسلام العيسى",
+                          groupName: "الصحابة",
+                        );
+                      },
+                      itemCount: attendanceStatus.length,
+                    ),
                   ),
                 ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: OtrojaButton(text: 'إنهاء التفقد', onPressed: () {}),
               ),
             ],
           ),

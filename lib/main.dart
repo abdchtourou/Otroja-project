@@ -1,5 +1,7 @@
 import 'package:admins/src/otroja/core/di/dependency_injection.dart';
 import 'package:admins/src/otroja/core/routing/app_router.dart';
+import 'package:admins/src/otroja/cubit/activityCubit/activity_cubit.dart';
+import 'package:admins/src/otroja/presentation/screens/absence/studentsAbsence/checkStudentsScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -42,7 +44,7 @@ class MyApp extends StatelessWidget {
               fontFamily: 'DIN Next LT Arabic',
             ),
             onGenerateRoute: appRouter.generateRoute,
-            home: CheckGroupsScreen(),
+
           );
         });
   }
