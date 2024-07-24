@@ -2,9 +2,12 @@ import 'package:admins/src/otroja/core/helper/extensions.dart';
 import 'package:admins/src/otroja/data/models/student_model/show_students.dart';
 import 'package:admins/src/otroja/presentation/widgets/otroja_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../core/di/dependency_injection.dart';
 import '../../../core/routing/routes.dart';
 import '../../../core/utils/constants/colors.dart';
+import '../../../cubit/students/edit_info_student_cubit/edit_info_student_cubit.dart';
 import '../../widgets/student_details/custom_data_row.dart';
 import '../../widgets/student_details/custom_container.dart';
 import '../../widgets/student_details/profile_info.dart';
@@ -18,13 +21,13 @@ class StudentDetails extends StatelessWidget {
 
   StudentDetails({super.key, required this.showStudentModel})
       : data = {
-          'البريد الإلكتروني': showStudentModel.firstName!,
-          'تاريخ الميلاد': showStudentModel.birthDate!,
-          'رقم الهاتف': showStudentModel.phoneNumber!,
-          'المدينة': showStudentModel.address!,
-          'الحلقة': showStudentModel.groupId!.toString(),
-          'المستوى': showStudentModel.grade!,
-        };
+    'البريد الإلكتروني': showStudentModel.firstName!,
+    'تاريخ الميلاد': showStudentModel.birthDate!,
+    'رقم الهاتف': showStudentModel.phoneNumber!,
+    'المدينة': showStudentModel.address!,
+    'الحلقة': showStudentModel.groupId!.toString(),
+    'المستوى': showStudentModel.grade!,
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +43,7 @@ class StudentDetails extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                   ProfileInfo(
+                  ProfileInfo(
                     name: showStudentModel.firstName!,
                     personalNumber: showStudentModel.phoneNumber!,
                     imagePath: 'assets/images/people (1) 1.png',
@@ -53,9 +56,11 @@ class StudentDetails extends StatelessWidget {
                   FilterBar(
                     optionalWidget: TextButton(
                       onPressed: () {
-                        context.pushNamed(Routes.editStudentInfo,arguments: showStudentModel.id.toString());
+                        context.pushNamed(Routes.editStudentInfo,
+                            arguments: showStudentModel.id.toString());
                       },
-                      child: Text('تعديل',style: TextStyle(color: OtrojaColors.primaryColor),),
+                      child: const Text('تعديل', style: TextStyle(
+                          color: OtrojaColors.primaryColor),),
                     ),
                     text: 'المعلومات العامة',
                   ),

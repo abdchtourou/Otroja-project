@@ -24,7 +24,7 @@ class ShowStudentsCubit extends Cubit<ShowStudentsState> {
 
     emit(ShowStudentsLoading());
     try {
-      final students = await showStudentsRepo.getStudents(0);
+      final students = await showStudentsRepo.getStudents(currentPage);
 
       for (var data in students['data']['data']) {
         studentList.add(ShowStudentModel.fromJson(data));

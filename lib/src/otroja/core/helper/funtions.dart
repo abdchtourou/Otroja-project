@@ -12,7 +12,7 @@ class Functions{
     Dimensions().setDimensions(height, width,isPortrait);
   }
   
-  static List search( {required List list,required  searchBy,required String value}){
+  static List search( {required List list,required searchBy,required String value}){
     List suggestionList = list
         .where((item) => item.searchBy
         .toString()
