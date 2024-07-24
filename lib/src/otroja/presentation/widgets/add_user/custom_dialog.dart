@@ -14,7 +14,7 @@ class MyDialog extends StatelessWidget {
             height: 230,
             child: Column(
               children: [
-                Image.asset('assets/images/clock 1.png'),
+               // Image.asset('assets/images/clock 1.png'),
                 const Text(
                   'تمت إضافة الطالب بنجاح',
                   style: TextStyle(

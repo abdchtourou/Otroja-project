@@ -1,8 +1,11 @@
+import 'package:admins/src/otroja/cubit/students/show_student_cubit/show_students_cubit.dart';
+import 'package:admins/src/otroja/cubit/students/show_student_cubit/show_students_state.dart';
+import 'package:admins/src/otroja/presentation/screens/Groups/addStudentToGroup/widgets/studentsListWidget.dart';
 import 'package:admins/src/otroja/presentation/widgets/buttons/add_app_bar.dart';
 import 'package:admins/src/otroja/presentation/widgets/otroja_app_bar.dart';
 import 'package:admins/src/otroja/presentation/widgets/otroja_search_bar.dart';
-import 'package:admins/src/otroja/presentation/widgets/user_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../widgets/buttons/otroja_button.dart';
 
@@ -11,14 +14,13 @@ class AddStudentToGroupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> students = ["islam", "Abd","islam", "Abd","islam", "Abd","islam", "Abd","islam", "Abd","islam", "Abd","islam", "Abd","islam", "Abd","islam", "Abd","islam", "Abd","islam", "Abd","islam", "Abd",];
     return Scaffold(
       appBar: OtrojaAppBar(
-          mainText: "حدد طلاب الحلقة",
-          secText:
-              "في حال أردت إضافة طالب جديد غير موجود مسبقا فاضغط على زر الإضافة يمينا",
-              optionalWidget: AddAppBar(onTap: (){}),
-              ),
+        mainText: "حدد طلاب الحلقة",
+        secText:
+            "في حال أردت إضافة طالب جديد غير موجود مسبقا فاضغط على زر الإضافة يمينا",
+        optionalWidget: AddAppBar(onTap: () {}),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -27,22 +29,25 @@ class AddStudentToGroupScreen extends StatelessWidget {
             const OtrojaSearchBar(),
             SizedBox(height: 20.h),
             Expanded(
-              child: ListView.builder(
-                itemCount: students.length,
-                itemBuilder: (context, index) {
-                  return UserCard(
-                    name: students[index],
-                    imagePath: "assets/images/kidsNew.png",
-                    iconPath: "assets/icons/add.png",
-                    onPressed: (){},
-                  );
+              child: BlocBuilder<ShowStudentsCubit, ShowStudentsState>(
+                builder: (context, state) {
+                  if (state is ShowStudentsLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (state is ShowStudentsLoaded) {
+                    return StudentsListWidget(context: context, students: state.students, selectedStudents: state is UpdateSelectedStudentState ? (state as UpdateSelectedStudentState).selectedStudents : []);
+                  } else if (state is UpdateSelectedStudentState) {
+                    return StudentsListWidget(context: context, students: context.read<ShowStudentsCubit>().studentList, selectedStudents: state.selectedStudents);
+                  } else {
+                    return const Center(child: Text("Error loading students"));
+                  }
                 },
               ),
             ),
-            OtrojaButton(text: "إضافة", onPressed:(){} )
+            OtrojaButton(text: "إضافة", onPressed: () {})
           ],
         ),
       ),
     );
   }
 }
+

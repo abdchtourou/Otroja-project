@@ -1,18 +1,18 @@
 class Group {
-  final int id;
+  final int? id;
   final int staffId;
   final int courseLevelId;
   final String name;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
 
   Group({
-    required this.id,
+    this.id,
     required this.staffId,
     required this.courseLevelId,
     required this.name,
-    required this.createdAt,
-    required this.updatedAt,
+    this.createdAt,
+    this.updatedAt,
   });
 
   factory Group.fromJson(Map<String, dynamic> json) {
@@ -28,12 +28,9 @@ class Group {
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
       'staff_id': staffId,
       'course_level_id': courseLevelId,
       'name': name,
-      'created_at': createdAt.toIso8601String(),
-      'updated_at': updatedAt.toIso8601String(),
     };
   }
 }

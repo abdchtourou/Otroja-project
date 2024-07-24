@@ -37,21 +37,22 @@ class OtrojaTextFormField extends StatelessWidget {
             ),
           ),
         ),
-        TextFormField(
-          obscureText: obscureText,
-          style: const TextStyle(color: Colors.black),
-          validator: (value) {
-            if (value!.isEmpty) {
-              return 'field is required';
-            }
-          },
-          onChanged: onChange,
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: Colors.white,
-            hintText: hintText,
-            hintStyle: const TextStyle(color: Color(0xFFC2C0C0)),
-            prefixIcon: isRtl && suffixIcon != null
+        Directionality(
+          textDirection: TextDirection.rtl,
+          child: TextFormField(
+            obscureText: obscureText,
+            style: const TextStyle(color: Colors.black),
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'الحقل مطلوب';
+              }
+            },
+            
+            onChanged: onChange,
+            decoration: InputDecoration(
+              hintText: hintText,
+              hintStyle: const TextStyle(color: Color(0xFFC2C0C0)),
+              prefixIcon: isRtl && suffixIcon != null
                 ? Image.asset(
                     suffixIcon!,
                   )
@@ -72,18 +73,19 @@ class OtrojaTextFormField extends StatelessWidget {
                         scale: 15,
                       )
                     : null,
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Color(0xFFE6E6E6), width: 2.w),
-              borderRadius: BorderRadius.all(Radius.circular(18)),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Color(0xFFE6E6E6), width: 2.w),
+                borderRadius: BorderRadius.all(Radius.circular(18)),
+              ),
+              border: const OutlineInputBorder(
+                borderSide: BorderSide(color: Color(0xFFE6E6E6)),
+              ),
+              contentPadding: isRtl
+                  ? const EdgeInsets.only(right: 16.0)
+                  : const EdgeInsets.only(left: 16.0),
             ),
-            border: const OutlineInputBorder(
-              borderSide: BorderSide(color: Color(0xFFE6E6E6)),
-            ),
-            contentPadding: isRtl
-                ? const EdgeInsets.only(right: 16.0)
-                : const EdgeInsets.only(left: 16.0),
+            textAlign: isRtl ? TextAlign.right : TextAlign.left,
           ),
-          textAlign: isRtl ? TextAlign.right : TextAlign.left,
         ),
       ],
     );

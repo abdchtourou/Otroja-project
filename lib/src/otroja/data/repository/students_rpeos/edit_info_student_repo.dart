@@ -1,4 +1,4 @@
-import 'package:admins/src/otroja/core/networking/api_services.dart';
+import '../../datasource/api_services.dart';
 
 class EditInfoStudentRepo{
   final ApiService apiService;

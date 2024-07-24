@@ -13,11 +13,25 @@ class ShowStudentsCubit extends Cubit<ShowStudentsState> {
 
   ShowStudentsCubit(this.showStudentsRepo) : super(ShowStudentsInitial()) {
     getStudents();
+    getStudentsIslam();
     scrollController.addListener(_onScroll);
   }
- 
 
   List<ShowStudentModel> studentList = <ShowStudentModel>[];
+  List<int> selectedStudents = [];
+
+  Future<void> getStudentsIslam() async {
+    emit(ShowStudentsLoading());
+    try {
+      final List<ShowStudentModel> students =
+          await showStudentsRepo.getStudentsIslam();
+      studentList = students;
+      emit(ShowStudentsLoaded(studentList, false));
+    } catch (e) {
+      print(e);
+      emit(ShowStudentsError());
+    }
+  }
 
   Future<void> getStudents() async {
     isLoadingMore = true;
@@ -29,7 +43,7 @@ class ShowStudentsCubit extends Cubit<ShowStudentsState> {
       for (var data in students['data']['data']) {
         studentList.add(ShowStudentModel.fromJson(data));
       }
-      emit(ShowStudentsLoaded(studentList,isLoadingMore));
+      emit(ShowStudentsLoaded(studentList, isLoadingMore));
       isLoadingMore = true;
 
       currentPage++;
@@ -45,9 +59,7 @@ class ShowStudentsCubit extends Cubit<ShowStudentsState> {
 
       if (students['data']['data'].isEmpty) {
         isLoadingMore = false;
-        emit(ShowStudentsLoaded(studentList,isLoadingMore));
-
-
+        emit(ShowStudentsLoaded(studentList, isLoadingMore));
 
         print(isLoadingMore);
         print("//////////////zed");
@@ -57,7 +69,7 @@ class ShowStudentsCubit extends Cubit<ShowStudentsState> {
       for (var data in students['data']['data']) {
         studentList.add(ShowStudentModel.fromJson(data));
       }
-      emit(ShowStudentsLoaded(studentList,isLoadingMore));
+      emit(ShowStudentsLoaded(studentList, isLoadingMore));
 
       currentPage++;
     } catch (error) {}
@@ -75,5 +87,41 @@ class ShowStudentsCubit extends Cubit<ShowStudentsState> {
     scrollController.removeListener(_onScroll);
     scrollController.dispose();
     return super.close();
+  }
+
+  Future<void> getStudentsByGroupId(int groupId) async {
+    emit(ShowStudentsLoading());
+    try {
+      final students = await showStudentsRepo.getStudentsByGroupId(groupId);
+      emit(ShowStudentsLoaded(students, false));
+    } catch (e) {
+      print(e);
+      emit(ShowStudentsError());
+    }
+  }
+
+  void toggleSelection(int id) {
+    if (selectedStudents.contains(id)) {
+      selectedStudents.remove(id);
+    } else {
+      selectedStudents.add(id);
+    }
+
+    emit(UpdateSelectedStudentState(List.from(selectedStudents)));
+  }
+
+  Future<void> removeStudentFromGroup(int? studentId, int groupId) async {
+    try {
+      final success =
+          await showStudentsRepo.removeStudentFromGroup(studentId, groupId);
+      if (success) {
+        getStudentsByGroupId(groupId);
+      } else {
+        emit(ShowStudentsError());
+      }
+    } catch (e) {
+      print(e);
+      emit(ShowStudentsError());
+    }
   }
 }

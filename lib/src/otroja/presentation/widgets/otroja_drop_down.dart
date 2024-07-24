@@ -40,37 +40,31 @@ class OtrojaDropdown extends StatelessWidget {
             ),
           ),
         SizedBox(
-          width: MediaQuery.of(context).size.width,
+          width: double.infinity,
           child: Directionality(
-            textDirection:TextDirection.rtl,
-            child: DropdownMenu<String>(
-              width: MediaQuery.of(context).size.width - 15,
-              initialSelection: value,
-              onSelected: onChange,
-              dropdownMenuEntries: list.map<DropdownMenuEntry<String>>((String value) {
-                return DropdownMenuEntry<String>(
+            textDirection: TextDirection.rtl,
+            child: DropdownButtonFormField<String>(
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'الحقل مطلوب';
+                }
+                return null;
+              },
+              value: value,
+              hint: Text(
+                "         $hint",
+                style: TextStyle(color: Color(0xFFC2C0C0)),
+                textAlign: TextAlign.end,
+              ),
+              onChanged: onChange,
+              items: list.map((String value) {
+                return DropdownMenuItem<String>(
                   value: value,
-                  label: value,
+                  child: Text(value),
                 );
               }).toList(),
-              textStyle: const TextStyle(color: Colors.black),
-              leadingIcon: prefixIcon != null
-                  ? ImageIcon(
-                isRtl ? suffixIcon! : prefixIcon!,
-                color: const Color(0xFFE6E6E6),
-              )
-                  : null,
-              trailingIcon: suffixIcon != null
-                  ? ImageIcon(
-                isRtl ? prefixIcon! : suffixIcon!,
-                color: const Color(0xFFE6E6E6),
-              )
-                  : null,
-              inputDecorationTheme: InputDecorationTheme(
-                filled: true,
-                fillColor: Colors.white,
+              decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(
-                  
                   borderSide: BorderSide(color: Color(0xFFE6E6E6), width: 2),
                   borderRadius: BorderRadius.all(Radius.circular(18)),
                 ),
@@ -80,9 +74,6 @@ class OtrojaDropdown extends StatelessWidget {
                 contentPadding: isRtl
                     ? const EdgeInsets.only(right: 16.0)
                     : const EdgeInsets.only(left: 16.0),
-              ),
-              menuStyle: MenuStyle(
-                alignment: isRtl ? Alignment.centerRight : Alignment.centerLeft,
               ),
             ),
           ),

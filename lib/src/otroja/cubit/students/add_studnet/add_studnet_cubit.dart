@@ -26,20 +26,14 @@ class AddStudentCubit extends Cubit<AddStudentState> {
 
   Future<void> pickImage() async {
     try {
-      final pickedImage= await imagePicker.pickImage(source: ImageSource.gallery);
-      if(pickedImage!=null){
-        image=pickedImage.path;
+      final pickedImage =
+          await imagePicker.pickImage(source: ImageSource.gallery);
+      if (pickedImage != null) {
+        image = pickedImage.path;
         emit(ImageLoaded(pickedImage.path));
-
-
-      }else{
+      } else {
         emit(ImageError("No Image Selected"));
-
-
       }
-
-
-
     } catch (e) {}
   }
   @override

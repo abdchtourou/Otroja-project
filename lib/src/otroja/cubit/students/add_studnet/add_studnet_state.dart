@@ -14,3 +14,4 @@ final class ImageError  extends AddStudentState {
 
   ImageError(this.errorMessage);
 }
+

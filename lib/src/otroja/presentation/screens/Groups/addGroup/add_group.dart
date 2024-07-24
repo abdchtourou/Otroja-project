@@ -1,38 +1,35 @@
+import 'package:admins/src/otroja/cubit/course/course_cubit.dart';
+import 'package:admins/src/otroja/cubit/staff/staff_cubit.dart';
+import 'package:admins/src/otroja/data/models/course_model.dart';
+import 'package:admins/src/otroja/data/models/group_model.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:admins/src/otroja/presentation/screens/Groups/addGroup/widgets/group_number_widget.dart';
 import 'package:admins/src/otroja/presentation/widgets/buttons/add_button.dart';
 import 'package:admins/src/otroja/presentation/widgets/buttons/view_button.dart';
 import 'package:admins/src/otroja/presentation/widgets/otroja_drop_down.dart';
 import 'package:admins/src/otroja/presentation/widgets/otroja_app_bar.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:admins/src/otroja/presentation/widgets/buttons/otroja_button.dart';
+import 'package:admins/src/otroja/presentation/widgets/otroja_text_field.dart';
+import 'package:admins/src/otroja/data/models/staff_model.dart';
 
-import '../../../widgets/buttons/otroja_button.dart';
-import '../../../widgets/otroja_text_field.dart';
+import '../../../../cubit/groups/group_cubit.dart';
+import '../../../widgets/otroja_seccuss_dialog.dart';
 
-class AddGroup extends StatefulWidget {
-  AddGroup({super.key});
+class AddGroup extends StatelessWidget {
+  AddGroup({Key? key}) : super(key: key);
 
   static String id = 'AddGroupScreen';
-
-  @override
-  State<AddGroup> createState() => _AddGroupState();
-}
-
-class _AddGroupState extends State<AddGroup> {
-  String? userName;
-
-  String? password;
-
-  bool isLoading = false;
-
-  GlobalKey<FormState> formKey = GlobalKey();
+  static final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: OtrojaAppBar(
-          mainText: "إنشاء حلقة",
-          secText: "املأ الحقول الموجودة في الأسفل ثم اضغط على زر إنشاء حلقة"),
+        mainText: "إنشاء حلقة",
+        secText: "املأ الحقول الموجودة في الأسفل ثم اضغط على زر إنشاء حلقة",
+      ),
       body: Column(
         children: [
           Expanded(
@@ -41,32 +38,113 @@ class _AddGroupState extends State<AddGroup> {
                 padding: const EdgeInsets.all(7.0),
                 child: Column(
                   children: [
-                    const GroupNumberWidget(),
-                    SizedBox(
-                      height: 20.h,
-                    ),
+                    // GroupNumberWidget(groupNumber: 2),
+                    //SizedBox(height: 20.h),
                     Form(
                       key: formKey,
                       child: Column(
                         children: [
-                          OtrojaTextFormField(
-                              label: "اسم الحلقة",
-                              onChange: (data) {
-                                userName = data;
-                              },
-                              hintText: "اسم الحلقة",
-                              prefixIcon: 'assets/icons/person.png'),
-                          SizedBox(height: 20.h),
-                          OtrojaDropdown(
-                            labelText: "الأستاذ ",
-                            hint: "الأستاذ",
-                            list: ["أحمد", "إسلام"],
+                          BlocBuilder<GroupCubit, GroupState>(
+                            builder: (context, state) {
+                              final cubit = context.read<GroupCubit>();
+                              return OtrojaTextFormField(
+                                label: "اسم الحلقة",
+                                onChange: (data) {
+                                  cubit.groupName = data;
+                                },
+                                hintText: "اسم الحلقة",
+          
+                              );
+                            },
                           ),
                           SizedBox(height: 20.h),
-                          OtrojaDropdown(
-                            labelText: "الدورة",
-                            hint: "الدورة",
-                            list: ["قران", "حديث"],
+                          BlocConsumer<StaffCubit, StaffState>(
+                            listener: (context, state) {
+                              if (state is StaffError) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                      content: Text(
+                                          "Error loading teachers: ${state.message}")),
+                                );
+                              }
+                            },
+                            builder: (context, state) {
+                              List<Staff> teachersList = [];
+
+                              if (state is StaffLoaded) {
+                                teachersList = state.staffList;
+                              }
+                              return BlocBuilder<GroupCubit, GroupState>(
+                                builder: (context, groupState) {
+                                  final cubit = context.read<GroupCubit>();
+                                  return OtrojaDropdown(
+                                    labelText: "الأستاذ",
+                                    hint: "اختر الأستاذ",
+                                    value: cubit.selectedTeacher != null
+                                        ? "${cubit.selectedTeacher!.firstName} ${cubit.selectedTeacher!.lastName}"
+                                        : null,
+                                    list: teachersList
+                                        .map((teacher) =>
+                                            "${teacher.firstName} ${teacher.lastName}")
+                                        .toList(),
+                                    onChange: (value) {
+                                      cubit.selectedTeacher =
+                                          teachersList.firstWhere(
+                                        (teacher) =>
+                                            "${teacher.firstName} ${teacher.lastName}" ==
+                                            value,
+                                      );
+                                    },
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                          SizedBox(height: 20.h),
+                          BlocConsumer<CourseCubit, CourseState>(
+                            listener: (context, state) {
+                              if (state is CourseError) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                      content: Text(
+                                          "Error loading courses: ${state.message}")),
+                                );
+                              }
+                            },
+                            builder: (context, state) {
+                              List<String> courseLevelList = [];
+                              Map<String, int> courseLevelMap =
+                                  {}; // To store course-level name and ID mapping
+
+                              if (state is CoursesLoaded) {
+                                state.courses.forEach((course) {
+                                  course.levels.forEach((level) {
+                                    String courseLevelName =
+                                        "${course.name} - ${level.name}";
+                                    courseLevelList.add(courseLevelName);
+                                    courseLevelMap[courseLevelName] =
+                                        level.pivot.id;
+                                  });
+                                });
+                              }
+
+                              return BlocBuilder<GroupCubit, GroupState>(
+                                builder: (context, groupState) {
+                                  final cubit = context.read<GroupCubit>();
+                                  return OtrojaDropdown(
+                                    labelText: "الدورة",
+                                    hint: "الدورة",
+                                    list: courseLevelList,
+                                    onChange: (value) {
+                                      cubit.selectedCourseName = value;
+                                      cubit.selectedCourseLevelId =
+                                          courseLevelMap[value];
+                                    },
+                                    value: cubit.selectedCourseName,
+                                  );
+                                },
+                              );
+                            },
                           ),
                           SizedBox(height: 45.h),
                           Row(
@@ -78,9 +156,7 @@ class _AddGroupState extends State<AddGroup> {
                                 text: "طلاب الحلقة",
                                 textColor: const Color(0xFF85313C),
                               ),
-                              const Spacer(
-                                flex: 1,
-                              ),
+                              const Spacer(flex: 1),
                               AddButton(
                                 onTap: () {},
                                 icon:
@@ -91,15 +167,36 @@ class _AddGroupState extends State<AddGroup> {
                               ),
                             ],
                           ),
-                          SizedBox(
-                            height: 60.h,
-                          ),
-                          OtrojaButton(
-                            onPressed: () async {
-                              if (formKey.currentState!.validate()) {}
-                            },
-                            text: 'إنشاء حلقة',
-                          ),
+                          SizedBox(height: 20.h),
+                          BlocConsumer<GroupCubit, GroupState>(
+                              listener: (context, state) {
+                            if (state is GroupLoaded) {
+                              showDialog(
+                                context: context,
+                                builder: (context) => OtrojaSuccessDialog(
+                                  text: "!تم إضافة الحلقة بنجاح",
+                                ),
+                              ).then((_) {
+        formKey.currentState?.reset();
+        context.read<GroupCubit>().resetState();
+      });
+                            }
+                          }, builder: (context, state) {
+                            return OtrojaButton(
+                              onPressed: () async {
+                                if (formKey.currentState!.validate()) {
+                                  final cubit = context.read<GroupCubit>();
+                                  cubit.createGroup(Group(
+                                      staffId: cubit.selectedTeacher!.id,
+                                      courseLevelId:
+                                          cubit.selectedCourseLevelId!,
+                                      name: cubit.groupName!));
+                                  print("tap");
+                                }
+                              },
+                              text: 'إنشاء حلقة',
+                            );
+                          })
                         ],
                       ),
                     ),

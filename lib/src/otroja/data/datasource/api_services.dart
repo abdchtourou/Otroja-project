@@ -1,34 +1,39 @@
 import 'package:dio/dio.dart';
 
-import '../helper/constant.dart';
 
 class ApiService {
   final Dio _dio = Dio();
-  final String _baseUrl = 'https://api.example.com'; // Replace with your API base URL
+  final String _baseUrl =
+      'https://a797-149-34-244-165.ngrok-free.app/api/'; // Replace with your API base URL
 
   ApiService() {
-    _dio.options.baseUrl = baseUrl;
-    _dio.options.connectTimeout = const Duration(seconds: 5);
-    _dio.options.receiveTimeout = const Duration(seconds: 3);
+    _dio.options.baseUrl = _baseUrl;
+    _dio.options.connectTimeout = const Duration(seconds: 100);
+    _dio.options.receiveTimeout = const Duration(seconds: 100);
     // You can add more default configurations here
   }
 
   // GET request
-  Future<Map<String, dynamic>> get(String path) async {
+  Future<Response> get(String path,
+      {Map<String, dynamic>? queryParameters}) async {
     try {
-      final response = await _dio.get(path);
-      return response.data;
+      final response = await _dio.get(path, queryParameters: queryParameters);
+      print(response);
+      return response;
     } on DioException catch (e) {
+      print(e.message);
       throw _handleError(e);
     }
   }
 
   // POST request
-  Future<Map<String, dynamic>> post(String path, {dynamic data, Map<String, dynamic>? queryParameters}) async {
+  Future<Response> post(String path,
+      {dynamic data, Map<String, dynamic>? queryParameters}) async {
     try {
-      print("post $data");
-      final response = await _dio.post(path, data: data, queryParameters: queryParameters);
-      return response.data;
+      final response =
+          await _dio.post(path, data: data, queryParameters: queryParameters);
+      
+      return response;
     } on DioException catch (e) {
       print(e);
       throw _handleError(e);
@@ -36,9 +41,11 @@ class ApiService {
   }
 
   // PUT request
-  Future<Response> put(String path, {dynamic data, Map<String, dynamic>? queryParameters}) async {
+  Future<Response> put(String path,
+      {dynamic data, Map<String, dynamic>? queryParameters}) async {
     try {
-      final response = await _dio.put(path, data: data, queryParameters: queryParameters);
+      final response =
+          await _dio.put(path, data: data, queryParameters: queryParameters);
       return response;
     } on DioException catch (e) {
       throw _handleError(e);
@@ -46,9 +53,11 @@ class ApiService {
   }
 
   // DELETE request
-  Future<Response> delete(String path, {Map<String, dynamic>? queryParameters}) async {
+  Future<Response> delete(String path,
+      {Map<String, dynamic>? queryParameters}) async {
     try {
-      final response = await _dio.delete(path, queryParameters: queryParameters);
+      final response =
+          await _dio.delete(path, queryParameters: queryParameters);
       return response;
     } on DioException catch (e) {
       throw _handleError(e);
