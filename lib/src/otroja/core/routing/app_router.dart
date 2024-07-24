@@ -26,7 +26,7 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
                   create: (context) => getIt<ShowStudentsCubit>(),
-                  child:  ShowSubject(),
+                  child:  SubjectClassifications(),
                 )
             );
       case Routes.studentDetails:
@@ -43,6 +43,9 @@ class AppRouter {
             builder: (_) => BlocProvider(
               create: (context) => getIt<EditInfoStudentCubit>(),
               child:  EditInformationStudent(studentId: studentId,),)
+        );
+      case Routes.showSubject:
+        return MaterialPageRoute(builder: (_)=>ShowSubject()
         );
     }
     return null;

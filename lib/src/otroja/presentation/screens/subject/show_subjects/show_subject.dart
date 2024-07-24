@@ -49,7 +49,7 @@ class ShowSubject extends StatelessWidget {
                           showDialog(
                             context: context,
                             builder: (BuildContext context) => AddSubjectDialog(
-                              optionalWidget: SubjectDetail(),
+                              optionalWidget: const SubjectDetail(),
                               buttonText: 'خروج',
                             ),
                           );
