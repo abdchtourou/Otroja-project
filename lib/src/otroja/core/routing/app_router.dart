@@ -19,6 +19,7 @@ import '../../data/repository/group_repository.dart';
 import '../../data/repository/staff_repository.dart';
 import '../../presentation/screens/Groups/addGroup/add_group.dart';
 import '../../presentation/screens/activity/showActivities/activityScreen.dart';
+import '../../presentation/screens/parents/addParents/add_parents.dart';
 import '../../presentation/screens/student/show_students.dart';
 import '../../presentation/screens/tasme3/tasmeaaScreen.dart';
 import '../di/dependency_injection.dart';
@@ -39,7 +40,7 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
                   create: (context) => getIt<ShowStudentsCubit>(),
-                  child:  ActivityScreen(),
+                  child:  AddParents(),
                 )
             );
       case'showStudent':

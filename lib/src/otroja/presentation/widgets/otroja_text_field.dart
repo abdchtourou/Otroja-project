@@ -10,6 +10,8 @@ class OtrojaTextFormField extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.isRtl = true,
+    this.controller,
+    this.type,
     required this.label,
   });
 
@@ -20,6 +22,8 @@ class OtrojaTextFormField extends StatelessWidget {
   final String? prefixIcon;
   final String? suffixIcon;
   final bool isRtl;
+  final TextInputType? type;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -47,32 +51,22 @@ class OtrojaTextFormField extends StatelessWidget {
                 return 'الحقل مطلوب';
               }
             },
-            
             onChanged: onChange,
             decoration: InputDecoration(
               hintText: hintText,
               hintStyle: const TextStyle(color: Color(0xFFC2C0C0)),
-              prefixIcon: isRtl && suffixIcon != null
-                ? Image.asset(
-                    suffixIcon!,
-                  )
-                : !isRtl && prefixIcon != null
-                    ? Image.asset(
-                        prefixIcon!,
-                        scale: 15,
-                      )
-                    : null,
-            suffixIcon: isRtl && prefixIcon != null
-                ? Image.asset(
-                    prefixIcon!,
-                    scale: 15,
-                  )
-                : !isRtl && suffixIcon != null
-                    ? Image.asset(
-                        suffixIcon!,
-                        scale: 15,
-                      )
-                    : null,
+              prefixIcon:prefixIcon != null?
+                       Image.asset(
+                          prefixIcon!,
+                          scale: 15,
+                        )
+                      : null,
+              suffixIcon:  suffixIcon != null
+                      ? Image.asset(
+                          suffixIcon!,
+                          scale: 15,
+                        )
+                      : null,
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Color(0xFFE6E6E6), width: 2.w),
                 borderRadius: BorderRadius.all(Radius.circular(18)),
