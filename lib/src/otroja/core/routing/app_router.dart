@@ -12,6 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../cubit/course/course_cubit.dart';
 import '../../cubit/groups/group_cubit.dart';
 import '../../cubit/staff/staff_cubit.dart';
+import '../../cubit/students/check_student/check_student_cubit.dart';
 import '../../cubit/students/show_student_cubit/show_students_cubit.dart';
 import '../../data/datasource/api_services.dart';
 import '../../data/repository/course_repository.dart';
@@ -39,8 +40,8 @@ class AppRouter {
       case '/':
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
-                  create: (context) => getIt<ShowStudentsCubit>(),
-                  child:  AddParents(),
+                  create: (context) => getIt<CheckStudentCubit>(),
+                  child:  CheckStudentScreen(),
                 )
             );
       case'showStudent':
