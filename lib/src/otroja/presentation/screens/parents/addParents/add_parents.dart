@@ -15,7 +15,7 @@ class AddParents extends StatelessWidget {
     return Scaffold(
       appBar: OtrojaAppBar(
         mainText: "إضافة ولي أمر",
-        secText:"املأ الحقول الموجودة في الأسفل ثم اضغط على زر إضافة المشرف",
+        secText:"املأ الحقول الموجودة في الأسفل ثم اضغط على زر إضافة ولي أمر",
       ),
       body: Column(
         children: [
@@ -72,7 +72,7 @@ class AddParents extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: OtrojaButton(text: "إضافة المشرف", onPressed: (){}),
+            child: OtrojaButton(text: "إضافة ولي أمر", onPressed: (){}),
           )
 
         ],
