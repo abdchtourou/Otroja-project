@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 
+import '../../core/helper/constant.dart';
+
 
 class ApiService {
   final Dio _dio = Dio();
@@ -7,7 +9,7 @@ class ApiService {
       'https://a797-149-34-244-165.ngrok-free.app/api/'; // Replace with your API base URL
 
   ApiService() {
-    _dio.options.baseUrl = _baseUrl;
+    _dio.options.baseUrl = baseUrl;
     _dio.options.connectTimeout = const Duration(seconds: 100);
     _dio.options.receiveTimeout = const Duration(seconds: 100);
     // You can add more default configurations here
