@@ -13,4 +13,5 @@ class Routes {
   static const String groups = "/groups";
   static const String showAuthorizedAdmins = "/showAuthorizedAdmins";
   static const String showPermissions = "/showPermissions";
+  static const String addActivity = "/addActivity";
 }

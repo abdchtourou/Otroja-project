@@ -10,10 +10,10 @@ class OtrojaTextFormField extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.isRtl = true,
-    this.controller,
-    this.type,
+    this.myController,
     required this.label,
   });
+  final TextEditingController? myController;
 
   final String label;
   final String? hintText;
@@ -22,8 +22,6 @@ class OtrojaTextFormField extends StatelessWidget {
   final String? prefixIcon;
   final String? suffixIcon;
   final bool isRtl;
-  final TextInputType? type;
-  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -41,45 +39,54 @@ class OtrojaTextFormField extends StatelessWidget {
             ),
           ),
         ),
-        Directionality(
-          textDirection: TextDirection.rtl,
-          child: TextFormField(
-            obscureText: obscureText,
-            style: const TextStyle(color: Colors.black),
-            validator: (value) {
-              if (value!.isEmpty) {
-                return 'الحقل مطلوب';
-              }
-            },
-            onChanged: onChange,
-            decoration: InputDecoration(
-              hintText: hintText,
-              hintStyle: const TextStyle(color: Color(0xFFC2C0C0)),
-              prefixIcon:prefixIcon != null?
-                       Image.asset(
-                          prefixIcon!,
-                          scale: 15,
-                        )
-                      : null,
-              suffixIcon:  suffixIcon != null
-                      ? Image.asset(
-                          suffixIcon!,
-                          scale: 15,
-                        )
-                      : null,
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Color(0xFFE6E6E6), width: 2.w),
-                borderRadius: BorderRadius.all(Radius.circular(18)),
-              ),
-              border: const OutlineInputBorder(
-                borderSide: BorderSide(color: Color(0xFFE6E6E6)),
-              ),
-              contentPadding: isRtl
-                  ? const EdgeInsets.only(right: 16.0)
-                  : const EdgeInsets.only(left: 16.0),
+        TextFormField(
+          controller: myController,
+          obscureText: obscureText,
+          style: const TextStyle(color: Colors.black),
+          validator: (value) {
+            if (value!.isEmpty) {
+              return 'field is required';
+            }
+          },
+          onChanged: onChange,
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: Colors.white,
+            hintText: hintText,
+            hintStyle: const TextStyle(color: Color(0xFFC2C0C0)),
+            prefixIcon: isRtl && suffixIcon != null
+                ? Image.asset(
+                    suffixIcon!,
+                  )
+                : !isRtl && prefixIcon != null
+                    ? Image.asset(
+                        prefixIcon!,
+                        scale: 15,
+                      )
+                    : null,
+            suffixIcon: isRtl && prefixIcon != null
+                ? Image.asset(
+                    prefixIcon!,
+                    scale: 15,
+                  )
+                : !isRtl && suffixIcon != null
+                    ? Image.asset(
+                        suffixIcon!,
+                        scale: 15,
+                      )
+                    : null,
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Color(0xFFE6E6E6), width: 2.w),
+              borderRadius: BorderRadius.all(Radius.circular(18)),
             ),
-            textAlign: isRtl ? TextAlign.right : TextAlign.left,
+            border: const OutlineInputBorder(
+              borderSide: BorderSide(color: Color(0xFFE6E6E6)),
+            ),
+            contentPadding: isRtl
+                ? const EdgeInsets.only(right: 16.0)
+                : const EdgeInsets.only(left: 16.0),
           ),
+          textAlign: isRtl ? TextAlign.right : TextAlign.left,
         ),
       ],
     );

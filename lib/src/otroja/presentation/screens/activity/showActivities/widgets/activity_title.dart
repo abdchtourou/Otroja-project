@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ActivityTitle extends StatelessWidget {
   String activityTitle;
-  String activityOtroja;
+  int activityOtroja;
 
   ActivityTitle({
     super.key,
@@ -39,7 +39,7 @@ class ActivityTitle extends StatelessWidget {
                   width: 5.w,
                 ),
                 Text(
-                  activityOtroja,
+                  '$activityOtroja',
                   style: TextStyle(
                       color: Colors.white,
                       fontStyle: FontStyle.normal,

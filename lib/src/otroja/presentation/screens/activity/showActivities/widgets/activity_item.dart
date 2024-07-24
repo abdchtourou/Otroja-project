@@ -6,7 +6,7 @@ import 'activity_title.dart';
 class ActivityItem extends StatelessWidget {
   String activityDescrition;
   String activityTitle;
-  String activityOtroja;
+  int activityOtroja;
    ActivityItem({
     super.key,
     required this.activityDescrition,
