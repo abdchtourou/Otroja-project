@@ -15,9 +15,7 @@ Future<void> setUpGetIt()async{
   getIt.registerLazySingleton<ShowStudentsCubit>(() => ShowStudentsCubit( getIt()));
   getIt.registerLazySingleton<AddStudentCubit>(()=>AddStudentCubit());
   getIt.registerLazySingleton<EditInfoStudentRepo>(() => EditInfoStudentRepo(apiServices));
-
   getIt.registerLazySingleton<EditInfoStudentCubit>(()=>EditInfoStudentCubit(getIt()));
   getIt.registerLazySingleton<AddStaffCubit>(()=>AddStaffCubit());
-
 
 }
