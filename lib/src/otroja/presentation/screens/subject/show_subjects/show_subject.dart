@@ -2,6 +2,8 @@ import 'package:admins/src/otroja/core/utils/constants/colors.dart';
 import 'package:admins/src/otroja/presentation/screens/subject/show_subjects/widget/add_subject_card.dart';
 import 'package:admins/src/otroja/presentation/screens/subject/show_subjects/widget/add_subject_dialog.dart';
 import 'package:admins/src/otroja/presentation/screens/subject/show_subjects/widget/subject_card.dart';
+import 'package:admins/src/otroja/presentation/screens/subject/show_subjects/widget/subject_detail.dart';
+import 'package:admins/src/otroja/presentation/screens/subject/show_subjects/widget/subject_input_form.dart';
 import 'package:admins/src/otroja/presentation/widgets/otroja_app_bar.dart';
 import 'package:admins/src/otroja/presentation/widgets/show_students_widget/search_bar.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +17,7 @@ class ShowSubject extends StatelessWidget {
   ShowSubject({super.key});
 
   final ValueNotifier<String> searchNotifier = ValueNotifier<String>('');
-  TextEditingController textEditingController =TextEditingController();
+  TextEditingController textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -38,59 +40,33 @@ class ShowSubject extends StatelessWidget {
                     crossAxisCount: 2,
                     childAspectRatio: 1.5,
                     crossAxisSpacing: 20,
-                      mainAxisSpacing: 20),
-                  itemCount: 11,
+                    mainAxisSpacing: 20),
+                itemCount: 11,
                 itemBuilder: (context, index) {
                   if (index < 10) {
                     return InkWell(
-                      onTap: (){
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) =>
-                              AddSubjectDialog(optionalWidget: Column(
-                                children: [
-                                  Container(
-                                    height:38,
-                                    decoration: BoxDecoration(
-                                      color: OtrojaColors.primaryColor,
-                                      borderRadius: BorderRadius.all(Radius.circular(30))
-                                    ),
-                                    child: Text('asdf'),
-                                  )
-
-                                  
-
-                                ],
-                              ),
-
-                              ),
-                        );
-
-                      },
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) => AddSubjectDialog(
+                              optionalWidget: SubjectDetail(),
+                              buttonText: 'خروج',
+                            ),
+                          );
+                        },
                         child: const SubjectCard());
                   } else {
-                    return AddSubjectCard(onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) =>
-                            AddSubjectDialog(optionalWidget: Column(
-                              children: [
-                                CustomTextFormField(
-                                    myController: textEditingController,
-                                    labelText: 'اسم المادة'),
-                                CustomTextFormField(
-                                    myController: textEditingController,
-                                    labelText: 'تصنيف المادة'),
-                                CustomTextFormField(
-                                    myController: textEditingController,
-                                    labelText: 'نبذة عن المادة'),
-
-                              ],
-                            ),
-
-                            ),
-                      );
-                    },);
+                    return AddSubjectCard(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) => AddSubjectDialog(
+                            optionalWidget: SubjectInputForm(),
+                            buttonText: 'إضافة المادة ',
+                          ),
+                        );
+                      },
+                    );
                   }
                 },
               ),

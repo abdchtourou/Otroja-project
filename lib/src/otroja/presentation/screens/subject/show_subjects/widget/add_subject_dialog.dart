@@ -6,16 +6,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/utils/constants/colors.dart';
 
 class AddSubjectDialog extends StatelessWidget {
-   AddSubjectDialog({super.key,required this.optionalWidget});
+   AddSubjectDialog({super.key,required this.optionalWidget,required this.buttonText});
   Widget optionalWidget;
+   String buttonText;
 
   @override
   Widget build(BuildContext context) {
     TextEditingController textEditingController = TextEditingController();
+
     return AlertDialog(
-      contentPadding: EdgeInsets.all(0),
-      actionsPadding: EdgeInsets.all(0),
-      backgroundColor: Color(0xffFFF9F5),
+      // contentPadding: EdgeInsets.all(2),
+      actionsPadding: const EdgeInsets.all(0),
+      backgroundColor: const Color(0xffFFF9F5),
       content: SingleChildScrollView(
         child: optionalWidget,
       ),
@@ -35,9 +37,9 @@ class AddSubjectDialog extends StatelessWidget {
               onPressed: () {
                 context.pop();
               },
-              child: const Text(
-                "إضافة التصنيف",
-                style: TextStyle(
+              child:  Text(
+                buttonText,
+                style: const TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20,
                   color: Colors.white,
