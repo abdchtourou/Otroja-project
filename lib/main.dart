@@ -1,38 +1,28 @@
+
 import 'package:admins/src/otroja/core/di/dependency_injection.dart';
-import 'package:admins/src/otroja/cubit/course/course_cubit.dart';
-import 'package:admins/src/otroja/cubit/groups/group_cubit.dart';
-import 'package:admins/src/otroja/cubit/staff/staff_cubit.dart';
-import 'package:admins/src/otroja/data/datasource/api_services.dart';
 import 'package:admins/src/otroja/core/routing/app_router.dart';
-import 'package:admins/src/otroja/cubit/activityCubit/activity_cubit.dart';
-import 'package:admins/src/otroja/presentation/screens/absence/studentsAbsence/checkStudentsScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'src/otroja/presentation/screens/absence/teachersAbsence/checkGroupsScreen.dart';
-
-
 void main() {
   setUpGetIt();
 
-  runApp(MyApp(
-    appRouter: AppRouter(),
-  ));
+  runApp( MyApp(appRouter: AppRouter(),));
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key, required this.appRouter});
-  final AppRouter appRouter;
+   MyApp({super.key, required this.appRouter});
+  final  AppRouter appRouter;
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    // Set the status bar color to transparent
+
+  // Set the status bar color to transparent
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent, // Make status bar transparent
-      statusBarIconBrightness:
-          Brightness.dark, // Optionally, set status bar icons to dark
+      statusBarIconBrightness: Brightness.dark, // Optionally, set status bar icons to dark
     ));
 
     return ScreenUtilInit(
@@ -47,7 +37,7 @@ class MyApp extends StatelessWidget {
                 fontFamily: 'DIN Next LT Arabic',
                 ),
             onGenerateRoute: appRouter.generateRoute,
-        
+            // home: AddActivityScreen(),
           );
         });
   }

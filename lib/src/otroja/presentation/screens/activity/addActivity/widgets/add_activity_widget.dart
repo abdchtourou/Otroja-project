@@ -1,7 +1,8 @@
-import 'package:admins/src/otroja/cubit/activityCubit/activity_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../../cubit/activityCubit/add_activity/activity_cubit.dart';
 
 class AddOtrojaWidget extends StatelessWidget {
   const AddOtrojaWidget({
