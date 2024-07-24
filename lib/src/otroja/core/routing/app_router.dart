@@ -18,7 +18,6 @@ import '../../presentation/screens/student/add_student.dart';
 import '../../presentation/screens/student/show_students.dart';
 import '../../presentation/screens/subject/show_subjects/show_subject.dart';
 import '../../presentation/screens/subject/subject_classification/subject_classifications.dart';
-import '../../presentation/screens/tasme3/tasmeaaScreen.dart';
 import '../di/dependency_injection.dart';
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -27,7 +26,7 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
                   create: (context) => getIt<ShowStudentsCubit>(),
-                  child:  TasmeaaScreen(),
+                  child:  ShowSubject(),
                 )
             );
       case Routes.studentDetails:

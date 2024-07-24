@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 class AddSubjectCard extends StatelessWidget {
-  const AddSubjectCard({super.key});
+   AddSubjectCard({super.key,required this.onTap});
+  void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){},
+      onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
             color: const Color(0xffFFF9F5),

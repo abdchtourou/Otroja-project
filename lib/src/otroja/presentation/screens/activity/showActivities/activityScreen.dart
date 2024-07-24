@@ -27,7 +27,12 @@ class ActivityScreen extends StatelessWidget {
             OtrojaSearchBar(),
             Expanded(
               child: ListView.builder(
-                itemBuilder: (context, index) => ActivityItem(activityDescrition: 'ينال الطالب خمس أترجات لكل فريضة صلاة \n يؤديها على وقتها ',activityTitle: 'الصلاة على وقتها',activityOtroja: '6',),
+                itemBuilder: (context, index) => ActivityItem(
+                  activityDescrition:
+                      'ينال الطالب خمس أترجات لكل فريضة صلاة \n يؤديها على وقتها ',
+                  activityTitle: 'الصلاة على وقتها',
+                  activityOtroja: '6',
+                ),
                 itemCount: 5,
               ),
             )
@@ -37,4 +42,3 @@ class ActivityScreen extends StatelessWidget {
     );
   }
 }
-
