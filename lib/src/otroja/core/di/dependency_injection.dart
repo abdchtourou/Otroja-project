@@ -1,5 +1,6 @@
 import 'package:admins/src/otroja/cubit/add_staff/add_staff_cubit.dart';
 import 'package:admins/src/otroja/cubit/students/add_studnet/add_studnet_cubit.dart';
+import 'package:admins/src/otroja/cubit/students/check_student/check_student_cubit.dart';
 import 'package:admins/src/otroja/cubit/students/edit_info_student_cubit/edit_info_student_cubit.dart';
 import 'package:admins/src/otroja/data/repository/activity_repos/add_activity_repo.dart';
 import 'package:admins/src/otroja/data/repository/students_rpeos/edit_info_student_repo.dart';
@@ -17,11 +18,17 @@ Future<void> setUpGetIt()async{
   getIt.registerLazySingleton<ShowStudentsRepo>(() => ShowStudentsRepo(apiServices));
   getIt.registerLazySingleton<ShowStudentsCubit>(() => ShowStudentsCubit( getIt()));
   getIt.registerLazySingleton<AddStudentCubit>(()=>AddStudentCubit());
+
+  // edit information
   getIt.registerLazySingleton<EditInfoStudentRepo>(() => EditInfoStudentRepo(apiServices));
   getIt.registerLazySingleton<EditInfoStudentCubit>(()=>EditInfoStudentCubit(getIt()));
+
+
   getIt.registerLazySingleton<AddStaffCubit>(()=>AddStaffCubit());
   // Add Activity
   getIt.registerLazySingleton<AddActivityRepo>(()=>AddActivityRepo(apiServices));
   getIt.registerLazySingleton<AddActivityCubit>(()=>AddActivityCubit(getIt()));
+
+  getIt.registerLazySingleton<CheckStudentCubit>(()=>CheckStudentCubit());
 
 }

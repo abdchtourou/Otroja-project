@@ -1,3 +1,5 @@
+import 'package:admins/src/otroja/cubit/students/check_student/check_student_state.dart';
+import 'package:admins/src/otroja/presentation/screens/absence/studentsAbsence/checkStudentsScreen.dart';
 import 'package:admins/src/otroja/presentation/screens/absence/teachersAbsence/widgets/teachers_absence_item.dart';
 import 'package:admins/src/otroja/presentation/widgets/buttons/otroja_button.dart';
 import 'package:admins/src/otroja/presentation/widgets/custumDropDown.dart';
@@ -7,8 +9,11 @@ import 'package:admins/src/otroja/presentation/widgets/text%20field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../cubit/students/check_student/check_student_cubit.dart';
+import '../../../widgets/add_user/custom_drop_down.dart';
 import '../../../widgets/karamDatePicker.dart';
 import 'widgets/absence_date_picker.dart';
 import 'widgets/teachers_absence_table_title.dart';
@@ -21,7 +26,7 @@ class CheckGroupsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 249, 245, 239),
+      backgroundColor: const Color.fromARGB(255, 249, 245, 239),
       appBar: OtrojaAppBar(
         mainText: "تفقد الحلقات",
         secText:
@@ -34,45 +39,57 @@ class CheckGroupsScreen extends StatelessWidget {
             children: [
               AbsenceDatePicker(
                 labelText: 'اختر تاريخ',
-                containerColor: Color(0xffffffff),
+                containerColor: const Color(0xffffffff),
                 containerWidth: 340.w,
                 borderThickness: 2,
-                borderColor: Color(0xffE6E6E6),
+                borderColor: const Color(0xffE6E6E6),
                 imagePath: 'assets/icons/calendar.png',
                 textDirection: TextDirection.rtl,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10.0),
-                child: OtrojaDropdown(
+               Padding(
+                padding: EdgeInsets.symmetric(vertical: 10.0),
+                child: CustomDropdown(
                   list: ["دورة وزدناهم هدى", "دورة يشفعان"],
                   hint: "الدورة",
-                  labelText: "اختر دورة",
+                  labelText: "اختر دورة", onChanged: (String? value) {  },
+
                 ),
               ),
-              Column(
-                children: [
-                  const TeachersAbsenceTableTitle(),
-                  Container(
-                    height: 280.h,
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 245, 236, 224),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: ListView.builder(
-                      shrinkWrap: true, // Add this line to avoid unbounded height error
-                      itemBuilder: (context, index) {
-                        return TeachersAbsenceItem(
-                          absence: attendanceStatus[index],
-                          onTap: () {},
-                          teachersName: "إسلام العيسى",
-                          groupName: "الصحابة",
-                        );
-                      },
-                      itemCount: attendanceStatus.length,
-                    ),
-                  ),
-                ],
-              ),
+             BlocBuilder<CheckStudentCubit, CheckStudentState>(
+               builder: (context, state) {
+                if( state is CheckStudentLoaded){
+                  return  Column(
+                    children: [
+                      const TeachersAbsenceTableTitle(),
+                      Container(
+                        height: 320.h,
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 245, 236, 224),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: ListView.builder(
+
+                          itemBuilder: (context, index) {
+
+                            return TeachersAbsenceItem(
+                              absence: attendanceStatus[index],
+                              onTap: () {},
+                              teachersName: "إسلام العيسى",
+                              groupName: "الصحابة", index: index, isAbsence: state.isPresentList[index],
+                            );
+                          },
+
+                          itemCount: state.isPresentList.length,
+                        ),
+                      ),
+                    ],
+                  );
+                }else{
+                  return Container();
+                }
+
+               },
+             ),
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),
                 child: OtrojaButton(text: 'إنهاء التفقد', onPressed: () {}),

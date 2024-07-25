@@ -1,3 +1,5 @@
+import 'package:admins/src/otroja/presentation/screens/absence/studentsAbsence/widget/checked.dart';
+import 'package:admins/src/otroja/presentation/screens/absence/studentsAbsence/widget/is_absence.dart';
 import 'package:admins/src/otroja/presentation/widgets/buttons/otroja_button.dart';
 import 'package:admins/src/otroja/presentation/widgets/custumDropDown.dart';
 import 'package:admins/src/otroja/presentation/widgets/otroja_app_bar.dart';
@@ -13,17 +15,13 @@ import '../../../../cubit/students/check_student/check_student_state.dart';
 import '../../../widgets/add_user/custom_drop_down.dart';
 import '../../../widgets/check_student/attendance_row_header.dart';
 
-
-
-
-class CheckStudentScreen extends StatelessWidget{
-  bool isexit=false;
+class CheckStudentScreen extends StatelessWidget {
+  bool isexit = false;
   List<bool> isPresentList = List<bool>.generate(5, (index) => false);
 
   CheckStudentScreen({super.key});
 
   @override
-
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 249, 245, 239),
@@ -52,42 +50,45 @@ class CheckStudentScreen extends StatelessWidget{
               SizedBox(
                 height: 10.h,
               ),
-              CustomDropdown(list: const ["1",'2','3'], labelText: 'الحلقة المرادة ', hint: 'اختر حلقة', onChanged: (String? value) {  },),
+              CustomDropdown(
+                list: const ["1", '2', '3'],
+                labelText: 'الحلقة المرادة ',
+                hint: 'اختر حلقة',
+                onChanged: (String? value) {},
+              ),
               SizedBox(
                 height: 20.h,
               ),
               const AttendanceRowHeader(),
-           BlocBuilder<CheckStudentCubit, CheckStudentState>(
-              builder: (context, state) {
-              if (state is CheckStudentLoaded) {
-                  return Column(
-                    children: [
-
-                      Container(
-                        width: 340.w,
-                        height: 300.h,
-                        padding: const EdgeInsets.only(top: 7),
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 245, 236, 224),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: ListView.separated(
-                          separatorBuilder: (context, index) => SizedBox(
-                            height: 18.w,
+              BlocBuilder<CheckStudentCubit, CheckStudentState>(
+                builder: (context, state) {
+                  if (state is CheckStudentLoaded) {
+                    return Column(
+                      children: [
+                        Container(
+                          width: 340.w,
+                          height: 300.h,
+                          padding: const EdgeInsets.only(top: 7),
+                          decoration: BoxDecoration(
+                            color: const Color.fromARGB(255, 245, 236, 224),
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                          itemBuilder: (context, index) {
-
-                            return Container(
-                              child: Column(
+                          child: ListView.separated(
+                            separatorBuilder: (context, index) => SizedBox(
+                              height: 18.w,
+                            ),
+                            itemBuilder: (context, index) {
+                              return Column(
                                 children: [
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     textDirection: TextDirection.rtl,
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.only(bottom: 20, right: 5),
+                                        padding: const EdgeInsets.only(
+                                            bottom: 20, right: 5),
                                         child: Text(
-                                         ' student.name',
+                                          ' student.name',
                                           style: TextStyle(
                                             color: Colors.black,
                                             fontStyle: FontStyle.normal,
@@ -100,50 +101,20 @@ class CheckStudentScreen extends StatelessWidget{
                                         width: 95.w,
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets.only(bottom: 10, right: 0),
-                                        child: InkWell(
-                                          onTap: () {
-                                            context.read<CheckStudentCubit>().togglePresence(index,true);
-                                          },
-                                          child: Container(
-                                            width: 40,
-                                            height: 40,
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              border: Border.all(
-                                                color: const Color(0xff85313C),
-                                                width: 2,
-                                              ),
-                                            ),
-                                            child: state.isPresentList[index]==1
-                                                ? const Icon(Icons.check, color: Colors.green)
-                                                : const Text(''),
-                                          ),
+                                        padding:
+                                            const EdgeInsets.only(right: 3.0),
+                                        child: Checked(
+                                          index: index,
+                                          isExit: state.isPresentList[index],
                                         ),
                                       ),
                                       Padding(
-                                        padding:  EdgeInsets.only(bottom: 10, right: 45.w),
-                                        child: InkWell(
-                                          onTap:(){
-                                            context.read<CheckStudentCubit>().togglePresence(index,false);
-
-                                          },
-                                          child: Container(
-                                            width: 40,
-                                            height: 40,
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              border: Border.all(
-                                                color: const Color(0xff85313C),
-                                                width: 2,
-                                              ),
-                                            ),
-                                            child:  state.isPresentList[index]==2
-                                                ? const Icon(Icons.check, color: Colors.green)
-                                                : const Text('')
-                                          ),
+                                        padding: EdgeInsets.only(right: 40.w),
+                                        child: IsAbsence(
+                                          index: index,
+                                          isAbsence: state.isPresentList[index],
                                         ),
-                                      ),
+                                      )
                                     ],
                                   ),
                                   const Divider(
@@ -153,23 +124,21 @@ class CheckStudentScreen extends StatelessWidget{
                                     endIndent: 10,
                                   ),
                                 ],
-                              ),
-                            );
-                          },
-                          itemCount: 5,
+                              );
+                            },
+                            itemCount: 5,
+                          ),
                         ),
-                      ),
-                    ],
-                  );
-                }
-                return Container();
-              },
-            ),
-
+                      ],
+                    );
+                  }
+                  return Container();
+                },
+              ),
               const SizedBox(
                 height: 10,
               ),
-             OtrojaButton(text: 'عرض المجموعة', onPressed: (){}),
+              OtrojaButton(text: 'إنهاء التفقد ', onPressed: () {}),
               const SizedBox(
                 height: 10,
               ),

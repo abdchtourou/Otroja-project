@@ -9,6 +9,7 @@ class CheckStudentCubit extends Cubit<CheckStudentState> {
   CheckStudentCubit() : super(CheckStudentInitial()) {
     getStudents();
   }
+  List<int> isAbsence=[];
 
   Future<void> getStudents() async {
     emit(CheckStudentLoading());
@@ -24,6 +25,13 @@ class CheckStudentCubit extends Cubit<CheckStudentState> {
 
   void togglePresence(int index, bool isPresent) {
     isPresentList[index] = isPresent ? 1:2 ;
+
     emit(CheckStudentLoaded( isPresentList));
+  }
+  addAbsence(int id){
+    if(!isAbsence.contains(id)){
+      isAbsence.add(id);
+
+    }
   }
 }
