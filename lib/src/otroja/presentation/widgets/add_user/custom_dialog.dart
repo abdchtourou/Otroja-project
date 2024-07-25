@@ -9,13 +9,13 @@ class MyDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        AlertDialog(
+         AlertDialog(
           content: SizedBox(
             height: 230,
             child: Column(
               children: [
-               // Image.asset('assets/images/clock 1.png'),
-                const Text(
+               Image.asset('assets/images/clock 1.png'),
+                Text(
                   'تمت إضافة الطالب بنجاح',
                   style: TextStyle(
                     fontWeight: FontWeight.w700,

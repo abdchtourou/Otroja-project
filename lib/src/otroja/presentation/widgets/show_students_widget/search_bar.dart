@@ -1,9 +1,10 @@
+import 'package:admins/src/otroja/core/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 
-class SearchBarStudents extends StatelessWidget {
+class OtrojaSearchBar1 extends StatelessWidget {
   final ValueNotifier<String> searchNotifier;
 
-  const SearchBarStudents({Key? key, required this.searchNotifier}) : super(key: key);
+  const OtrojaSearchBar1({Key? key, required this.searchNotifier}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,13 +17,13 @@ class SearchBarStudents extends StatelessWidget {
           textAlign: TextAlign.right,
           decoration: InputDecoration(
             enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.red),
+              borderSide: BorderSide(color: OtrojaColors.primaryColor),
             ),
             border: const OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.red),
+              borderSide: BorderSide(color: OtrojaColors.primaryColor),
             ),
             focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.red),
+              borderSide: BorderSide(color: OtrojaColors.primaryColor),
             ),
             suffixIcon: Image.asset('assets/images/search (1) 1.png'),
             hintText: 'بحث',

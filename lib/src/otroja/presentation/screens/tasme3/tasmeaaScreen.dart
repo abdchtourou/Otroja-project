@@ -53,7 +53,7 @@ class TasmeaaScreen extends StatelessWidget {
                   Container(
                     width: 340.w,
                     height: 300.h,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Color.fromARGB(255, 245, 236, 224),
                     ),
                     child: ListView.builder(

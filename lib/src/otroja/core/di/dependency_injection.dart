@@ -1,8 +1,10 @@
+import 'package:admins/src/otroja/cubit/activityCubit/show_activity/show_activity_cubit.dart';
 import 'package:admins/src/otroja/cubit/add_staff/add_staff_cubit.dart';
 import 'package:admins/src/otroja/cubit/students/add_studnet/add_studnet_cubit.dart';
 import 'package:admins/src/otroja/cubit/students/check_student/check_student_cubit.dart';
 import 'package:admins/src/otroja/cubit/students/edit_info_student_cubit/edit_info_student_cubit.dart';
 import 'package:admins/src/otroja/data/repository/activity_repos/add_activity_repo.dart';
+import 'package:admins/src/otroja/data/repository/activity_repos/show_activity_repo.dart';
 import 'package:admins/src/otroja/data/repository/students_rpeos/edit_info_student_repo.dart';
 import 'package:admins/src/otroja/presentation/screens/activity/addActivity/addActivityScreen.dart';
 import 'package:get_it/get_it.dart';
@@ -20,15 +22,19 @@ Future<void> setUpGetIt()async{
   getIt.registerLazySingleton<AddStudentCubit>(()=>AddStudentCubit());
 
   // edit information
-  getIt.registerLazySingleton<EditInfoStudentRepo>(() => EditInfoStudentRepo(apiServices));
-  getIt.registerLazySingleton<EditInfoStudentCubit>(()=>EditInfoStudentCubit(getIt()));
+  getIt.registerFactory<EditInfoStudentRepo>(() => EditInfoStudentRepo(apiServices));
+  getIt.registerFactory<EditInfoStudentCubit>(()=>EditInfoStudentCubit(getIt()));
 
 
-  getIt.registerLazySingleton<AddStaffCubit>(()=>AddStaffCubit());
+  getIt.registerFactory<AddStaffCubit>(()=>AddStaffCubit());
   // Add Activity
-  getIt.registerLazySingleton<AddActivityRepo>(()=>AddActivityRepo(apiServices));
-  getIt.registerLazySingleton<AddActivityCubit>(()=>AddActivityCubit(getIt()));
+  getIt.registerFactory<AddActivityRepo>(()=>AddActivityRepo(apiServices));
+  getIt.registerFactory<AddActivityCubit>(()=>AddActivityCubit(getIt()));
 
-  getIt.registerLazySingleton<CheckStudentCubit>(()=>CheckStudentCubit());
+  //// show activity
+  getIt.registerFactory<ShowActivityRepo>(()=>ShowActivityRepo(apiServices));
+  getIt.registerFactory<ShowActivityCubit>(()=>ShowActivityCubit(getIt()));
+
+  getIt.registerFactory<CheckStudentCubit>(()=>CheckStudentCubit());
 
 }

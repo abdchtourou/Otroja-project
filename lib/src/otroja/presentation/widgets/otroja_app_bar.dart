@@ -52,7 +52,7 @@ Row(
   children: [
     IconButton(
       onPressed: () {
-        Navigator.pop(context,true);
+        Navigator.maybePop(context);
       },
       icon: const Icon(
         Icons.arrow_back_ios,
