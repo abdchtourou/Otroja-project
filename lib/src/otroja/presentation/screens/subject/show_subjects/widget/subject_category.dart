@@ -13,19 +13,15 @@ class SubjectCategory extends StatelessWidget {
       child: Stack(
         children: [
           Positioned(
-            bottom: 10.h,
-            left: 0.w,
+            bottom: 7.h,
+            // left: 0,
             child: Container(
-                height: 35.h,
-                width: 220.w,
+                height: 40.h,
+                width: 237.w,
                 decoration: BoxDecoration(
                     color: const Color.fromARGB(223, 245, 236, 224),
-                     borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20.0),
-                  bottomRight: Radius.circular(50.0),
-                  bottomLeft: Radius.circular(20.0),
-                  topRight: Radius.circular(50.0),
-                ),
+                    borderRadius:
+                    const BorderRadius.all(Radius.circular(10)),
                     border: Border.all(
                       color: const Color.fromARGB(223, 234, 226, 215),
                     )),
@@ -52,7 +48,7 @@ class SubjectCategory extends StatelessWidget {
                 )),
           ),
           Positioned(
-              right: 0.w,
+              right: 0,
               // top:1.h,
 
               child: Container(
