@@ -4,10 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OtrojaAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? optionalWidget; 
+  final Widget? optionalWidget1;
   String? mainText;
   String? secText;
 
-  OtrojaAppBar({super.key, this.optionalWidget, required this.mainText, this.secText});
+  OtrojaAppBar({super.key, this.optionalWidget,this.optionalWidget1, required this.mainText, this.secText});
 
   @override
   Widget build(BuildContext context) {
@@ -50,16 +51,16 @@ class OtrojaAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
 Row(
   children: [
-    IconButton(
-      onPressed: () {
-        Navigator.maybePop(context);
-      },
-      icon: const Icon(
-        Icons.arrow_back_ios,
-        color: Color(0xFF85313C),
-        size: 30,
-      ),
-    ),
+   if (optionalWidget1==null) IconButton(
+     onPressed: () {
+       Navigator.maybePop(context);
+     },
+     icon: const Icon(
+       Icons.arrow_back_ios,
+       color: Color(0xFF85313C),
+       size: 30,
+     ),
+   ) else optionalWidget1!,
     Expanded(
       child: Center(
         child: Column(

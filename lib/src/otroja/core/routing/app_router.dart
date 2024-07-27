@@ -26,6 +26,7 @@ import '../../presentation/screens/Groups/addStudentToGroup/add_student_to_group
 import '../../presentation/screens/Groups/groupStudents/group_students_screen.dart';
 import '../../presentation/screens/absence/studentsAbsence/checkStudentsScreen.dart';
 import '../../presentation/screens/absence/teachersAbsence/checkGroupsScreen.dart';
+import '../../presentation/screens/home_page/home_page.dart';
 import '../../presentation/screens/parents/addParents/add_parents.dart';
 import '../../presentation/screens/permissions/ShowAuthorizedAdmins/show_authorized_admins.dart';
 import '../../presentation/screens/permissions/ShowPermissions/show_permissions_screen.dart';
@@ -41,7 +42,7 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
                   create: (context) => getIt<CheckStudentCubit>(),
-                  child: CheckGroupsScreen(),
+                  child: NewsScreen(),
             ));
 
       case Routes.addParents:
