@@ -18,11 +18,16 @@ class GroupRepository {
     return Group.fromJson(response.data);
   }
 
-  Future<Group> createGroup(Group group) async {
-    final response =
-        await _apiService.post('group/create', data: group.toJson());
-    
-    return Group.fromJson(response.data['data']);
+  Future<Group> createGroupWithStudents(Group group) async {
+    try {
+      final response = await _apiService.post(
+        'group/create_with_students',
+        data: group.toJson(),
+      );
+      return Group.fromJson(response.data);
+    } catch (e) {
+      throw Exception('Failed to create group: $e');
+    }
   }
 
   Future<Group> updateGroup(int id, Group group) async {

@@ -1,11 +1,11 @@
+import 'package:admins/src/otroja/core/helper/extensions.dart';
+import 'package:admins/src/otroja/core/routing/routes.dart';
 import 'package:admins/src/otroja/cubit/course/course_cubit.dart';
 import 'package:admins/src/otroja/cubit/staff/staff_cubit.dart';
-import 'package:admins/src/otroja/data/models/course_model.dart';
 import 'package:admins/src/otroja/data/models/group_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:admins/src/otroja/presentation/screens/Groups/addGroup/widgets/group_number_widget.dart';
 import 'package:admins/src/otroja/presentation/widgets/buttons/add_button.dart';
 import 'package:admins/src/otroja/presentation/widgets/buttons/view_button.dart';
 import 'package:admins/src/otroja/presentation/widgets/otroja_drop_down.dart';
@@ -53,7 +53,6 @@ class AddGroup extends StatelessWidget {
                                   cubit.groupName = data;
                                 },
                                 hintText: "اسم الحلقة",
-          
                               );
                             },
                           ),
@@ -158,7 +157,9 @@ class AddGroup extends StatelessWidget {
                               ),
                               const Spacer(flex: 1),
                               AddButton(
-                                onTap: () {},
+                                onTap: () {
+                                  context.pushNamed(Routes.showStudents);
+                                },
                                 icon:
                                     AssetImage('assets/icons/studentWhite.png'),
                                 backgroundColor: const Color(0xFF85313C),
@@ -177,20 +178,21 @@ class AddGroup extends StatelessWidget {
                                   text: "!تم إضافة الحلقة بنجاح",
                                 ),
                               ).then((_) {
-        formKey.currentState?.reset();
-        context.read<GroupCubit>().resetState();
-      });
+                                formKey.currentState?.reset();
+                                context.read<GroupCubit>().resetState();
+                              });
                             }
                           }, builder: (context, state) {
                             return OtrojaButton(
                               onPressed: () async {
                                 if (formKey.currentState!.validate()) {
                                   final cubit = context.read<GroupCubit>();
-                                  cubit.createGroup(Group(
+                                  cubit.createGroupWithStudents(Group(
                                       staffId: cubit.selectedTeacher!.id,
                                       courseLevelId:
                                           cubit.selectedCourseLevelId!,
-                                      name: cubit.groupName!));
+                                      name: cubit.groupName!,
+                                      studentIds: cubit.selectedStudents));
                                   print("tap");
                                 }
                               },

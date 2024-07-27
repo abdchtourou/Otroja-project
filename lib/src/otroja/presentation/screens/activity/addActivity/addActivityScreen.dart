@@ -41,7 +41,7 @@ class AddActivityScreen extends StatelessWidget {
                     label: "الاسم",
                     prefixIcon: 'assets/icons/product-development(1).png',
                     hintText: "اكتب اسم النشاط ",
-                    myController: cubit.nameController,
+                    controller: cubit.nameController,
                   ),
                   SizedBox(
                     height: 10.h,
@@ -50,7 +50,7 @@ class AddActivityScreen extends StatelessWidget {
                     label: "الوصف",
                     prefixIcon: 'assets/icons/info.png',
                     hintText: "اكتب وصف عن النشاط",
-                    myController: cubit.descriptionController,
+                    controller: cubit.descriptionController,
                   ),
                   SizedBox(
                     height: 15.h,

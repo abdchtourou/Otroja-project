@@ -1,4 +1,5 @@
 import 'package:admins/src/otroja/core/routing/routes.dart';
+import 'package:admins/src/otroja/cubit/students/check_student/check_student_cubit.dart';
 import 'package:admins/src/otroja/cubit/students/edit_info_student_cubit/edit_info_student_cubit.dart';
 import 'package:admins/src/otroja/data/models/student_model/show_students.dart';
 import 'package:admins/src/otroja/presentation/screens/activity/addActivity/addActivityScreen.dart';
@@ -33,11 +34,9 @@ class AppRouter {
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.home:
-        return MaterialPageRoute(
-            builder: (_) => BlocProvider(
-                  create: (context) => getIt<ShowStudentsCubit>(),
-                  child: AddParents(),
-                ));
+        return MaterialPageRoute(builder: (_) => BlocProvider(
+           create: (context) => CheckStudentCubit(),
+          child: CheckStudentScreen()));
 
       case Routes.addParents:
         return MaterialPageRoute(
@@ -54,7 +53,9 @@ class AppRouter {
                 ));
 
       case Routes.checkStudents:
-        return MaterialPageRoute(builder: (_) => CheckStudentScreen());
+        return MaterialPageRoute(builder: (_) => BlocProvider(
+           create: (context) => CheckStudentCubit(),
+          child: CheckStudentScreen()));
 
       case Routes.checkGroups:
         return MaterialPageRoute(builder: (_) => CheckGroupsScreen());

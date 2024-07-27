@@ -19,6 +19,9 @@ final class GroupLoaded extends GroupState {
   GroupLoaded(this.group);
 }
 
+class GroupCreated extends GroupState {
+  
+}
 
 final class GroupError extends GroupState {
   final String message;

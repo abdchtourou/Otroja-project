@@ -10,11 +10,12 @@ class OtrojaTextFormField extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.isRtl = true,
-    this.myController,
+    this.controller,
+    this.type,
     required this.label,
   });
-  final TextEditingController? myController;
-
+  final TextEditingController? controller;
+  final TextInputType? type;
   final String label;
   final String? hintText;
   Function(String)? onChange;
@@ -40,7 +41,7 @@ class OtrojaTextFormField extends StatelessWidget {
           ),
         ),
         TextFormField(
-          controller: myController,
+          controller: controller,
           obscureText: obscureText,
           style: const TextStyle(color: Colors.black),
           validator: (value) {
@@ -48,6 +49,7 @@ class OtrojaTextFormField extends StatelessWidget {
               return 'field is required';
             }
           },
+          keyboardType: type,
           onChanged: onChange,
           decoration: InputDecoration(
             filled: true,

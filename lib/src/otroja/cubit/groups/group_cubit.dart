@@ -14,6 +14,7 @@ class GroupCubit extends Cubit<GroupState> {
   Staff? selectedTeacher;
   String? selectedCourseName;
   int? selectedCourseLevelId;
+  List<int>? selectedStudents;
 
   GroupCubit(this.repository) : super(GroupInitial()) {
     getGroups();
@@ -39,12 +40,20 @@ class GroupCubit extends Cubit<GroupState> {
     }
   }
 
-  Future<void> createGroup(Group group) async {
-    emit(GroupLoading());
+  // Future<void> createGroup(Group group) async {
+  //   emit(GroupLoading());
+  //   try {
+  //     final createdGroup = await repository.createGroup(group);
+  //     print(createdGroup);
+  //     emit(GroupLoaded(createdGroup));
+  //   } catch (e) {
+  //     emit(GroupError(e.toString()));
+  //   }
+  // }
+   Future<void> createGroupWithStudents(Group group) async {
     try {
-      final createdGroup = await repository.createGroup(group);
-      print(createdGroup);
-      emit(GroupLoaded(createdGroup));
+      await repository.createGroupWithStudents(group);
+      emit(GroupCreated());
     } catch (e) {
       emit(GroupError(e.toString()));
     }

@@ -3,6 +3,7 @@ class Group {
   final int staffId;
   final int courseLevelId;
   final String name;
+   final List<int>? studentIds;
   final DateTime? createdAt;
   final DateTime? updatedAt;
 
@@ -13,6 +14,7 @@ class Group {
     required this.name,
     this.createdAt,
     this.updatedAt,
+    this.studentIds,
   });
 
   factory Group.fromJson(Map<String, dynamic> json) {
@@ -21,6 +23,7 @@ class Group {
       staffId: json['staff_id'],
       courseLevelId: json['course_level_id'],
       name: json['name'],
+      studentIds: List<int>.from(json['student_ids']),
       createdAt: DateTime.parse(json['created_at']),
       updatedAt: DateTime.parse(json['updated_at']),
     );
@@ -31,6 +34,7 @@ class Group {
       'staff_id': staffId,
       'course_level_id': courseLevelId,
       'name': name,
+      'student_ids': studentIds,
     };
   }
 }
