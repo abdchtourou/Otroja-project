@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 
 import '../../core/helper/constant.dart';
 
-
 class ApiService {
   final Dio _dio = Dio();
 
@@ -18,8 +17,9 @@ class ApiService {
   Future<Response> get(String path,
       {Map<String, dynamic>? queryParameters}) async {
     try {
+      print('////////////////////in get');
       final response = await _dio.get(path, queryParameters: queryParameters);
-      print(response);
+      // print(response.data);
       return response;
     } on DioException catch (e) {
       print(e.message);
@@ -33,7 +33,7 @@ class ApiService {
     try {
       final response =
           await _dio.post(path, data: data, queryParameters: queryParameters);
-      
+
       return response;
     } on DioException catch (e) {
       print(e);
@@ -85,21 +85,25 @@ class ApiService {
 // Custom exceptions
 class TimeoutException implements Exception {
   final String message;
+
   TimeoutException(this.message);
 }
 
 class BadResponseException implements Exception {
   final int? statusCode;
   final dynamic data;
+
   BadResponseException(this.statusCode, this.data);
 }
 
 class RequestCancelledException implements Exception {
   final String message;
+
   RequestCancelledException(this.message);
 }
 
 class UnknownException implements Exception {
   final String message;
+
   UnknownException(this.message);
 }

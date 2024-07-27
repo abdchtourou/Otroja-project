@@ -9,7 +9,7 @@ class ShowActivityRepo{
 
     final students= await apiService.get("activities");
 
-    return students;
+    return students.data;
 
 
   }

@@ -35,7 +35,7 @@ class ShowStudents extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SearchBarStudents(searchNotifier: searchNotifier),
+          OtrojaSearchBar1(searchNotifier: searchNotifier),
           const SizedBox(height: 10),
           BlocBuilder<ShowStudentsCubit, ShowStudentsState>(
             builder: (context, state) {
@@ -79,10 +79,14 @@ class ShowStudents extends StatelessWidget {
                                         onTap: () async {
                                           final studentId =
                                               filteredStudents[index];
+
                                           context
                                               .pushNamed(Routes.studentDetails,
                                                   arguments: studentId)
                                               .then((_) {
+                                            context
+                                                .read<ShowStudentsCubit>()
+                                                .currentPage=0;
                                             context
                                                 .read<ShowStudentsCubit>()
                                                 .studentList

@@ -38,7 +38,6 @@ class EditInformationStudent extends StatelessWidget {
               builder: (BuildContext context) => MyDialog(),
             );
           }
-
         },
         child: BlocBuilder<EditInfoStudentCubit, EditInfoStudentState>(
           builder: (context, state) {

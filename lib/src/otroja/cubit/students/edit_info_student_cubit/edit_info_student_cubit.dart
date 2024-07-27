@@ -60,17 +60,10 @@ class EditInfoStudentCubit extends Cubit<EditInfoStudentState> {
         emit(EditInfoStudentLoaded());
 
     } catch (e) {
+      emit(EditInfoStudentFailure());
     }
   }
 
-  @override
-  Future<void> close() {
-    fullNameController.dispose();
-    emailController.dispose();
-    passwordController.dispose();
-    phoneNumberController.dispose();
-    dateController.dispose();
-    return super.close();
-  }
+
 }
 

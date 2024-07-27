@@ -13,7 +13,7 @@ class ShowStudentsCubit extends Cubit<ShowStudentsState> {
 
   ShowStudentsCubit(this.showStudentsRepo) : super(ShowStudentsInitial()) {
     getStudents();
-    getStudentsIslam();
+    // getStudentsIslam();
     scrollController.addListener(_onScroll);
   }
 
@@ -38,7 +38,10 @@ class ShowStudentsCubit extends Cubit<ShowStudentsState> {
 
     emit(ShowStudentsLoading());
     try {
-      final students = await showStudentsRepo.getStudents(0);
+      print('///////////////////////in cubit ');
+      final students = await showStudentsRepo.getStudents(currentPage);
+      print('after');
+      print(students['data']);
 
       for (var data in students['data']['data']) {
         studentList.add(ShowStudentModel.fromJson(data));
