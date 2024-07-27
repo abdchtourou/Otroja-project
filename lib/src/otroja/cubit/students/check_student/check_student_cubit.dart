@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'check_student_state.dart';
@@ -28,10 +30,18 @@ class CheckStudentCubit extends Cubit<CheckStudentState> {
 
     emit(CheckStudentLoaded( isPresentList));
   }
-  addAbsence(int id){
-    if(!isAbsence.contains(id)){
-      isAbsence.add(id);
+  addAbsence(int id ,bool isPresent){
+   if(isPresent){
+     if(!isAbsence.remove(id)){
+       isAbsence.add(id);
 
-    }
+     }
+
+   }else {
+     if(!isAbsence.contains(id)){
+       isAbsence.add(id);
+
+     }
+   }
   }
 }

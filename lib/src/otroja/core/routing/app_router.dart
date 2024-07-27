@@ -40,8 +40,8 @@ class AppRouter {
       case Routes.home:
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
-                  create: (context) => getIt<ShowActivityCubit>(),
-                  child: SubjectClassifications(),
+                  create: (context) => getIt<CheckStudentCubit>(),
+                  child: CheckGroupsScreen(),
             ));
 
       case Routes.addParents:
@@ -105,12 +105,9 @@ class AppRouter {
       case Routes.studentDetails:
         final ShowStudentModel? showStudentModel =
             settings.arguments as ShowStudentModel?;
-        print(showStudentModel);
-        print(showStudentModel!.firstName!);
-        print('rout');
         return MaterialPageRoute(
             builder: (_) => StudentDetails(
-              showStudentModel: showStudentModel,
+              showStudentModel: showStudentModel!,
             ));
       case Routes.editStudentInfo:
         final studentId = settings.arguments as String;

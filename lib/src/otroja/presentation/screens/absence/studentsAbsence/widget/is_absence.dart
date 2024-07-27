@@ -15,7 +15,7 @@ class IsAbsence extends StatelessWidget {
     return InkWell(
       onTap: () {
         context.read<CheckStudentCubit>().togglePresence(index, false);
-        context.read<CheckStudentCubit>().addAbsence(index);
+        context.read<CheckStudentCubit>().addAbsence(index,false);
         print(context
             .read<CheckStudentCubit>()
             .isAbsence

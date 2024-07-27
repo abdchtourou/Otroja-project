@@ -14,6 +14,8 @@ class Checked extends StatelessWidget {
     return InkWell(
       onTap: () {
         context.read<CheckStudentCubit>().togglePresence(index, true);
+        context.read<CheckStudentCubit>().addAbsence(index,true);
+
       },
       child: Container(
         width: 40,
