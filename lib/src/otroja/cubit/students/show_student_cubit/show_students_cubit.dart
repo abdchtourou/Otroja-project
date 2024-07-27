@@ -105,6 +105,7 @@ class ShowStudentsCubit extends Cubit<ShowStudentsState> {
       selectedStudents.remove(id);
     } else {
       selectedStudents.add(id);
+      print(selectedStudents.length);
     }
 
     emit(UpdateSelectedStudentState(List.from(selectedStudents)));

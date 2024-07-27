@@ -8,19 +8,18 @@ part 'staff_state.dart';
 class StaffCubit extends Cubit<StaffState> {
   final StaffRepository repository;
 
-  StaffCubit(this.repository) : super(StaffInitial()){
+  StaffCubit(this.repository) : super(StaffInitial()) {
     getAll();
   }
 
-
-Future<void> getAll() async {
+  Future<void> getAll() async {
     try {
       emit(StaffLoading());
       final teachersList = await repository.getAllTeachers();
+      print(teachersList);
       emit(StaffLoaded(teachersList));
     } catch (e) {
       emit(StaffError(e.toString()));
     }
   }
-
 }

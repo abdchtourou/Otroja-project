@@ -44,6 +44,7 @@ class OtrojaDropdown extends StatelessWidget {
           child: Directionality(
             textDirection: TextDirection.rtl,
             child: DropdownButtonFormField<String>(
+              
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'الحقل مطلوب';
@@ -64,6 +65,8 @@ class OtrojaDropdown extends StatelessWidget {
                 );
               }).toList(),
               decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white,
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Color(0xFFE6E6E6), width: 2),
                   borderRadius: BorderRadius.all(Radius.circular(18)),

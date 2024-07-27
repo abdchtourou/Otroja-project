@@ -54,7 +54,8 @@ class StaffRepository {
 
   Future<List<Staff>> getAllTeachers() async {
     try {
-      final response = await _apiService.get('teachers');  // Keep the endpoint as 'teachers' if that's what your API uses
+      final response = await _apiService.get('teachers'); 
+       // Keep the endpoint as 'teachers' if that's what your API uses
       if (response.statusCode == 200) {
         List<dynamic> teachersJson = response.data['data'];
         return teachersJson.map((json) => Staff.fromJson(json)).toList();

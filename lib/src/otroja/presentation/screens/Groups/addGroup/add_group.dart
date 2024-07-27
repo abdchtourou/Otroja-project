@@ -2,6 +2,8 @@ import 'package:admins/src/otroja/core/helper/extensions.dart';
 import 'package:admins/src/otroja/core/routing/routes.dart';
 import 'package:admins/src/otroja/cubit/course/course_cubit.dart';
 import 'package:admins/src/otroja/cubit/staff/staff_cubit.dart';
+import 'package:admins/src/otroja/cubit/students/show_student_cubit/show_students_cubit.dart';
+import 'package:admins/src/otroja/cubit/students/show_student_cubit/show_students_state.dart';
 import 'package:admins/src/otroja/data/models/group_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -146,32 +148,22 @@ class AddGroup extends StatelessWidget {
                             },
                           ),
                           SizedBox(height: 45.h),
-                          Row(
-                            children: [
-                              ViewButton(
-                                onTap: () {},
-                                icon: AssetImage('assets/icons/student.png'),
-                                backgroundColor: const Color(0xffEEEAE4),
-                                text: "طلاب الحلقة",
-                                textColor: const Color(0xFF85313C),
-                              ),
-                              const Spacer(flex: 1),
-                              AddButton(
-                                onTap: () {
-                                  context.pushNamed(Routes.showStudents);
-                                },
-                                icon:
-                                    AssetImage('assets/icons/studentWhite.png'),
-                                backgroundColor: const Color(0xFF85313C),
-                                text: "إضافة طلاب للحلقة",
-                                textColor: const Color(0xffEEEAE4),
-                              ),
-                            ],
+                          Center(
+                            child: AddButton(
+                              onTap: () {
+                                context.pushNamed(Routes.addStudentToGroup);
+                              },
+                              icon:
+                                  AssetImage('assets/icons/student.png'),
+                              backgroundColor:const Color(0xffEEEAE4) ,
+                              text: "إضافة طلاب للحلقة",
+                              textColor: const Color(0xFF85313C),
+                            ),
                           ),
                           SizedBox(height: 20.h),
                           BlocConsumer<GroupCubit, GroupState>(
                               listener: (context, state) {
-                            if (state is GroupLoaded) {
+                            if (state is GroupCreated) {
                               showDialog(
                                 context: context,
                                 builder: (context) => OtrojaSuccessDialog(
@@ -183,21 +175,33 @@ class AddGroup extends StatelessWidget {
                               });
                             }
                           }, builder: (context, state) {
-                            return OtrojaButton(
-                              onPressed: () async {
-                                if (formKey.currentState!.validate()) {
-                                  final cubit = context.read<GroupCubit>();
-                                  cubit.createGroupWithStudents(Group(
-                                      staffId: cubit.selectedTeacher!.id,
-                                      courseLevelId:
-                                          cubit.selectedCourseLevelId!,
-                                      name: cubit.groupName!,
-                                      studentIds: cubit.selectedStudents));
-                                  print("tap");
-                                }
-                              },
-                              text: 'إنشاء حلقة',
-                            );
+                          
+                            return  OtrojaButton(
+                                onPressed: () async {
+                                  if (formKey.currentState!.validate()) {
+                                    final groupCubit =
+                                        context.read<GroupCubit>();
+                                    final studentCubit =
+                                        context.read<ShowStudentsCubit>();
+                                    groupCubit.createGroupWithStudents(Group(
+                                        staffId: groupCubit.selectedTeacher!.id,
+                                        courseLevelId:
+                                            groupCubit.selectedCourseLevelId!,
+                                        name: groupCubit.groupName!,
+                                        studentIds:
+                                            studentCubit.selectedStudents));
+
+                                     print("tap");
+                                    // print(groupCubit.groupName);
+                                    // print(
+                                    //     groupCubit.selectedTeacher!.firstName);
+                                    // print(groupCubit.selectedCourseLevelId);
+                                    // print(studentCubit.selectedStudents.length);
+                                  }
+                                },
+                                text: 'إنشاء حلقة',
+                              );
+                           
                           })
                         ],
                       ),

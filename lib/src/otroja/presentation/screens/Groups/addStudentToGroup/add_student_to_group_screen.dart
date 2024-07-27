@@ -43,7 +43,7 @@ class AddStudentToGroupScreen extends StatelessWidget {
                 },
               ),
             ),
-            OtrojaButton(text: "إضافة", onPressed: () {})
+           // OtrojaButton(text: "إضافة", onPressed: () {})
           ],
         ),
       ),

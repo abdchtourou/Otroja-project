@@ -6,8 +6,8 @@ class AddButton extends StatelessWidget {
     super.key,
     required this.onTap,
     required this.icon,
-    required this.backgroundColor ,
-    required this.text ,
+    required this.backgroundColor,
+    required this.text,
     required this.textColor,
   });
 
@@ -22,8 +22,7 @@ class AddButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        width: 160.w,
-        height: 150.h,
+        width: MediaQuery.of(context).size.width,
         margin: const EdgeInsets.only(top: 0),
         decoration: BoxDecoration(
           border: Border.all(
@@ -33,13 +32,15 @@ class AddButton extends StatelessWidget {
           borderRadius: const BorderRadius.all(Radius.circular(10)),
           color: backgroundColor,
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Stack(
-              alignment: Alignment.bottomRight,
-              children: [
-                Image(height: 98.h, width: 98.w, image: icon),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Stack(
+                alignment: Alignment.bottomRight,
+                children: [
+                  Image(height: 98.h, width: 98.w, image: icon),
                   Positioned(
                     right: 0,
                     bottom: 0,
@@ -49,17 +50,18 @@ class AddButton extends StatelessWidget {
                       image: const AssetImage("assets/icons/plus.png"),
                     ),
                   ),
-              ],
-            ),
-            Text(
-              text,
-              style: TextStyle(
-                fontSize: 15.sp,
-                fontWeight: FontWeight.w700,
-                color: textColor,
+                ],
               ),
-            )
-          ],
+              Text(
+                text,
+                style: TextStyle(
+                  fontSize: 15.sp,
+                  fontWeight: FontWeight.w700,
+                  color: textColor,
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -5,8 +5,7 @@ import '../../core/helper/constant.dart';
 
 class ApiService {
   final Dio _dio = Dio();
-  final String _baseUrl =
-      'https://a797-149-34-244-165.ngrok-free.app/api/'; // Replace with your API base URL
+
 
   ApiService() {
     _dio.options.baseUrl = baseUrl;

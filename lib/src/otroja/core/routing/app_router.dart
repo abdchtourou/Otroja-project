@@ -1,7 +1,7 @@
 import 'package:admins/src/otroja/core/routing/routes.dart';
-import 'package:admins/src/otroja/cubit/students/check_student/check_student_cubit.dart';
 import 'package:admins/src/otroja/cubit/students/edit_info_student_cubit/edit_info_student_cubit.dart';
 import 'package:admins/src/otroja/data/models/student_model/show_students.dart';
+import 'package:admins/src/otroja/data/repository/students_rpeos/show_students_repo.dart';
 import 'package:admins/src/otroja/presentation/screens/activity/addActivity/addActivityScreen.dart';
 import 'package:admins/src/otroja/presentation/screens/student/edit_information_student.dart';
 import 'package:admins/src/otroja/presentation/screens/student/student_details.dart';
@@ -29,14 +29,32 @@ import '../../presentation/screens/permissions/ShowPermissions/show_permissions_
 import '../../presentation/screens/student/show_students.dart';
 import '../di/dependency_injection.dart';
 
-
 class AppRouter {
+  ShowStudentsCubit showStudentsCubit = ShowStudentsCubit(ShowStudentsRepo(ApiService()));
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.home:
-        return MaterialPageRoute(builder: (_) => BlocProvider(
-           create: (context) => CheckStudentCubit(),
-          child: CheckStudentScreen()));
+        return MaterialPageRoute(
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (BuildContext context) =>
+                    StaffCubit(StaffRepository(ApiService())),
+              ),
+              BlocProvider(
+                create: (context) =>
+                    CourseCubit(CourseRepository(ApiService())),
+              ),
+              BlocProvider(
+                create: (context) => GroupCubit(GroupRepository(ApiService())),
+              ),
+               BlocProvider.value(
+                value: showStudentsCubit,
+              ),
+            ],
+            child: AddGroup(),
+          ),
+        );
 
       case Routes.addParents:
         return MaterialPageRoute(
@@ -50,12 +68,11 @@ class AppRouter {
             builder: (_) => BlocProvider(
                   create: (context) => getIt<ShowStudentsCubit>(),
                   child: ShowStudents(),
-                ));
+                )
+                );
 
       case Routes.checkStudents:
-        return MaterialPageRoute(builder: (_) => BlocProvider(
-           create: (context) => CheckStudentCubit(),
-          child: CheckStudentScreen()));
+        return MaterialPageRoute(builder: (_) => CheckStudentScreen());
 
       case Routes.checkGroups:
         return MaterialPageRoute(builder: (_) => CheckGroupsScreen());
@@ -81,7 +98,10 @@ class AppRouter {
         );
 
       case Routes.addStudentToGroup:
-        return MaterialPageRoute(builder: (_) => AddStudentToGroupScreen());
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider.value(
+              value: showStudentsCubit,
+                child: AddStudentToGroupScreen()));
 
       case Routes.groupStudents:
         return MaterialPageRoute(
