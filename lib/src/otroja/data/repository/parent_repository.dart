@@ -1,22 +1,22 @@
 // lib/repositories/parent_repository.dart
 
-
 import '../datasource/api_services.dart';
 import '../models/parent.dart';
 
 class ParentRepository {
   final ApiService _apiService;
 
-
   ParentRepository(this._apiService);
 
-  Future<Parent> addParent(Parent parent) async {
+  Future<int> addParent(Parent parent) async {
     try {
+      print(parent.toJson());
       final response = await _apiService.post(
         'register/parent',
         data: parent.toJson(),
       );
-      return Parent.fromJson(response.data);
+      print(response);
+      return response.data['status'];
     } catch (e) {
       throw Exception('Failed to register parent: $e');
     }

@@ -1,8 +1,10 @@
 import 'package:admins/src/otroja/core/routing/routes.dart';
 import 'package:admins/src/otroja/cubit/activityCubit/show_activity/show_activity_cubit.dart';
+import 'package:admins/src/otroja/cubit/parentCubit/parent_cubit.dart';
 import 'package:admins/src/otroja/cubit/students/check_student/check_student_cubit.dart';
 import 'package:admins/src/otroja/cubit/students/edit_info_student_cubit/edit_info_student_cubit.dart';
 import 'package:admins/src/otroja/data/models/student_model/show_students.dart';
+import 'package:admins/src/otroja/data/repository/parent_repository.dart';
 import 'package:admins/src/otroja/data/repository/students_rpeos/show_students_repo.dart';
 import 'package:admins/src/otroja/presentation/screens/activity/addActivity/addActivityScreen.dart';
 import 'package:admins/src/otroja/presentation/screens/activity/showActivities/activityScreen.dart';
@@ -39,32 +41,16 @@ class AppRouter {
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.home:
-        return MaterialPageRoute(
-          builder: (_) => MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (BuildContext context) =>
-                    StaffCubit(StaffRepository(ApiService())),
-              ),
-              BlocProvider(
-                create: (context) =>
-                    CourseCubit(CourseRepository(ApiService())),
-              ),
-              BlocProvider(
-                create: (context) => GroupCubit(GroupRepository(ApiService())),
-              ),
-               BlocProvider.value(
-                value: showStudentsCubit,
-              ),
-            ],
-            child: AddGroup(),
-          ),
-        );
+        return  MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) => ParentCubit(ParentRepository(ApiService())),
+                  child: AddParents(),
+                ));
 
       case Routes.addParents:
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
-                  create: (context) => getIt<ShowStudentsCubit>(),
+                  create: (context) => ParentCubit(ParentRepository(ApiService())),
                   child: AddParents(),
                 ));
 

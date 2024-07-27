@@ -5,7 +5,7 @@ sealed class ParentState {}
 
 final class ParentInitial extends ParentState {}
 class ParentLoading extends ParentState {}
-class ParentAdded extends ParentState {
+class ParentCreated extends ParentState {
 }
 class ParentError extends ParentState {
   final String message;
