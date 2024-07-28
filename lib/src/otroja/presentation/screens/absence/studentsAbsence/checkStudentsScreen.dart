@@ -1,3 +1,4 @@
+import 'package:admins/src/otroja/data/models/student_model/show_students.dart';
 import 'package:admins/src/otroja/presentation/screens/absence/studentsAbsence/widget/checked.dart';
 import 'package:admins/src/otroja/presentation/screens/absence/studentsAbsence/widget/is_absence.dart';
 import 'package:admins/src/otroja/presentation/widgets/buttons/otroja_button.dart';
@@ -7,17 +8,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/di/dependency_injection.dart';
 import '../../../../cubit/students/check_student/check_student_cubit.dart';
 import '../../../../cubit/students/check_student/check_student_state.dart';
+import '../../../widgets/add_user/custom_dialog.dart';
 import '../../../widgets/add_user/custom_drop_down.dart';
 import '../../../widgets/check_student/attendance_row_header.dart';
+import 'widget/drop_down_group.dart';
 
 class CheckStudentScreen extends StatelessWidget {
-
   CheckStudentScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<CheckStudentCubit>();
+
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 249, 245, 239),
         appBar: OtrojaAppBar(
@@ -45,95 +50,146 @@ class CheckStudentScreen extends StatelessWidget {
               SizedBox(
                 height: 10.h,
               ),
-              CustomDropdown(
-                list: const ["1", '2', '3'],
-                labelText: 'الحلقة المرادة ',
-                hint: 'اختر حلقة',
-                onChanged: (String? value) {},
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              const AttendanceRowHeader(),
-              BlocBuilder<CheckStudentCubit, CheckStudentState>(
-                builder: (context, state) {
-                  if (state is CheckStudentLoaded) {
-                    return Column(
-                      children: [
-                        Container(
-                          width: 340.w,
-                          height: 300.h,
-                          padding: const EdgeInsets.only(top: 7),
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 245, 236, 224),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: ListView.separated(
-                            separatorBuilder: (context, index) => SizedBox(
-                              height: 18.w,
-                            ),
-                            itemBuilder: (context, index) {
-                              return Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    textDirection: TextDirection.rtl,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            bottom: 20, right: 5),
-                                        child: Text(
-                                          ' student.name ',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontStyle: FontStyle.normal,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 15.sp,
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 95.w,
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 3.0),
-                                        child: Checked(
-                                          index: index,
-                                          isExit: state.isPresentList[index],
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(right: 40.w),
-                                        child: IsAbsence(
-                                          index: index,
-                                          isAbsence: state.isPresentList[index],
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  const Divider(
-                                    color: Color.fromARGB(223, 234, 226, 215),
-                                    thickness: 1,
-                                    indent: 10,
-                                    endIndent: 10,
-                                  ),
-                                ],
-                              );
-                            },
-                            itemCount: 5,
-                          ),
-                        ),
-                      ],
+              BlocListener<CheckStudentCubit, CheckStudentState>(
+                listener: (context , state ){
+                  if(state is CheckStudentSend){
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) => MyDialog(text: "تم التفقد بنجاح",),
                     );
                   }
-                  return Container();
                 },
+               child: BlocBuilder<CheckStudentCubit, CheckStudentState>(
+                 builder: (context, state) {
+                   return Column(
+                     children: [
+                       DropDownGroup(
+                         list: cubit.groupsName,
+                         labelText: 'اختر حلقة',
+                         hint: 'اختر حلقة',
+                         onChanged: (value) {
+                           context.read<CheckStudentCubit>().idGroup =
+                           value!.id!;
+
+
+                           cubit.getStudents();
+                         },
+                       ),
+                       SizedBox(
+                         height: 20.h,
+                       ),
+                       const AttendanceRowHeader(),
+                       Container(
+                           width: 340.w,
+                           height: 300.h,
+                           padding: const EdgeInsets.only(top: 7),
+                           decoration: BoxDecoration(
+                             color: const Color.fromARGB(255, 245, 236, 224),
+                             borderRadius: BorderRadius.circular(10),
+                           ),
+                           child: ListView.separated(
+                             separatorBuilder: (context, index) =>
+                                 SizedBox(
+                                   height: 18.w,
+                                 ),
+                             itemBuilder: (context, index) {
+                               return Column(
+                                 children: [
+                                   Row(
+                                     mainAxisAlignment:
+                                     MainAxisAlignment.spaceBetween,
+                                     textDirection: TextDirection.rtl,
+                                     children: [
+                                       Padding(
+                                         padding: const EdgeInsets.only(
+                                             bottom: 20, right: 5),
+                                         child: Text(
+                                           cubit.studentsList[index]
+                                               .firstName ??
+                                               '',
+                                           style: TextStyle(
+                                             color: Colors.black,
+                                             fontStyle: FontStyle.normal,
+                                             fontWeight: FontWeight.bold,
+                                             fontSize: 15.sp,
+                                           ),
+                                         ),
+                                       ),
+                                       Row(
+                                         children: [
+                                           Padding(
+                                             padding:
+                                             const EdgeInsets.only(
+                                                 left: 20.0),
+                                             child: InkWell(
+                                               onTap: () {
+                                                 cubit.togglePresence(
+                                                     index, false);
+                                                 cubit.addAbsence(
+                                                     cubit
+                                                         .studentsList[
+                                                     index]
+                                                         .id as int,
+                                                     false);
+                                               },
+                                               child: IsAbsence(
+                                                 index: index,
+                                                 isAbsence: cubit
+                                                     .isPresentList[index],
+                                               ),
+                                             ),
+                                           ),
+                                           Padding(
+                                             padding: EdgeInsets.only(
+                                                 left: 45.w),
+                                             child: InkWell(
+                                               onTap: () {
+                                                 cubit.togglePresence(
+                                                     index, true);
+                                                 cubit.addAbsence(
+                                                     cubit
+                                                         .studentsList[
+                                                     index]
+                                                         .id as int,
+                                                     true);
+                                               },
+                                               child: Checked(
+                                                 index: index,
+                                                 isExit: cubit
+                                                     .isPresentList[index],
+                                               ),
+                                             ),
+                                           ),
+                                         ],
+                                       )
+                                     ],
+                                   ),
+                                   const Divider(
+                                     color: Color.fromARGB(
+                                         223, 234, 226, 215),
+                                     thickness: 1,
+                                     indent: 10,
+                                     endIndent: 10,
+                                   ),
+                                 ],
+                               );
+                             },
+                             itemCount: cubit.studentsList.length,
+                           )
+                            ),
+                     ],
+                   );
+                 },
+               ) ,
               ),
               const SizedBox(
                 height: 10,
               ),
-              OtrojaButton(text: 'إنهاء التفقد ', onPressed: () {}),
+              OtrojaButton(
+                  text: 'إنهاء التفقد ',
+                  onPressed: () {
+                    context.read<CheckStudentCubit>().post();
+                  }),
               const SizedBox(
                 height: 10,
               ),

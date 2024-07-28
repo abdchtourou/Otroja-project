@@ -12,29 +12,19 @@ class IsAbsence extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        context.read<CheckStudentCubit>().togglePresence(index, false);
-        context.read<CheckStudentCubit>().addAbsence(index,false);
-        print(context
-            .read<CheckStudentCubit>()
-            .isAbsence
-        );
-      },
-      child: Container(
-          width: 35.w,
-          height: 35.h,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(
-              color: const Color(0xff85313C),
-              width: 2,
-            ),
+    return Container(
+        width: 35.w,
+        height: 35.h,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          border: Border.all(
+            color: const Color(0xff85313C),
+            width: 2,
           ),
-          child: isAbsence == 2
-              ? Icon(Icons.close,color: Colors.red,size: 30,)
-              : const Text('')
-      ),
+        ),
+        child: isAbsence == 2
+            ? Icon(Icons.close,color: Colors.red,size: 30,)
+            : const Text('')
     );
   }
 }

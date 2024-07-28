@@ -42,7 +42,7 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
                   create: (context) => getIt<CheckStudentCubit>(),
-                  child: NewsScreen(),
+                  child: CheckGroupsScreen(),
             ));
 
       case Routes.addParents:

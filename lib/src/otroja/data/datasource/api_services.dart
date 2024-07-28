@@ -19,8 +19,8 @@ class ApiService {
       {Map<String, dynamic>? queryParameters}) async {
     try {
       print('////////////////////in get');
+
       final response = await _dio.get(path, queryParameters: queryParameters);
-      // print(response.data);
       return response;
     } on DioException catch (e) {
       print(e.message);
