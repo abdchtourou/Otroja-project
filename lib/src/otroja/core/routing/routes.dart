@@ -1,4 +1,5 @@
 class Routes {
+  static const String homePage = '/HomePage';
   static const String showStudents = '/ShowStudents';
   static const String addStudent = "/addStudent";
   static const String editStudentInfo = "/editStudentInfo";
@@ -17,4 +18,8 @@ class Routes {
   static const String showSubject = "/ShowSubject";
   static const String tasmeaa = "/tasmeaa";
   static const String showStudentsRecite = "/showStudentsRecite";
+  static const String showCourses = "/ShowCourses";
+  static const String addCourses = "/AddCourses";
+
+
 }

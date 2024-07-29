@@ -9,6 +9,8 @@ import 'package:admins/src/otroja/data/repository/parent_repository.dart';
 import 'package:admins/src/otroja/data/repository/recite_repository.dart';
 import 'package:admins/src/otroja/data/repository/standard_repository.dart';
 import 'package:admins/src/otroja/data/repository/students_rpeos/show_students_repo.dart';
+import 'package:admins/src/otroja/presentation/Courses/AddCourses/addCoursesScreen.dart';
+import 'package:admins/src/otroja/presentation/Courses/ShowCourses/showCoursesScreen.dart';
 import 'package:admins/src/otroja/presentation/screens/activity/addActivity/addActivityScreen.dart';
 import 'package:admins/src/otroja/presentation/screens/activity/showActivities/activityScreen.dart';
 import 'package:admins/src/otroja/presentation/screens/student/edit_information_student.dart';
@@ -170,6 +172,13 @@ case Routes.showStudentsRecite:
         return MaterialPageRoute(builder: (_) => ShowPermissionsScreen());
       case Routes.showSubject:
         return MaterialPageRoute(builder: (_) => ShowSubject());
+
+         case Routes.showCourses:
+        return MaterialPageRoute(builder: (_) => ShowCourses());
+
+         case Routes.addCourses:
+        return MaterialPageRoute(builder: (_) => AddCourses());
+
     }
     return null;
   }
