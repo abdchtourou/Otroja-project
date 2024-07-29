@@ -1,4 +1,6 @@
+import 'package:admins/src/otroja/cubit/standardCubit/standard_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DatePickerWidget extends StatefulWidget {
   final String hintText;
@@ -52,7 +54,10 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
     if (picked != null && picked != selectedDate)
       setState(() {
         selectedDate = picked;
+       String formattedDate = "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
+        context.read<StandardCubit>().updateDate(formattedDate);
       });
+      
   }
 
   @override
