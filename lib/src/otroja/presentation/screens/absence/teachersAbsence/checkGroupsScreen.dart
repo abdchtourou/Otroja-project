@@ -46,6 +46,7 @@ class CheckGroupsScreen extends StatelessWidget {
                 imagePath: 'assets/icons/calendar.png',
                 textDirection: TextDirection.rtl,
               ),
+
                Padding(
                 padding: EdgeInsets.symmetric(vertical: 10.0),
                 child: CustomDropdown(
