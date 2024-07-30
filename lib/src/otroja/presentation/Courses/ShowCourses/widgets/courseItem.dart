@@ -6,37 +6,46 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CourseItem extends StatelessWidget {
-  const CourseItem({super.key});
+  String courseName;
+  String startDate;
+  String levels;
+  VoidCallback onTap;
+  CourseItem(
+      {super.key,
+      required this.courseName,
+      required this.startDate,
+      required this.levels,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10),
-      height: 255.h,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(
-            color: OtrojaColors.primaryColor,
-            width: 2,
-          )),
-      child: Column(
-        children: [
-          CourseItemHeader(),
-          SizedBox(
-            height: 15,
-          ),
-          Expanded(flex: 3, child: CourseItemBody()),
-          Expanded(
-            flex: 1,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 5),
-              child: OtrojaButton(
-                text: 'عرض الدورة',
-                onPressed: () {},
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: InkWell(
+        onTap: onTap,
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 10),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(
+                color: OtrojaColors.primaryColor,
+                width: 2,
+              )),
+          child: Column(
+            children: [
+              CourseItemHeader(
+                courseName: courseName,
               ),
-            ),
-          )
-        ],
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CourseItemBody(
+                  startDate: startDate,
+                  levels: levels,
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

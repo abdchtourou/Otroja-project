@@ -16,16 +16,25 @@ class GroupCubit extends Cubit<GroupState> {
   int? selectedCourseLevelId;
   List<int> selectedStudents = [];
 
-  GroupCubit(this.repository) : super(GroupInitial()) {
-    getGroups();
-  }
+  GroupCubit(this.repository) : super(GroupInitial()) {}
 
-  Future<void> getGroups() async {
+  // Future<void> getGroups() async {
+  //   emit(GroupLoading());
+  //   try {
+  //     final groups = await repository.getGroups();
+  //     emit(GroupsLoaded(groups));
+  //   } catch (e) {
+  //     emit(GroupError(e.toString()));
+  //   }
+  // }
+  Future<void> getGroupByCourseLevel(int id) async {
     emit(GroupLoading());
     try {
-      final groups = await repository.getGroups();
+      final groups = await repository.getGroupsByCourseLevel(id);
+
       emit(GroupsLoaded(groups));
     } catch (e) {
+      print(e);
       emit(GroupError(e.toString()));
     }
   }
@@ -52,7 +61,7 @@ class GroupCubit extends Cubit<GroupState> {
   // }
   Future<void> createGroupWithStudents(Group group) async {
     try {
-     await repository.createGroupWithStudents(group);
+      await repository.createGroupWithStudents(group);
       emit(GroupCreated());
     } catch (e) {
       emit(GroupError(e.toString()));
@@ -69,15 +78,15 @@ class GroupCubit extends Cubit<GroupState> {
     }
   }
 
-  Future<void> deleteGroup(int id) async {
-    emit(GroupLoading());
-    try {
-      await repository.deleteGroup(id);
-      await getGroups(); // Refresh the list after deletion
-    } catch (e) {
-      emit(GroupError(e.toString()));
-    }
-  }
+  // Future<void> deleteGroup(int id) async {
+  //   emit(GroupLoading());
+  //   try {
+  //     await repository.deleteGroup(id);
+  //     await getGroups(); // Refresh the list after deletion
+  //   } catch (e) {
+  //     emit(GroupError(e.toString()));
+  //   }
+  // }
 
   Future<void> addStudentToGroup(int studentId, int groupId) async {
     emit(GroupLoading());

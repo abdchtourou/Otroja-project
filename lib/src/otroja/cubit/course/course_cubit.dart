@@ -17,6 +17,7 @@ class CourseCubit extends Cubit<CourseState> {
       emit(CourseLoading());
       final courses = await repository.getAllCourses();
       emit(CoursesLoaded(courses));
+     
     } catch (e) {
       print(e);
       emit(CourseError(e.toString()));

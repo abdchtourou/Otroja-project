@@ -17,7 +17,7 @@ class CourseCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-        color: Color.fromARGB(255, 19, 9, 9),
+        color: Color.fromARGB(255, 247, 244, 244),
         border: Border(
           bottom: BorderSide(color: Color(0x229C9B9B)),
         ),

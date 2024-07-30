@@ -15,6 +15,21 @@ class Course {
     required this.startDate
   });
 
+ String get highestLevelOrGeneral {
+    if (levels.any((level) => level.name == "عام")) {
+      return "عام";
+    }
+    
+    int highestLevel = 0;
+    for (var level in levels) {
+      int? levelNumber = int.tryParse(level.name);
+      if (levelNumber != null && levelNumber > highestLevel) {
+        highestLevel = levelNumber;
+      }
+    }
+    
+    return highestLevel > 0 ? highestLevel.toString() : levels.first.name;
+  }
   factory Course.fromJson(Map<String, dynamic> json) {
     return Course(
       id: json['id'],

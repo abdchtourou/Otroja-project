@@ -20,6 +20,8 @@ class Routes {
   static const String showStudentsRecite = "/showStudentsRecite";
   static const String showCourses = "/ShowCourses";
   static const String addCourses = "/AddCourses";
+  static const String showLevels = "/showLevels";
+  static const String subjectOrGroup = "/subjectOrGroup";
 
 
 }

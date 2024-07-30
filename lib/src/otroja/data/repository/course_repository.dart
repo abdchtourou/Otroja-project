@@ -1,5 +1,7 @@
+
+
 import 'package:admins/src/otroja/data/datasource/api_services.dart';
-import 'package:dio/dio.dart';
+
 import 'package:admins/src/otroja/data/models/course_model.dart';
 
 class CourseRepository {
@@ -45,7 +47,8 @@ class CourseRepository {
         throw Exception('Failed to load courses');
       }
     } catch (e) {
-      throw Exception('Failed to load courses: $e');
+      print(e);
+      throw Exception('Failed to load courses: ${e}');
     }
   }
 }
