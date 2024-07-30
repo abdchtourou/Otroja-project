@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../cubit/students/edit_info_student_cubit/edit_info_student_cubit.dart';
-import '../widgets/add_user/add_parent.dart';
-import '../widgets/add_user/custom_text_field.dart';
-import '../widgets/add_user/image_student.dart';
+import '../../../cubit/students/edit_info_student_cubit/edit_info_student_cubit.dart';
+import '../../widgets/add_user/add_parent.dart';
+import '../../widgets/add_user/custom_text_field.dart';
+import '../../widgets/add_user/image_student.dart';
 
 
 class AddStaff extends StatelessWidget {

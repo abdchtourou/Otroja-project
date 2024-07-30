@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../cubit/subjectCubit/subject_cubit.dart';
+import '../../../widgets/otroja_circular_progress_indicator.dart';
 
 class SubjectsTap extends StatelessWidget {
   SubjectsTap({super.key});
@@ -20,7 +21,7 @@ class SubjectsTap extends StatelessWidget {
       body: BlocBuilder<SubjectCubit, SubjectState>(
         builder: (context, state) {
           if (state is SubjectLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: OtrojaCircularProgressIndicator());
           } else if (state is SubjectsLoaded) {
             return GridView.builder(
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 15),
@@ -41,7 +42,10 @@ class SubjectsTap extends StatelessWidget {
                       //   ),
                       // );
                     },
-                    child:  SubjectCard(name: state.subjects[index].name,category: state.subjects[index].categoryName,));
+                    child: SubjectCard(
+                      name: state.subjects[index].name,
+                      category: state.subjects[index].categoryName,
+                    ));
               },
             );
           } else {

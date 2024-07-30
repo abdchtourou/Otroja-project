@@ -11,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../data/models/recite_model.dart';
+import '../../widgets/otroja_circular_progress_indicator.dart';
 import '../../widgets/otroja_seccuss_dialog.dart';
 import 'widgets/page_count_widget.dart';
 import 'widgets/table_title_widget.dart';
@@ -91,7 +92,8 @@ class TasmeaaScreen extends StatelessWidget {
                     itemCount: context.read<StandardCubit>().standards.length,
                   );
                 } else if (state is StandardLoading) {
-                  return const Center(child: CircularProgressIndicator());
+                  return const Center(
+                      child:OtrojaCircularProgressIndicator());
                 } else {
                   return const Center(child: Text("Error loading standards"));
                 }
@@ -102,16 +104,15 @@ class TasmeaaScreen extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: BlocConsumer<ReciteCubit, ReciteState>(
                 listener: (context, state) {
-                    if (state is ReciteCreated) {
-                      showDialog(
-                        context: context,
-                        builder: (context) => OtrojaSuccessDialog(
-                          text: "!تم إضافة التسميع بنجاح",
-                        ),
-                      );
-                    }
-                  },
-            
+                  if (state is ReciteCreated) {
+                    showDialog(
+                      context: context,
+                      builder: (context) => OtrojaSuccessDialog(
+                        text: "!تم إضافة التسميع بنجاح",
+                      ),
+                    );
+                  }
+                },
                 builder: (context, state) {
                   return OtrojaButton(
                       text: 'إنهاء التسميع',
@@ -128,10 +129,9 @@ class TasmeaaScreen extends StatelessWidget {
                         print(context.read<StandardCubit>().studentId);
                         context.read<ReciteCubit>().createRecite(Recite(
                             date: context.read<StandardCubit>().date,
-                            studentId:context.read<StandardCubit>().studentId ,
+                            studentId: context.read<StandardCubit>().studentId,
                             reciteTypeId: "1",
                             standardCounts: standardCount));
-                       
                       });
                 },
               ))

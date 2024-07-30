@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/routing/routes.dart';
+import '../../../widgets/otroja_circular_progress_indicator.dart';
 import '../../../widgets/otroja_search_bar.dart';
 import 'widgets/course_item.dart';
 
@@ -28,7 +29,9 @@ class ShowCourses extends StatelessWidget {
               child: BlocBuilder<CourseCubit, CourseState>(
                 builder: (context, state) {
                   if (state is CourseLoading) {
-                    return const Center(child: CircularProgressIndicator());
+                    return const Center(
+                        child:
+                            OtrojaCircularProgressIndicator());
                   } else if (state is CoursesLoaded) {
                     state.courses.forEach((element) {
                       print(element.name);

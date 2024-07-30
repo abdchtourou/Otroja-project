@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../cubit/students/show_student_cubit/show_students_cubit.dart';
 import '../../../../cubit/students/show_student_cubit/show_students_state.dart';
+import '../../../widgets/otroja_circular_progress_indicator.dart';
 import '../../../widgets/otroja_search_bar.dart';
 import 'studentsListRecit.dart';
 
@@ -22,7 +23,6 @@ class ShowStudentsRecite extends StatelessWidget {
       appBar: OtrojaAppBar(
         mainText: "حدد الطالب ",
         secText: "اختر طالباً لبدأ التسميع",
-    
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -35,16 +35,20 @@ class ShowStudentsRecite extends StatelessWidget {
               child: BlocBuilder<ShowStudentsCubit, ShowStudentsState>(
                 builder: (context, state) {
                   if (state is ShowStudentsLoading) {
-                    return const Center(child: CircularProgressIndicator());
+                    return const Center(
+                        child: OtrojaCircularProgressIndicator());
                   } else if (state is ShowStudentsLoaded) {
-                    return StudentsListRecit(context: context, students: state.students,);
-                  }  else {
+                    return StudentsListRecit(
+                      context: context,
+                      students: state.students,
+                    );
+                  } else {
                     return const Center(child: Text("Error loading students"));
                   }
                 },
               ),
             ),
-           // OtrojaButton(text: "إضافة", onPressed: () {})
+            // OtrojaButton(text: "إضافة", onPressed: () {})
           ],
         ),
       ),
