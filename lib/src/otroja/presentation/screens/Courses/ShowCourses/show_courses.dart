@@ -4,11 +4,8 @@ import 'package:admins/src/otroja/presentation/Courses/ShowCourses/widgets/cours
 import 'package:admins/src/otroja/presentation/widgets/otroja_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../widgets/otroja_circular_progress_indicator.dart';
-import '../../../widgets/otroja_search_bar.dart';
-import 'widgets/course_item.dart';
 
 class ShowCourses extends StatelessWidget {
   ShowCourses({super.key});
@@ -30,8 +27,7 @@ class ShowCourses extends StatelessWidget {
                 builder: (context, state) {
                   if (state is CourseLoading) {
                     return const Center(
-                        child:
-                            OtrojaCircularProgressIndicator());
+                        child: OtrojaCircularProgressIndicator());
                   } else if (state is CoursesLoaded) {
                     state.courses.forEach((element) {
                       print(element.name);

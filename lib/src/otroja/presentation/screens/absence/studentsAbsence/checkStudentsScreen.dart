@@ -13,7 +13,6 @@ import '../../../widgets/add_user/custom_drop_down.dart';
 import '../../../widgets/check_student/attendance_row_header.dart';
 
 class CheckStudentScreen extends StatelessWidget {
-
   CheckStudentScreen({super.key});
 
   @override
