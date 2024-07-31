@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../widgets/buttons/otroja_button.dart';
+import '../../../widgets/otroja_circular_progress_indicator.dart';
 
 class AddStudentToGroupScreen extends StatelessWidget {
   const AddStudentToGroupScreen({super.key});
@@ -32,22 +33,32 @@ class AddStudentToGroupScreen extends StatelessWidget {
               child: BlocBuilder<ShowStudentsCubit, ShowStudentsState>(
                 builder: (context, state) {
                   if (state is ShowStudentsLoading) {
-                    return const Center(child: CircularProgressIndicator());
+                    return const Center(
+                        child:
+                            OtrojaCircularProgressIndicator());
                   } else if (state is ShowStudentsLoaded) {
-                    return StudentsListWidget(context: context, students: state.students, selectedStudents: state is UpdateSelectedStudentState ? (state as UpdateSelectedStudentState).selectedStudents : []);
+                    return StudentsListWidget(
+                        context: context,
+                        students: state.students,
+                        selectedStudents: state is UpdateSelectedStudentState
+                            ? (state as UpdateSelectedStudentState)
+                                .selectedStudents
+                            : []);
                   } else if (state is UpdateSelectedStudentState) {
-                    return StudentsListWidget(context: context, students: context.read<ShowStudentsCubit>().studentList, selectedStudents: state.selectedStudents);
+                    return StudentsListWidget(
+                        context: context,
+                        students: context.read<ShowStudentsCubit>().studentList,
+                        selectedStudents: state.selectedStudents);
                   } else {
                     return const Center(child: Text("Error loading students"));
                   }
                 },
               ),
             ),
-           // OtrojaButton(text: "إضافة", onPressed: () {})
+            // OtrojaButton(text: "إضافة", onPressed: () {})
           ],
         ),
       ),
     );
   }
 }
-

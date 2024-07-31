@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/constants/colors.dart';
+
 class SubjectCard extends StatelessWidget {
-  const SubjectCard({super.key});
+  String name;
+  String category;
+   SubjectCard({super.key, required this.name, required this.category});
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
+    return Container(
       decoration: BoxDecoration(
           color: OtrojaColors.primary2Color,
           borderRadius: const BorderRadius.all(Radius.circular(10)),
-          border: Border.all(
-              width: 4, color: OtrojaColors.primaryColor)),
+          border: Border.all(width: 4, color: OtrojaColors.primaryColor)),
       child: Column(
         children: [
           Row(
@@ -21,8 +23,8 @@ class SubjectCard extends StatelessWidget {
               Image.asset("assets/images/pattern (7) 2.png"),
             ],
           ),
-          const Text(
-            "الفقه الشافعي",
+           Text(
+           name,
             style: TextStyle(fontSize: 18),
           ),
           const Spacer(),
@@ -31,11 +33,10 @@ class SubjectCard extends StatelessWidget {
             height: 30,
             decoration: BoxDecoration(
                 color: OtrojaColors.primaryColor,
-                border: Border.all(
-                    width: 4, color: OtrojaColors.primaryColor)),
-            child: const Center(
+                border: Border.all(width: 4, color: OtrojaColors.primaryColor)),
+            child:  Center(
               child: Text(
-                "الفقه",
+                category,
                 style: TextStyle(color: Colors.white),
               ),
             ),

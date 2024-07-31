@@ -7,6 +7,7 @@ import '../../../core/helper/constant.dart';
 import '../../../core/routing/routes.dart';
 import '../../../cubit/students/show_student_cubit/show_students_cubit.dart';
 import '../../../cubit/students/show_student_cubit/show_students_state.dart';
+import '../../widgets/otroja_circular_progress_indicator.dart';
 import '../../widgets/show_students_widget/appbar.dart';
 import '../../widgets/show_students_widget/filter_bar.dart';
 import '../../widgets/show_students_widget/no_students.dart';
@@ -86,7 +87,7 @@ class ShowStudents extends StatelessWidget {
                                               .then((_) {
                                             context
                                                 .read<ShowStudentsCubit>()
-                                                .currentPage=0;
+                                                .currentPage = 0;
                                             context
                                                 .read<ShowStudentsCubit>()
                                                 .studentList
@@ -110,7 +111,7 @@ class ShowStudents extends StatelessWidget {
                                                   vertical: 20),
                                               child: Center(
                                                   child:
-                                                      CircularProgressIndicator()),
+                                                      OtrojaCircularProgressIndicator()),
                                             )
                                           : const Text(
                                               "no more data to load",
@@ -131,7 +132,7 @@ class ShowStudents extends StatelessWidget {
               } else if (state is ShowStudentsLoading) {
                 return const Expanded(
                   child: Center(
-                    child: CircularProgressIndicator(),
+                    child: OtrojaCircularProgressIndicator(),
                   ),
                 );
               } else {

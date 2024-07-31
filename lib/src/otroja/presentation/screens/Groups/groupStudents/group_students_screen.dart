@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../widgets/otroja_circular_progress_indicator.dart';
+
 class GroupStudentsScreen extends StatelessWidget {
   final int groupId;
   const GroupStudentsScreen({super.key, required this.groupId});
@@ -14,7 +16,7 @@ class GroupStudentsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     context.read<ShowStudentsCubit>().getStudentsByGroupId(groupId);
-    
+
     return Scaffold(
       appBar: OtrojaAppBar(
         mainText: "طلاب الحلقة",
@@ -31,10 +33,14 @@ class GroupStudentsScreen extends StatelessWidget {
               child: BlocBuilder<ShowStudentsCubit, ShowStudentsState>(
                 builder: (context, state) {
                   if (state is ShowStudentsLoading) {
-                    return const Center(child: CircularProgressIndicator());
+                    return const Center(
+                        child: OtrojaCircularProgressIndicator());
                   } else if (state is ShowStudentsLoaded) {
                     final students = state.students;
-                    return GroupStudentsList(students: students ,groupId: groupId,);
+                    return GroupStudentsList(
+                      students: students,
+                      groupId: groupId,
+                    );
                   } else if (state is ShowStudentsError) {
                     return const Center(child: Text("Error loading students"));
                   } else {

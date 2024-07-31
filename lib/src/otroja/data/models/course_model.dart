@@ -1,6 +1,7 @@
 class Course {
   final int id;
   final String name;
+  final String startDate;
   final DateTime createdAt;
   final DateTime updatedAt;
   final List<Level> levels;
@@ -11,12 +12,29 @@ class Course {
     required this.createdAt,
     required this.updatedAt,
     required this.levels,
+    required this.startDate
   });
 
+ String get highestLevelOrGeneral {
+    if (levels.any((level) => level.name == "عام")) {
+      return "عام";
+    }
+    
+    int highestLevel = 0;
+    for (var level in levels) {
+      int? levelNumber = int.tryParse(level.name);
+      if (levelNumber != null && levelNumber > highestLevel) {
+        highestLevel = levelNumber;
+      }
+    }
+    
+    return highestLevel > 0 ? highestLevel.toString() : levels.first.name;
+  }
   factory Course.fromJson(Map<String, dynamic> json) {
     return Course(
       id: json['id'],
       name: json['name'],
+      startDate: json['start_date'],
       createdAt: DateTime.parse(json['created_at']),
       updatedAt: DateTime.parse(json['updated_at']),
       levels: (json['levels'] as List<dynamic>)
@@ -29,6 +47,7 @@ class Course {
     return {
       'id': id,
       'name': name,
+      'start_date': startDate,
       'created_at': createdAt.toIso8601String(),
       'updated_at': updatedAt.toIso8601String(),
       'levels': levels.map((level) => level.toJson()).toList(),

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../../cubit/activityCubit/add_activity/add_activity_cubit.dart';
-
 
 class AddOtrojaWidget extends StatelessWidget {
   const AddOtrojaWidget({
@@ -49,7 +47,7 @@ class AddOtrojaWidget extends StatelessWidget {
               angle: 3.14 / 4,
               child: Container(
                 margin: EdgeInsets.only(left: 115.w, top: 75.h),
-                padding: EdgeInsets.only(left:0.w, bottom: 0),
+                padding: EdgeInsets.only(left: 0.w, bottom: 0),
                 width: 32.w,
                 height: 32.h,
                 decoration: BoxDecoration(
@@ -59,7 +57,6 @@ class AddOtrojaWidget extends StatelessWidget {
                 child: Transform.rotate(
                   angle: -3.14 / 4,
                   // child:
-
                 ),
               ),
             ),
@@ -94,28 +91,24 @@ class AddOtrojaWidget extends StatelessWidget {
             child: Row(
               children: [
                 Container(
-                  width: 125.w,
-                  height: 125.h,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/icons/islam.png')
-                    )
-                  ),
-                  child: Center(
-                    child:    InkWell(
-                      onTap: () {
-                        BlocProvider.of<AddActivityCubit>(context)
-                            .updateOtroja(false);
-                      },
-                      child: SizedBox(
-                        width: 30.w,
-                        height: 30.h,
-                        child: Image.asset('assets/icons/minus-sign.png'),
+                    width: 125.w,
+                    height: 125.h,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage('assets/icons/islam.png'))),
+                    child: Center(
+                      child: InkWell(
+                        onTap: () {
+                          BlocProvider.of<AddActivityCubit>(context)
+                              .updateOtroja(false);
+                        },
+                        child: SizedBox(
+                          width: 30.w,
+                          height: 30.h,
+                          child: Image.asset('assets/icons/minus-sign.png'),
+                        ),
                       ),
-                    ),
-                  )
-                ),
-
+                    )),
                 const SizedBox(
                   width: 90,
                 ),
@@ -124,11 +117,9 @@ class AddOtrojaWidget extends StatelessWidget {
                     height: 125.h,
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                            image: AssetImage('assets/icons/islam.png')
-                        )
-                    ),
+                            image: AssetImage('assets/icons/islam.png'))),
                     child: Center(
-                      child:    InkWell(
+                      child: InkWell(
                         onTap: () {
                           BlocProvider.of<AddActivityCubit>(context)
                               .updateOtroja(true);
@@ -139,9 +130,7 @@ class AddOtrojaWidget extends StatelessWidget {
                           child: Image.asset('assets/icons/plus(6).png'),
                         ),
                       ),
-                    )
-                ),
-
+                    )),
               ],
             ),
           )

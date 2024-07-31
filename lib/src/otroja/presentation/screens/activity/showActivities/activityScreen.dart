@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../widgets/otroja_circular_progress_indicator.dart';
 import 'widgets/activity_item.dart';
 
 class ActivityScreen extends StatelessWidget {
@@ -46,7 +47,8 @@ class ActivityScreen extends StatelessWidget {
                 } else {
                   return const Expanded(
                     child: Center(
-                      child: CircularProgressIndicator(),
+                      child:
+                         OtrojaCircularProgressIndicator(),
                     ),
                   );
                 }

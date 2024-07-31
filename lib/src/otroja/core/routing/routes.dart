@@ -16,8 +16,12 @@ class Routes {
   static const String showPermissions = "/showPermissions";
   static const String addActivity = "/addActivity";
   static const String showSubject = "/ShowSubject";
+  static const String tasmeaa = "/tasmeaa";
+  static const String showStudentsRecite = "/showStudentsRecite";
   static const String showCourses = "/ShowCourses";
   static const String addCourses = "/AddCourses";
+  static const String showLevels = "/showLevels";
+  static const String subjectOrGroup = "/subjectOrGroup";
 
 
 }

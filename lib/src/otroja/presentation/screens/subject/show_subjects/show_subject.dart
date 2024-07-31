@@ -54,7 +54,7 @@ class ShowSubject extends StatelessWidget {
                             ),
                           );
                         },
-                        child: const SubjectCard());
+                        child:  SubjectCard(name: "شافعي",category: 'فقه',));
                   } else {
                     return AddSubjectCard(
                       onTap: () {

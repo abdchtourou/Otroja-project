@@ -23,9 +23,7 @@ final String name;
         ),
       ),
       child: InkWell(
-        onTap: () {
-          // Handle tap event
-        },
+        onTap:onPressed,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
@@ -34,7 +32,7 @@ final String name;
               Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: IconButton(
-                  onPressed: onPressed,
+                 onPressed: (){},
                   icon: Image.asset(iconPath, scale: 15),
                 ),
               ),

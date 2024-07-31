@@ -1,13 +1,21 @@
-import 'package:admins/src/otroja/core/helper/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OtrojaAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final Widget? optionalWidget; 
-  String? mainText;
-  String? secText;
+  final Widget? optionalWidget;
+  final String? mainText;
+  final String? secText;
+  final List<Tab>? tabs; // List of tabs
+  final TabController? tabController; // TabController
 
-  OtrojaAppBar({super.key, this.optionalWidget, required this.mainText, this.secText});
+  OtrojaAppBar({
+    super.key,
+    this.optionalWidget,
+    required this.mainText,
+    this.secText,
+    this.tabs,
+    this.tabController,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -48,61 +56,75 @@ class OtrojaAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           ),
         ),
-Row(
-  children: [
-    IconButton(
-      onPressed: () {
-        Navigator.maybePop(context);
-      },
-      icon: const Icon(
-        Icons.arrow_back_ios,
-        color: Color(0xFF85313C),
-        size: 30,
-      ),
-    ),
-    Expanded(
-      child: Center(
-        child: Column(
+        Column(
           children: [
-            const SizedBox(
-              height: 40,
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Navigator.maybePop(context);
+                  },
+                  icon: const Icon(
+                    Icons.arrow_back_ios,
+                    color: Color(0xFF85313C),
+                    size: 30,
+                  ),
+                ),
+                Expanded(
+                  child: Center(
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 40),
+                        Text(
+                          mainText!,
+                          style: const TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(height: 10),
+                        if(secText!=null)
+                        Text(
+                          secText!,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                              height: 1.47,
+                              letterSpacing: 0.02,
+                              fontSize: 15,
+                              fontWeight: FontWeight.normal,
+                              color: Color.fromARGB(255, 119, 119, 119)),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                ...optionalWidget != null
+                    ? [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: optionalWidget!,
+                        )
+                      ]
+                    : [
+                        SizedBox(
+                          width: 40.w,
+                        ),
+                      ],
+              ],
             ),
-            Text(
-              mainText!,
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              secText?? " ",
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                  height: 1.47,
-                  letterSpacing: 0.02,
-                  fontSize: 15,
-                  fontWeight: FontWeight.normal,
-                  color: Color.fromARGB(255, 119, 119, 119)),
-            ),
+            if (tabs != null && tabController != null) // Conditionally render TabBar
+              TabBar(
+                controller: tabController,
+                tabs: tabs!,
+                indicatorColor: Color(0xFF85313C),
+                labelColor: Color(0xFF85313C),
+                unselectedLabelColor: Colors.black,
+                dividerColor: Colors.transparent,
+              ),
           ],
         ),
-      ),
-    ),
-   ...optionalWidget!= null? [
-     Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: optionalWidget!,
-    )] : [SizedBox(
-    width: 40.w,
-   )],
-  ],
-),
-
-
-
-        
       ],
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(100);
+  Size get preferredSize => const Size.fromHeight(100); // Adjust height if needed
 }

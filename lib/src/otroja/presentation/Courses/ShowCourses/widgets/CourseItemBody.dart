@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CourseItemBody extends StatelessWidget {
-  const CourseItemBody({super.key});
+  String startDate;
+  String levels;
+  CourseItemBody({super.key, required this.startDate, required this.levels});
 
   @override
   Widget build(BuildContext context) {
@@ -21,12 +23,12 @@ class CourseItemBody extends StatelessWidget {
                   child: Image.asset("assets/icons/calendar(2).png")),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.only(right: 5.w),
+                  padding: EdgeInsets.all(8.w),
                   child: Row(
                     textDirection: TextDirection.rtl,
                     children: [
                       Text(
-                        ': تنتهي في ',
+                        ': تبدأ في ',
                         style: TextStyle(
                             fontWeight: FontWeight.w500, fontSize: 16),
                       ),
@@ -36,7 +38,7 @@ class CourseItemBody extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.only(top: 2.h),
                         child: Text(
-                          '1 / 5 / 2002',
+                          startDate,
                           style: TextStyle(
                               fontSize: 16,
                               color: OtrojaColors.primaryColor,
@@ -47,13 +49,13 @@ class CourseItemBody extends StatelessWidget {
                   ),
                 ),
               ),
-              Text(
-                'تعديل',
-                style: TextStyle(
-                    fontSize: 16,
-                    color: OtrojaColors.primaryColor,
-                    fontWeight: FontWeight.bold),
-              ),
+              // Text(
+              //   'تعديل',
+              //   style: TextStyle(
+              //       fontSize: 16,
+              //       color: OtrojaColors.primaryColor,
+              //       fontWeight: FontWeight.bold),
+              // ),
             ],
           ),
           Divider(),
@@ -63,71 +65,69 @@ class CourseItemBody extends StatelessWidget {
               textDirection: TextDirection.rtl,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Expanded(
-                  flex: 2,
-                  child: Padding(
-                    padding: EdgeInsets.only(right: 5.w, top: 5.h),
-                    child: Row(
-                      textDirection: TextDirection.rtl,
-                      children: [
-                        Text(
-                          ': عدد الحلقات الكلي  ',
-                          style: TextStyle(
+                // Expanded(
+                //   flex: 2,
+                //   child: Padding(
+                //     padding: EdgeInsets.only(right: 5.w, top: 5.h),
+                //     child: Row(
+                //       textDirection: TextDirection.rtl,
+                //       children: [
+                //         // Text(
+                //         //   ': عدد الحلقات الكلي  ',
+                //         //   style: TextStyle(
+                //         //       fontWeight: FontWeight.w500, fontSize: 16),
+                //         // ),
+                //         SizedBox(
+                //           width: 5.w,
+                //         ),
+                //         Padding(
+                //           padding: EdgeInsets.only(top: 2.h),
+                //           child: Text(
+                //             '20',
+                //             style: TextStyle(
+                //                 fontSize: 16,
+                //                 color: OtrojaColors.primaryColor,
+                //                 fontWeight: FontWeight.w500),
+                //           ),
+                //         ),
+                //       ],
+                //     ),
+                //   ),
+                // ),
+                Text("المستويات",
+                  style: TextStyle(
                               fontWeight: FontWeight.w500, fontSize: 16),
-                        ),
-                        SizedBox(
-                          width: 5.w,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 2.h),
-                          child: Text(
-                            '20',
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: OtrojaColors.primaryColor,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
                 ),
-                Expanded(
-                  child: Stack(
-                    children: [
-                      SizedBox(
-                          width: 80.w,
-                          height: 80.h,
-                          child: Image.asset("assets/icons/courseLevels.png")),
-                      Positioned(
-                        left: 22.w,
-                        top: 27.5.h,
+                Spacer(flex: 1,),
+                Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Image.asset(
+                      "assets/icons/courseLevels.png",
+                      fit: BoxFit.contain,
+                      scale: 1.5,
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 8),
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
                         child: Text(
-                          '1 2 3',
+                          levels,
                           style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500),
+                            fontSize: 16,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
                       ),
-                      Positioned(
-                        left: 7.5.w,
-                        top: 55.h,
-                        child: Text(
-                          'مستوياتها',
-                          style: TextStyle(
-                              fontSize: 16,
-                                color: OtrojaColors.primaryColor,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                    ],
-                  ),
-                )
+                    ),
+                  ],
+                ),
+                Spacer(flex: 4,)
               ],
             ),
           ),
-          Divider(),
         ],
       ),
     );
