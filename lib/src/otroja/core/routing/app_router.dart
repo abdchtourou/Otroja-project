@@ -17,6 +17,7 @@ import 'package:admins/src/otroja/data/repository/students_rpeos/show_students_r
 import 'package:admins/src/otroja/data/repository/subject_repository.dart';
 import 'package:admins/src/otroja/presentation/Courses/AddCourses/addCoursesScreen.dart';
 import 'package:admins/src/otroja/presentation/Courses/ShowCourses/showCoursesScreen.dart';
+import 'package:admins/src/otroja/presentation/screens/Home/homePage.dart';
 import 'package:admins/src/otroja/presentation/screens/activity/addActivity/addActivityScreen.dart';
 import 'package:admins/src/otroja/presentation/screens/activity/showActivities/activityScreen.dart';
 import 'package:admins/src/otroja/presentation/screens/student/edit_information_student.dart';
@@ -80,7 +81,7 @@ class AppRouter {
                       value: levelCubit,
                     ),
                   ],
-                  child: AddCourses(),
+                  child: HomePage(),
                 ));
 
       case Routes.showLevels:
@@ -110,40 +111,14 @@ class AppRouter {
                   ),
                 ));
 
-      case Routes.showCourses:
+
+
+ case Routes.showCourses:
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
                   create: (context) =>
                       CourseCubit(CourseRepository(ApiService())),
                   child: ShowCourses(),
-                ));
-
-      case Routes.showStudentsRecite:
-        return MaterialPageRoute(
-            builder: (_) => MultiBlocProvider(
-                  providers: [
-                    BlocProvider.value(
-                      value: standardCubit,
-                    ),
-                    BlocProvider(
-                      create: (context) => getIt<ShowStudentsCubit>(),
-                    ),
-                  ],
-                  child: ShowStudentsRecite(),
-                ));
-      case Routes.tasmeaa:
-        return MaterialPageRoute(
-            builder: (_) => MultiBlocProvider(
-                  providers: [
-                    BlocProvider.value(
-                      value: standardCubit,
-                    ),
-                    BlocProvider(
-                      create: (context) =>
-                          ReciteCubit(ReciteRepository(ApiService())),
-                    ),
-                  ],
-                  child: TasmeaaScreen(),
                 ));
 
       case Routes.addParents:
@@ -234,6 +209,7 @@ class AppRouter {
 
       case Routes.addCourses:
         return MaterialPageRoute(builder: (_) => AddCourses());
+
     }
     return null;
   }
