@@ -11,27 +11,20 @@ class Checked extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        context.read<CheckStudentCubit>().togglePresence(index, true);
-        context.read<CheckStudentCubit>().addAbsence(index,true);
-
-      },
-      child: Container(
-        width: 40,
-        height: 40,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          border: Border.all(
-            color: const Color(0xff85313C),
-            width: 2,
-          ),
+    return Container(
+      width: 40,
+      height: 40,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        border: Border.all(
+          color: const Color(0xff85313C),
+          width: 2,
         ),
-        child: isExit == 1
-            ? const Icon(Icons.check, color: Colors.green,size: 30,)
-
-                : const Text(''),
       ),
+      child: isExit == 1
+          ? const Icon(Icons.check, color: Colors.green,size: 30,)
+
+              : const Text(''),
     );
   }
 }

@@ -1,7 +1,10 @@
+import 'package:admins/src/otroja/cubit/absecne_staff/absence_staff_cubit.dart';
 import 'package:admins/src/otroja/presentation/screens/absence/studentsAbsence/widget/is_absence.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../cubit/students/check_student/check_student_cubit.dart';
 import '../../studentsAbsence/widget/checked.dart';
 
 class TeachersAbsenceItem extends StatelessWidget {
@@ -9,21 +12,23 @@ class TeachersAbsenceItem extends StatelessWidget {
   VoidCallback onTap;
   String groupName;
   String teachersName;
-int index;
-int isAbsence;
+  int index;
+  int isAbsence;
 
-  TeachersAbsenceItem(
-      {super.key,
-      required this.absence,
-      required this.onTap,
-      required this.groupName,
-      required this.teachersName,
-        required this.index,
-        required this.isAbsence,
-      });
+  TeachersAbsenceItem({
+    super.key,
+    required this.absence,
+    required this.onTap,
+    required this.groupName,
+    required this.teachersName,
+    required this.index,
+    required this.isAbsence,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<AbsenceStaffCubit>();
+
     return SizedBox(
       width: 300.w,
       height: 70.h,
@@ -41,20 +46,40 @@ int isAbsence;
             ),
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-
-              Padding(
-                padding:  EdgeInsets.only(right: 40.0.w),
-                child: IsAbsence(index: index,  isAbsence: isAbsence,),
+              Row(
+                children: [
+                  Padding(
+                    padding:  EdgeInsets.only(left: 28.0.w),
+                    child: InkWell(
+                      onTap: () {
+                        cubit.togglePresence(index, false);
+                        cubit.addAbsence(
+                        1, false);
+                      },
+                      child: IsAbsence(
+                        index: index,
+                        isAbsence: cubit.isPresentList[index],
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 45.w),
+                    child: InkWell(
+                      onTap: () {
+                        cubit.togglePresence(index, true);
+                        cubit.addAbsence(
+                            1, true);
+                      },
+                      child: Checked(
+                        index: index,
+                        isExit: cubit.isPresentList[index],
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              Padding(
-                padding:  EdgeInsets.only(right: 45.w,top: 0.h),
-                child: Checked(index: index, isExit: isAbsence),
-              ),
-
-
-
               Column(
                 children: [
                   Container(
@@ -91,7 +116,6 @@ int isAbsence;
               ),
             ],
           ),
-
         ],
       ),
     );

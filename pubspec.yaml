@@ -13,6 +13,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
   flutter_screenutil: ^5.9.1
+  scrollable_positioned_list:
 
   flutter_bloc:
   intl:
@@ -34,6 +35,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+
 
 
 

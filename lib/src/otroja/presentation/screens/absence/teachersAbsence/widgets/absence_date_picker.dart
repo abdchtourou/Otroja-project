@@ -9,9 +9,10 @@ class AbsenceDatePicker extends StatefulWidget {
   final Color borderColor;
   final String imagePath;
   final TextDirection textDirection;
+  DateTime? selectedDate;
 
   AbsenceDatePicker({
-     this.hintText="",
+    this.hintText = "",
     required this.labelText,
     required this.containerColor,
     required this.containerWidth,
@@ -19,6 +20,7 @@ class AbsenceDatePicker extends StatefulWidget {
     required this.borderColor,
     required this.imagePath,
     required this.textDirection,
+    required this.selectedDate,
   });
 
   @override
@@ -26,12 +28,10 @@ class AbsenceDatePicker extends StatefulWidget {
 }
 
 class _DatePickerWidgetState extends State<AbsenceDatePicker> {
-  DateTime? selectedDate;
-
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: selectedDate ?? DateTime.now(),
+      initialDate: widget.selectedDate ?? DateTime.now(),
       firstDate: DateTime(2000),
       lastDate: DateTime(2101),
       builder: (BuildContext context, Widget? child) {
@@ -44,15 +44,16 @@ class _DatePickerWidgetState extends State<AbsenceDatePicker> {
               onSurface: Colors.black, // لون النص عند عدم الاختيار
             ),
             dialogBackgroundColor:
-                Color.fromARGB(223, 239, 227, 211), // لون خلفية الحوار
+                const Color.fromARGB(223, 239, 227, 211), // لون خلفية الحوار
           ),
           child: child!,
         );
       },
     );
-    if (picked != null && picked != selectedDate)
+    if (picked != null && picked != widget.selectedDate)
       setState(() {
-        selectedDate = picked;
+        widget.selectedDate = picked;
+        print(widget.selectedDate.toString());
       });
   }
 
@@ -62,22 +63,23 @@ class _DatePickerWidgetState extends State<AbsenceDatePicker> {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         Padding(
-            padding: const EdgeInsets.only(bottom: 15),
-            child: Text(
-              widget.labelText!,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-              ),
-              textAlign: TextAlign.right,
+          padding: const EdgeInsets.only(bottom: 15),
+          child: Text(
+            widget.labelText!,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
             ),
+            textAlign: TextAlign.right,
           ),
+        ),
         GestureDetector(
           onTap: () => _selectDate(context),
           child: Container(
             width: widget.containerWidth,
             height: 50,
-            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
             decoration: BoxDecoration(
               color: widget.containerColor,
               border: Border.all(
@@ -90,20 +92,20 @@ class _DatePickerWidgetState extends State<AbsenceDatePicker> {
               textDirection: TextDirection.rtl,
               children: [
                 Image.asset(widget.imagePath),
-                SizedBox(
+                const SizedBox(
                   width: 100,
                 ),
-                selectedDate == null
+                widget.selectedDate == null
                     ? Text(
                         '${widget.hintText}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Color.fromARGB(255, 155, 151, 151),
                           fontSize: 16.0,
                         ),
                       )
                     : Text(
-                        '${selectedDate!.day}-${selectedDate!.month}-${selectedDate!.year}',
-                        style: TextStyle(
+                        '${widget.selectedDate!.day}-${widget.selectedDate!.month}-${widget.selectedDate!.year}',
+                        style: const TextStyle(
                           color: Color.fromARGB(255, 0, 0, 0),
                           fontSize: 16.0,
                         ),

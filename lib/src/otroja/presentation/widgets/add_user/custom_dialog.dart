@@ -5,6 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/helper/constant.dart';
 
 class MyDialog extends StatelessWidget {
+  MyDialog({this.text});
+
+
+  String? text;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -16,7 +20,7 @@ class MyDialog extends StatelessWidget {
               children: [
                Image.asset('assets/images/clock 1.png'),
                 Text(
-                  'تمت إضافة الطالب بنجاح',
+                 text ?? 'تمت إضافة الطالب بنجاح',
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
                     fontSize: 20,
@@ -54,4 +58,5 @@ class MyDialog extends StatelessWidget {
       ],
     );
   }
+
 }
