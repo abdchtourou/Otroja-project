@@ -68,8 +68,8 @@ class AppRouter {
 
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case Routes.home:
-        return MaterialPageRoute(builder: (_) => HomePage());
+      // case Routes.home:
+      //   return MaterialPageRoute(builder: (_) => HomePage());
 
       case Routes.addCourses:
         levelCubit.getAllLevels();
@@ -130,7 +130,7 @@ class AppRouter {
                   ),
                 ));
 
-      case Routes.showCourses:
+      case Routes.home:
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
                   create: (context) =>

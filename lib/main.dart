@@ -41,11 +41,11 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               fontFamily: 'DIN Next LT Arabic',
             ),
-            // onGenerateRoute: appRouter.generateRoute,
-            home: BlocProvider(
-              create: (context) => getIt<AbsenceStaffCubit>(),
-              child: CheckGroupsScreen(),
-            ),
+            onGenerateRoute: appRouter.generateRoute,
+            // home: BlocProvider(
+            //   create: (context) => getIt<AbsenceStaffCubit>(),
+            //   child: CheckGroupsScreen(),
+            // ),
           );
         });
   }
