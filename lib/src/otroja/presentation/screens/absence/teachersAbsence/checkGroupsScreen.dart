@@ -1,23 +1,16 @@
-import 'package:admins/src/otroja/cubit/students/check_student/check_student_state.dart';
-import 'package:admins/src/otroja/presentation/screens/absence/studentsAbsence/checkStudentsScreen.dart';
 import 'package:admins/src/otroja/presentation/screens/absence/teachersAbsence/widgets/teachers_absence_item.dart';
 import 'package:admins/src/otroja/presentation/widgets/buttons/otroja_button.dart';
-import 'package:admins/src/otroja/presentation/widgets/custumDropDown.dart';
 import 'package:admins/src/otroja/presentation/widgets/otroja_app_bar.dart';
-import 'package:admins/src/otroja/presentation/widgets/otroja_drop_down.dart';
-import 'package:admins/src/otroja/presentation/widgets/text%20field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../cubit/students/check_student/check_student_cubit.dart';
+import '../../../../cubit/absecne_staff/absence_staff_cubit.dart';
 import '../../../widgets/add_user/custom_drop_down.dart';
-import '../../../widgets/karamDatePicker.dart';
 import 'widgets/absence_date_picker.dart';
 import 'widgets/teachers_absence_table_title.dart';
-import 'widgets/ttt.dart';
 class CheckGroupsScreen extends StatelessWidget {
   CheckGroupsScreen({super.key});
 
@@ -25,6 +18,8 @@ class CheckGroupsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<AbsenceStaffCubit>();
+
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 249, 245, 239),
       appBar: OtrojaAppBar(
@@ -44,11 +39,11 @@ class CheckGroupsScreen extends StatelessWidget {
                 borderThickness: 2,
                 borderColor: const Color(0xffE6E6E6),
                 imagePath: 'assets/icons/calendar.png',
-                textDirection: TextDirection.rtl,
+                textDirection: TextDirection.rtl, selectedDate: cubit.dateTime,
               ),
 
                Padding(
-                padding: EdgeInsets.symmetric(vertical: 10.0),
+                padding: const EdgeInsets.symmetric(vertical: 10.0),
                 child: CustomDropdown(
                   list: ["دورة وزدناهم هدى", "دورة يشفعان"],
                   hint: "الدورة",
@@ -56,9 +51,9 @@ class CheckGroupsScreen extends StatelessWidget {
 
                 ),
               ),
-             BlocBuilder<CheckStudentCubit, CheckStudentState>(
+             BlocBuilder<AbsenceStaffCubit, AbsenceStaffState>(
                builder: (context, state) {
-                if( state is CheckStudentLoaded){
+
                   return  Column(
                     children: [
                       const TeachersAbsenceTableTitle(),
@@ -76,23 +71,21 @@ class CheckGroupsScreen extends StatelessWidget {
                               absence: attendanceStatus[index],
                               onTap: () {},
                               teachersName: "إسلام العيسى",
-                              groupName: "الصحابة", index: index, isAbsence: state.isPresentList[index],
+                              groupName: "الصحابة", index: index, isAbsence: cubit.isPresentList[index],
                             );
                           },
 
-                          itemCount: state.isPresentList.length,
+                          itemCount: 2,
                         ),
                       ),
                     ],
                   );
-                }else{
-                  return Container();
-                }
+
 
                },
              ),
               Padding(
-                padding: const EdgeInsets.only(top: 8.0),
+                padding: const EdgeInsets.only(top: 8.0,bottom: 10),
                 child: OtrojaButton(text: 'إنهاء التفقد', onPressed: () {}),
               ),
             ],

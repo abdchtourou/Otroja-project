@@ -14,6 +14,7 @@ class CheckStudentCubit extends Cubit<CheckStudentState> {
   CheckStudentCubit(this.absenceRepo) : super(CheckStudentInitial()) {
     getGroups();
   }
+  DateTime? dateTime=DateTime.now();
 
   AbsenceRepo absenceRepo;
 
@@ -67,7 +68,8 @@ class CheckStudentCubit extends Cubit<CheckStudentState> {
 
   post() async {
     final data =
-        AbsenceModel(groupId: '2', studentIds: isAbsence, date: '2024-6-2');
+        AbsenceModel(groupId: '2', studentIds: isAbsence, date: dateTime.toString());
+    print(data.toJson());
     await absenceRepo.post(data.toJson());
     emit(CheckStudentSend());
   }

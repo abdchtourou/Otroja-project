@@ -10,6 +10,7 @@ import 'package:admins/src/otroja/data/repository/students_rpeos/edit_info_stude
 import 'package:admins/src/otroja/presentation/screens/activity/addActivity/addActivityScreen.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../cubit/absecne_staff/absence_staff_cubit.dart';
 import '../../cubit/activityCubit/add_activity/add_activity_cubit.dart';
 import '../../cubit/students/show_student_cubit/show_students_cubit.dart';
 import '../../data/datasource/api_services.dart';
@@ -40,5 +41,10 @@ Future<void> setUpGetIt()async{
   //check student
   getIt.registerFactory<AbsenceRepo>(()=>AbsenceRepo(apiServices));
   getIt.registerFactory<CheckStudentCubit>(()=>CheckStudentCubit(getIt()));
+
+
+  //check student
+  // getIt.registerFactory<AbsenceRepo>(()=>AbsenceRepo(apiServices));
+  getIt.registerFactory<AbsenceStaffCubit>(()=>AbsenceStaffCubit());
 
 }
