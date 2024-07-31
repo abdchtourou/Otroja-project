@@ -56,19 +56,19 @@ class Course {
 }
 
 class Level {
-  final int id;
+  final int? id;
   final String name;
   final LevelPivot? pivot;
 
   Level({
     required this.name,
-    required this.id,
+    this.id,
     this.pivot,
   });
 
    factory Level.fromJson(Map<String, dynamic> json) {
     return Level(
-      id: json['id'],
+      id: json['id'] != null ? json['id'] : null,
       name: json['name'],
       pivot: json['pivot'] != null ? LevelPivot.fromJson(json['pivot']) : null,
     );

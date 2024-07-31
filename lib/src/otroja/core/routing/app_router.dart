@@ -56,7 +56,7 @@ import '../../presentation/screens/subjectOrGroups/subject_or_group_screen.dart'
 import '../../presentation/screens/tasme3/tasmeaaScreen.dart';
 import '../../presentation/screens/tasme3/widgets/show_students_recit.dart';
 import '../di/dependency_injection.dart';
-import '../../presentation/screens/Courses/ShowCourses/show_courses.dart';
+
 
 class AppRouter {
   ShowStudentsCubit showStudentsCubit =
@@ -69,6 +69,9 @@ class AppRouter {
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.home:
+        return MaterialPageRoute(builder: (_) => HomePage());
+
+      case Routes.addCourses:
         levelCubit.getAllLevels();
         return MaterialPageRoute(
             builder: (_) => MultiBlocProvider(
@@ -81,7 +84,23 @@ class AppRouter {
                       value: levelCubit,
                     ),
                   ],
-                  child: HomePage(),
+                  child: AddCourses(),
+                ));
+
+      case Routes.tasmeaa:
+        standardCubit.getStandards();
+        return MaterialPageRoute(
+            builder: (_) => MultiBlocProvider(
+                  providers: [
+                    BlocProvider(
+                      create: (context) =>
+                          ReciteCubit(ReciteRepository(ApiService())),
+                    ),
+                    BlocProvider.value(
+                      value: standardCubit,
+                    ),
+                  ],
+                  child: TasmeaaScreen(),
                 ));
 
       case Routes.showLevels:
@@ -111,9 +130,7 @@ class AppRouter {
                   ),
                 ));
 
-
-
- case Routes.showCourses:
+      case Routes.showCourses:
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
                   create: (context) =>
@@ -130,6 +147,7 @@ class AppRouter {
                 ));
 
       case Routes.showStudents:
+        showStudentsCubit.getStudents();
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
                   create: (context) => getIt<ShowStudentsCubit>(),
@@ -163,6 +181,7 @@ class AppRouter {
         );
 
       case Routes.addStudentToGroup:
+        showStudentsCubit.getStudents();
         return MaterialPageRoute(
             builder: (_) => BlocProvider.value(
                 value: showStudentsCubit, child: AddStudentToGroupScreen()));
@@ -206,10 +225,6 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => ShowPermissionsScreen());
       case Routes.showSubject:
         return MaterialPageRoute(builder: (_) => ShowSubject());
-
-      case Routes.addCourses:
-        return MaterialPageRoute(builder: (_) => AddCourses());
-
     }
     return null;
   }

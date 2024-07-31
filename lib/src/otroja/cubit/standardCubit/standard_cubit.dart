@@ -9,15 +9,14 @@ part 'standard_state.dart';
 
 class StandardCubit extends Cubit<StandardState> {
   final StandardRepository _repository;
-  StandardCubit(this._repository) : super(StandardInitial()) {
-    getStandards();
-  }
+  StandardCubit(this._repository) : super(StandardInitial());
+  
   Map<int, int> standardsCounts = {};
   List<Standard> standards = [];
   int pageCount = 0;
   List<StandardCount> standardCount = [];
   String date = "";
-  String studentId='';
+  String studentId = '';
 
   void updateDate(String newDate) {
     date = newDate;

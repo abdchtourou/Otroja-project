@@ -7,7 +7,7 @@ import '../../data/repository/subject_repository.dart';
 part 'subject_state.dart';
 
 class SubjectCubit extends Cubit<SubjectState> {
-final SubjectRepository repository;
+  final SubjectRepository repository;
 
   SubjectCubit(this.repository) : super(SubjectInitial());
 
@@ -16,9 +16,12 @@ final SubjectRepository repository;
     try {
       final subjects = await repository.getSubjectsByCourseLevel(id);
       emit(SubjectsLoaded(subjects));
+      print("llllllllllllllllllllllllllllllllll");
+      print(subjects);
     } catch (e) {
+      print('eeeeeeeeeeeeeeeeeeeee');
+      print(e);
       emit(SubjectError(e.toString()));
     }
   }
-
 }

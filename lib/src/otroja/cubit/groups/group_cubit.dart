@@ -16,7 +16,7 @@ class GroupCubit extends Cubit<GroupState> {
   int? selectedCourseLevelId;
   List<int> selectedStudents = [];
 
-  GroupCubit(this.repository) : super(GroupInitial()) {}
+  GroupCubit(this.repository) : super(GroupInitial());
 
   // Future<void> getGroups() async {
   //   emit(GroupLoading());

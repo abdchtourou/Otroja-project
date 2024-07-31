@@ -60,7 +60,11 @@ class CourseRepository {
       final response = await _apiService.get('courses');
       if (response.statusCode == 200) {
         Map<String, dynamic> responseData = response.data;
+          print("hhhhhhhhhhhhhhhh");
+        print(response.data['data']);
         List<dynamic> coursesJson = responseData['data'];
+          print("kkkkkkkkkkkkkkkkkkkkkkkk");
+        print(coursesJson);
         return coursesJson.map((json) => Course.fromJson(json)).toList();
       } else {
         throw Exception('Failed to load courses');

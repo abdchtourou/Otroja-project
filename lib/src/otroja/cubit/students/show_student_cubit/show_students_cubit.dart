@@ -12,7 +12,7 @@ class ShowStudentsCubit extends Cubit<ShowStudentsState> {
   bool isLoadingMore = false;
 
   ShowStudentsCubit(this.showStudentsRepo) : super(ShowStudentsInitial()) {
-    getStudents();
+   
     // getStudentsIslam();
     scrollController.addListener(_onScroll);
   }

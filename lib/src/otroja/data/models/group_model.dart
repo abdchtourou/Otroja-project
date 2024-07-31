@@ -26,6 +26,7 @@ class Group {
     return Group(
       id: json['id'],
       name: json['name'],
+      staffId: json['staff_id'],
       staffName: json['staff_name'],
       courseName: json['course_name'],
       studentsCount: json['student_count'],

@@ -60,7 +60,7 @@ class LevelCubit extends Cubit<LevelState> {
     try {
       emit(LevelLoading());
       final levels = await repository.getAllLevels();
-      this.levels = {for (var level in levels) level.id: false};
+      this.levels = {for (var level in levels) level.id!: false};
       emit(LevelLoaded(levels));
     } catch (e) {
       emit(LevelError(e.toString()));
