@@ -1,5 +1,7 @@
 import 'package:admins/src/otroja/core/di/dependency_injection.dart';
 import 'package:admins/src/otroja/core/routing/app_router.dart';
+import 'package:admins/src/otroja/cubit/absecne_staff/absence_staff_cubit.dart';
+import 'package:admins/src/otroja/presentation/screens/absence/teachersAbsence/checkGroupsScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,11 +41,11 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               fontFamily: 'DIN Next LT Arabic',
             ),
-            onGenerateRoute: appRouter.generateRoute,
-            // home: BlocProvider(
-            //   create: (context) => ActivityCubit(),
-            //   child: AddActivityScreen(),
-            // ),
+            // onGenerateRoute: appRouter.generateRoute,
+            home: BlocProvider(
+              create: (context) => getIt<AbsenceStaffCubit>(),
+              child: CheckGroupsScreen(),
+            ),
           );
         });
   }

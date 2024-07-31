@@ -20,6 +20,7 @@ class ApiService {
       print('////////////////////in get');
 
       final response = await _dio.get(path, queryParameters: queryParameters);
+      print('after response');
       return response;
     } on DioException catch (e) {
       print(e.message);

@@ -4,6 +4,7 @@ import 'package:admins/src/otroja/cubit/students/add_studnet/add_studnet_cubit.d
 import 'package:admins/src/otroja/cubit/students/check_student/check_student_cubit.dart';
 import 'package:admins/src/otroja/cubit/students/edit_info_student_cubit/edit_info_student_cubit.dart';
 import 'package:admins/src/otroja/data/repository/absence/absence_repo.dart';
+import 'package:admins/src/otroja/data/repository/absence/absence_staff_repo.dart';
 import 'package:admins/src/otroja/data/repository/activity_repos/add_activity_repo.dart';
 import 'package:admins/src/otroja/data/repository/activity_repos/show_activity_repo.dart';
 import 'package:admins/src/otroja/data/repository/students_rpeos/edit_info_student_repo.dart';
@@ -44,7 +45,7 @@ Future<void> setUpGetIt()async{
 
 
   //check student
-  // getIt.registerFactory<AbsenceRepo>(()=>AbsenceRepo(apiServices));
-  getIt.registerFactory<AbsenceStaffCubit>(()=>AbsenceStaffCubit());
+  getIt.registerFactory<AbsenceStaffRepo>(()=>AbsenceStaffRepo(apiServices));
+  getIt.registerFactory<AbsenceStaffCubit>(()=>AbsenceStaffCubit(getIt()));
 
 }

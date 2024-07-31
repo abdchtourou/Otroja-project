@@ -1,4 +1,5 @@
 import 'package:admins/src/otroja/core/routing/routes.dart';
+import 'package:admins/src/otroja/cubit/absecne_staff/absence_staff_cubit.dart';
 import 'package:admins/src/otroja/cubit/activityCubit/show_activity/show_activity_cubit.dart';
 import 'package:admins/src/otroja/cubit/parentCubit/parent_cubit.dart';
 import 'package:admins/src/otroja/cubit/recite/recite_cubit.dart';
@@ -56,7 +57,6 @@ import '../../presentation/screens/subjectOrGroups/subject_or_group_screen.dart'
 import '../../presentation/screens/tasme3/tasmeaaScreen.dart';
 import '../../presentation/screens/tasme3/widgets/show_students_recit.dart';
 import '../di/dependency_injection.dart';
-
 
 class AppRouter {
   ShowStudentsCubit showStudentsCubit =
@@ -155,10 +155,17 @@ class AppRouter {
                 ));
 
       case Routes.checkStudents:
-        return MaterialPageRoute(builder: (_) => CheckStudentScreen());
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                create: (context) => getIt<CheckStudentCubit>(),
+                child: CheckStudentScreen()));
 
       case Routes.checkGroups:
-        return MaterialPageRoute(builder: (_) => CheckGroupsScreen());
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+    create: (context) => getIt<AbsenceStaffCubit>(),
+     child: CheckGroupsScreen())
+    );
 
       case Routes.addGroup:
         return MaterialPageRoute(

@@ -76,6 +76,7 @@ class _DatePickerWidgetState extends State<AbsenceDatePicker> {
         GestureDetector(
           onTap: () => _selectDate(context),
           child: Container(
+
             width: widget.containerWidth,
             height: 50,
             padding:
