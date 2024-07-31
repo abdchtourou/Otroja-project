@@ -12,6 +12,11 @@ class LevelLoaded extends LevelState {
 
   LevelLoaded(this.levels);
 }
+class LevelUpdated extends LevelState {
+  final Map<int,bool> levels;
+
+  LevelUpdated(this.levels);
+}
 
 class LevelError extends LevelState {
   final String message;

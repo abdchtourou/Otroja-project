@@ -44,7 +44,7 @@ class ShowLevels extends StatelessWidget {
                           level: levels[index].name,
                           onTap: () {
                             context.pushNamed(Routes.subjectOrGroup,
-                                arguments: levels[index].pivot.id);
+                                arguments: levels[index].pivot!.id);
                           },
                         ));
                   },

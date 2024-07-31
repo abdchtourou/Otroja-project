@@ -12,6 +12,16 @@ class CourseCubit extends Cubit<CourseState> {
     getAllCourses();
   }
 
+  Future<void> createCourse(String startDate,String name, List<int> levelIds) async {
+    try {
+      emit(CourseLoading());
+      await repository.createCourse(startDate,name, levelIds);
+      emit(CourseCreated());
+    } catch (e) {
+      print(e);
+      emit(CourseError(e.toString()));
+    }
+  }
   Future<void> getAllCourses() async {
     try {
       emit(CourseLoading());

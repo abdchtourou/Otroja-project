@@ -1,72 +1,74 @@
+import 'package:admins/src/otroja/cubit/levelCubit/level_cubit.dart';
+import 'package:admins/src/otroja/presentation/widgets/otroja_circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
-class LevelCheckboxWidget extends StatefulWidget {
-  @override
-  _LevelCheckboxWidgetState createState() => _LevelCheckboxWidgetState();
-}
-
-class _LevelCheckboxWidgetState extends State<LevelCheckboxWidget> {
-  List<bool> _selectedLevels = [false, false, false, false];
-
-  void _updateSelection(int index, bool selected) {
-    setState(() {
-      for (int i = 0; i <= index; i++) {
-        _selectedLevels[i] = selected;
-      }
-      for (int i = index + 1; i < _selectedLevels.length; i++) {
-        _selectedLevels[i] = false;
-      }
-    });
-  }
-
+class LevelCheckboxWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        textDirection: TextDirection.rtl,
-        children: [
-          Text(
-            'حدد مستويات الدورة ', // Arabic for "Select Episode Levels"
-            style: TextStyle(
-              fontSize: 18.sp,
-              fontWeight: FontWeight.bold,
-            ),
-            textDirection: TextDirection.rtl,
-          ),
-          ...List.generate(4, (index) {
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.end, // Align to the right
+    return BlocBuilder<LevelCubit, LevelState>(
+      builder: (context, state) {
+        if (state is LevelLoading) {
+          return Center(child: OtrojaCircularProgressIndicator());
+        } else if (state is LevelLoaded || state is LevelUpdated) {
+          Map<int, bool> levels = context.read<LevelCubit>().levels;
+        
+          return Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              textDirection: TextDirection.rtl,
               children: [
                 Text(
-                  'مستوى ${index + 1}', // Arabic for "Level {number}"
+                  'حدد مستويات الدورة ',
                   style: TextStyle(
-                    fontSize: 16.sp,
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.bold,
                   ),
                   textDirection: TextDirection.rtl,
                 ),
-                Transform.scale(
-                  scale: 1.2, // Adjust the scale factor to make it bigger
-                  child: Checkbox(
-                    value: _selectedLevels[index],
-                    onChanged: (bool? value) {
-                      _updateSelection(index, value ?? false);
-                    },
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20), // Circular shape
-                    ),
-                    activeColor: Color(0xFF85313C), // Custom selected color
-                    checkColor: Colors.white,
-                  ),
-                ),
+                ...levels.entries.map((entry) {
+                  int index = entry.key;
+                  bool isChecked = entry.value;
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        'مستوى $index',
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                        ),
+                        textDirection: TextDirection.rtl,
+                      ),
+                      Transform.scale(
+                        scale: 1.2,
+                        child: Checkbox(
+                          value: isChecked,
+                          onChanged: (bool? value) {
+                            context
+                                .read<LevelCubit>()
+                                .updateSelection(index, value ?? false);
+                          },
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          activeColor: Color(0xFF85313C),
+                          checkColor: Colors.white,
+                        ),
+                      ),
+                    ],
+                  );
+                }).toList(),
               ],
-            );
-          }),
-        ],
-      ),
+            ),
+          );
+        } else if (state is LevelError) {
+          return Center(child: Text('Failed to load levels: ${state.message}'));
+        } else {
+          return Container();
+        }
+      },
     );
   }
 }

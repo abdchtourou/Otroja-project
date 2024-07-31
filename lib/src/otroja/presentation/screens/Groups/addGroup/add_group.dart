@@ -124,7 +124,7 @@ class AddGroup extends StatelessWidget {
                                         "${course.name} - ${level.name}";
                                     courseLevelList.add(courseLevelName);
                                     courseLevelMap[courseLevelName] =
-                                        level.pivot.id;
+                                        level.pivot!.id;
                                   });
                                 });
                               }

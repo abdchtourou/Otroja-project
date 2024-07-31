@@ -2,7 +2,7 @@ import 'package:admins/src/otroja/cubit/recite/recite_cubit.dart';
 import 'package:admins/src/otroja/cubit/standardCubit/standard_cubit.dart';
 import 'package:admins/src/otroja/presentation/screens/tasme3/widgets/standard_item.dart';
 import 'package:admins/src/otroja/presentation/widgets/buttons/otroja_button.dart';
-import 'package:admins/src/otroja/presentation/widgets/karamDatePicker.dart';
+import 'package:admins/src/otroja/presentation/widgets/OtrojaDatePicker.dart';
 import 'package:admins/src/otroja/presentation/widgets/otroja_app_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +37,7 @@ class TasmeaaScreen extends StatelessWidget {
           SizedBox(
             height: 15.h,
           ),
-          DatePickerWidget(
+          OtrojaDatePickerWidget(
             hintText: "حدد التاريخ",
             labelText: 'اختر تاريخ',
             containerColor: Color(0xffffffff),
@@ -46,6 +46,11 @@ class TasmeaaScreen extends StatelessWidget {
             borderColor: Color(0xffE6E6E6),
             imagePath: 'assets/icons/calendar.png',
             textDirection: TextDirection.rtl,
+            onDateSelected: (DateTime picked) {
+              String formattedDate =
+                  "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
+              context.read<StandardCubit>().updateDate(formattedDate);
+            },
           ),
           SizedBox(
             height: 15.h,
@@ -92,8 +97,7 @@ class TasmeaaScreen extends StatelessWidget {
                     itemCount: context.read<StandardCubit>().standards.length,
                   );
                 } else if (state is StandardLoading) {
-                  return const Center(
-                      child:OtrojaCircularProgressIndicator());
+                  return const Center(child: OtrojaCircularProgressIndicator());
                 } else {
                   return const Center(child: Text("Error loading standards"));
                 }

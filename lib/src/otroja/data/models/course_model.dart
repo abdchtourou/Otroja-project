@@ -6,20 +6,19 @@ class Course {
   final DateTime updatedAt;
   final List<Level> levels;
 
-  Course({
-    required this.id,
-    required this.name,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.levels,
-    required this.startDate
-  });
+  Course(
+      {required this.id,
+      required this.name,
+      required this.createdAt,
+      required this.updatedAt,
+      required this.levels,
+      required this.startDate});
 
- String get highestLevelOrGeneral {
+  String get highestLevelOrGeneral {
     if (levels.any((level) => level.name == "عام")) {
       return "عام";
     }
-    
+
     int highestLevel = 0;
     for (var level in levels) {
       int? levelNumber = int.tryParse(level.name);
@@ -27,9 +26,10 @@ class Course {
         highestLevel = levelNumber;
       }
     }
-    
+
     return highestLevel > 0 ? highestLevel.toString() : levels.first.name;
   }
+
   factory Course.fromJson(Map<String, dynamic> json) {
     return Course(
       id: json['id'],
@@ -56,29 +56,30 @@ class Course {
 }
 
 class Level {
+  final int id;
   final String name;
-  final LevelPivot pivot;
+  final LevelPivot? pivot;
 
   Level({
     required this.name,
-    required this.pivot,
+    required this.id,
+    this.pivot,
   });
 
-  factory Level.fromJson(Map<String, dynamic> json) {
+   factory Level.fromJson(Map<String, dynamic> json) {
     return Level(
+      id: json['id'],
       name: json['name'],
-      pivot: LevelPivot.fromJson(json['pivot']),
+      pivot: json['pivot'] != null ? LevelPivot.fromJson(json['pivot']) : null,
     );
   }
-
   Map<String, dynamic> toJson() {
     return {
       'name': name,
-      'pivot': pivot.toJson(),
+      'pivot': pivot?.toJson(),
     };
   }
 }
-
 class LevelPivot {
   final int courseId;
   final int levelId;

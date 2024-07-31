@@ -8,6 +8,25 @@ class CourseRepository {
   final ApiService _apiService;
 
   CourseRepository(this._apiService);
+  Future<int> createCourse(String startDate,String name, List<int> levelIds) async {
+    try {
+      final response = await _apiService.post('course/create', data: {
+        'name': name,
+        'level_ids': levelIds,
+        'start_date':startDate,
+      });
+
+      if (response.statusCode == 201) {
+       
+        return response.data['status'];
+      } else {
+        throw Exception('Failed to create course');
+      }
+    } catch (e) {
+      print(e);
+      throw Exception('Failed to create course: $e');
+    }
+  }
 
   // Future<List<Course>> getAllCourses() async {
   //   try {

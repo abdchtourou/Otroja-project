@@ -63,17 +63,29 @@ class AppRouter {
   StandardCubit standardCubit = StandardCubit(StandardRepository(ApiService()));
   GroupCubit groupCubit = GroupCubit(GroupRepository(ApiService()));
   SubjectCubit subjectCubit = SubjectCubit(SubjectRepository(ApiService()));
+  LevelCubit levelCubit = LevelCubit(LevelRepository(ApiService()));
+
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.home:
+        levelCubit.getAllLevels();
         return MaterialPageRoute(
-            builder: (_) => BlocProvider(
-                  create: (context) =>
-                      CourseCubit(CourseRepository(ApiService())),
-                  child: ShowCourses(),
+            builder: (_) => MultiBlocProvider(
+                  providers: [
+                    BlocProvider(
+                      create: (context) =>
+                          CourseCubit(CourseRepository(ApiService())),
+                    ),
+                    BlocProvider.value(
+                      value: levelCubit,
+                    ),
+                  ],
+                  child: AddCourses(),
                 ));
+
       case Routes.showLevels:
         final List<Level> levels = settings.arguments as List<Level>;
+
         return MaterialPageRoute(
             builder: (_) => ShowLevels(
                   levels: levels,

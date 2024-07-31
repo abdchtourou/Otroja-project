@@ -40,55 +40,52 @@ class OtrojaTextFormField extends StatelessWidget {
             ),
           ),
         ),
-        TextFormField(
-          controller: controller,
-          obscureText: obscureText,
-          style: const TextStyle(color: Colors.black),
-          validator: (value) {
-            if (value!.isEmpty) {
-              return 'field is required';
-            }
-          },
-          keyboardType: type,
-          onChanged: onChange,
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: Colors.white,
-            hintText: hintText,
-            hintStyle: const TextStyle(color: Color(0xFFC2C0C0)),
-            prefixIcon: isRtl && suffixIcon != null
-                ? Image.asset(
-                    suffixIcon!,
-                  )
-                : !isRtl && prefixIcon != null
-                    ? Image.asset(
+        Directionality(
+          textDirection: isRtl ? TextDirection.rtl : TextDirection.ltr,
+          child: TextFormField(
+            controller: controller,
+            obscureText: obscureText,
+            style: const TextStyle(color: Colors.black),
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'field is required';
+              }
+            },
+            keyboardType: type,
+            onChanged: onChange,
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: Colors.white,
+              hintText: hintText,
+              hintStyle: const TextStyle(color: Color(0xFFC2C0C0)),
+              prefixIcon: prefixIcon != null
+                  ? Padding(
+                    padding: const EdgeInsets.only(right: 10.0),
+                    child: Image.asset(
                         prefixIcon!,
                         scale: 15,
-                      )
-                    : null,
-            suffixIcon: isRtl && prefixIcon != null
-                ? Image.asset(
-                    prefixIcon!,
-                    scale: 15,
+                      ),
                   )
-                : !isRtl && suffixIcon != null
-                    ? Image.asset(
-                        suffixIcon!,
-                        scale: 15,
-                      )
-                    : null,
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Color(0xFFE6E6E6), width: 2.w),
-              borderRadius: BorderRadius.all(Radius.circular(18)),
+                  : null,
+              suffixIcon: suffixIcon != null
+                  ? Image.asset(
+                      suffixIcon!,
+                      scale: 15,
+                    )
+                  : null,
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Color(0xFFE6E6E6), width: 2.w),
+                borderRadius: BorderRadius.all(Radius.circular(18)),
+              ),
+              border: const OutlineInputBorder(
+                borderSide: BorderSide(color: Color(0xFFE6E6E6)),
+              ),
+              contentPadding: isRtl
+                  ? const EdgeInsets.only(right: 16.0)
+                  : const EdgeInsets.only(left: 16.0),
             ),
-            border: const OutlineInputBorder(
-              borderSide: BorderSide(color: Color(0xFFE6E6E6)),
-            ),
-            contentPadding: isRtl
-                ? const EdgeInsets.only(right: 16.0)
-                : const EdgeInsets.only(left: 16.0),
+            textAlign: isRtl ? TextAlign.right : TextAlign.left,
           ),
-          textAlign: isRtl ? TextAlign.right : TextAlign.left,
         ),
       ],
     );
