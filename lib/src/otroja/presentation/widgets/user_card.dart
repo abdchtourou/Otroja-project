@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 
 class UserCard extends StatelessWidget {
-final String name;
+  final String name;
   final String imagePath;
   final String iconPath;
-  final VoidCallback onPressed;
+  final VoidCallback? onItemPressed;
+  final VoidCallback? onIconPressed;
 
   const UserCard({
     Key? key,
     required this.name,
     required this.imagePath,
     required this.iconPath,
-    required this.onPressed,
+    required this.onItemPressed,
+     this.onIconPressed,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ final String name;
         ),
       ),
       child: InkWell(
-        onTap:onPressed,
+        onTap: onItemPressed,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
@@ -32,7 +34,7 @@ final String name;
               Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: IconButton(
-                 onPressed: (){},
+                  onPressed: onIconPressed,
                   icon: Image.asset(iconPath, scale: 15),
                 ),
               ),
@@ -56,7 +58,8 @@ final String name;
                   imagePath,
                   width: 60, // Specify the desired width
                   height: 60, // Specify the desired height
-                  fit: BoxFit.cover, // Ensure the image covers the area without stretching
+                  fit: BoxFit
+                      .cover, // Ensure the image covers the area without stretching
                 ),
               ),
             ],

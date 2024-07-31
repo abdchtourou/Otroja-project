@@ -103,6 +103,7 @@ class ShowStudentsCubit extends Cubit<ShowStudentsState> {
     }
   }
 
+
   void toggleSelection(int id) {
     if (selectedStudents.contains(id)) {
       selectedStudents.remove(id);
@@ -119,6 +120,7 @@ class ShowStudentsCubit extends Cubit<ShowStudentsState> {
       final success =
           await showStudentsRepo.removeStudentFromGroup(studentId, groupId);
       if (success) {
+        emit(StudentRemoved());
         getStudentsByGroupId(groupId);
       } else {
         emit(ShowStudentsError());

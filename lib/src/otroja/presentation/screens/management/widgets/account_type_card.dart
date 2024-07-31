@@ -3,15 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class PermissionCard extends StatelessWidget {
+class AccountTypeCard extends StatelessWidget {
   final String title;
-  final String numberOfAuthorizedAdmins;
   final VoidCallback onPressed;
 
-  const PermissionCard({
+  const AccountTypeCard({
     Key? key,
     required this.title,
-    required this.numberOfAuthorizedAdmins,
     required this.onPressed,
   }) : super(key: key);
   @override
@@ -21,7 +19,7 @@ class PermissionCard extends StatelessWidget {
       child: InkWell(
         onTap: onPressed,
         child: Container(
-          height: 30.h,
+          height: 50.h,
           decoration: BoxDecoration(
             color: Color(0xffEEEAE4),
             border: Border.all(
@@ -36,37 +34,18 @@ class PermissionCard extends StatelessWidget {
             children: [
               IconButton(
                 onPressed: onPressed,
-                icon: Image.asset("assets/icons/return.png",
+                icon: Image.asset(
+                  "assets/icons/return.png",
+                  scale: 20,
                 ),
               ),
-              Expanded(
+              Spacer(flex: 1,),
+              Padding(
+                padding: const EdgeInsets.only(right:  8.0),
                 child: Text(
                   "$title ",
                   textAlign: TextAlign.center,
                   style: const TextStyle(color: Colors.black, fontSize: 20),
-                ),
-              ),
-              const SizedBox(width: 10),
-              Container(
-                width: 50.w,
-                 height: 50.h,
-                color: Color(0xFF85313C),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Image.asset(
-                      "assets/icons/person.png",
-                      color: Colors.white,
-                      scale: 3, // Specify the desired height
-                      fit: BoxFit
-                          .cover, // Ensure the image covers the area without stretching
-                    ),
-                    Text(
-                      numberOfAuthorizedAdmins,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ],
                 ),
               ),
             ],

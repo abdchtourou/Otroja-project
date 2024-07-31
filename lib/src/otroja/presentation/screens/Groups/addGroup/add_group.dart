@@ -27,6 +27,7 @@ class AddGroup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 249, 245, 239),
       appBar: OtrojaAppBar(
         mainText: "إنشاء حلقة",
         secText: "املأ الحقول الموجودة في الأسفل ثم اضغط على زر إنشاء حلقة",

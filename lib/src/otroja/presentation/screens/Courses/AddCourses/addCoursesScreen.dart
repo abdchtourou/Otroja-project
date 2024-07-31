@@ -1,6 +1,6 @@
 import 'package:admins/src/otroja/cubit/course/course_cubit.dart';
 import 'package:admins/src/otroja/cubit/levelCubit/level_cubit.dart';
-import 'package:admins/src/otroja/presentation/Courses/AddCourses/widgets/courseLevelWidget.dart';
+import 'package:admins/src/otroja/presentation/screens/Courses/AddCourses/widgets/courseLevelWidget.dart';
 import 'package:admins/src/otroja/presentation/screens/absence/teachersAbsence/widgets/absence_date_picker.dart';
 import 'package:admins/src/otroja/presentation/widgets/otroja_app_bar.dart';
 import 'package:admins/src/otroja/presentation/widgets/otroja_button.dart';
@@ -10,8 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../widgets/OtrojaDatePicker.dart';
-import '../../widgets/otroja_seccuss_dialog.dart';
+import '../../../widgets/OtrojaDatePicker.dart';
+import '../../../widgets/otroja_seccuss_dialog.dart';
 
 class AddCourses extends StatelessWidget {
   AddCourses({super.key});
@@ -75,45 +75,43 @@ class AddCourses extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-              padding: EdgeInsets.all(16.0),
-              child: BlocConsumer<CourseCubit, CourseState>(
-                  listener: (context, state) {
-                if (state is CourseCreated) {
-                  showDialog(
-                    context: context,
-                    builder: (context) => OtrojaSuccessDialog(
-                      text: "!تم إضافة الدورة بنجاح",
-                    ),
-                  ).then((_) {
-                    formKey.currentState?.reset();
-                    context.read<LevelCubit>().resetState();
-            
-                  });
-                }
-              }, builder: (context, state) {
-                final levelCubit = context.read<LevelCubit>();
-
-                return OtrojaButton(
-                  onPressed: () async {
-                 
-                      if (levelCubit.startDate == '' ||!levelCubit.isAnyLevelSelected()|| levelCubit.name == '') {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('الرجاءادخال اسم و تحديد تاريخ البداية و تحديد مستوى واحد على الأقل' )),
-                        );
-                        return;
-                      }
-                      levelCubit.getSelectedLevelIds();
-                      print("tap");
-                      context.read<CourseCubit>().createCourse(
-                          levelCubit.startDate,
-                          levelCubit.name,
-                          levelCubit.levelsint);
-                    
-                  },
-                  text: 'إنشاء حلقة',
-                );
-              })),
+          BlocConsumer<CourseCubit, CourseState>(
+              listener: (context, state) {
+            if (state is CourseCreated) {
+              showDialog(
+                context: context,
+                builder: (context) => OtrojaSuccessDialog(
+                  text: "!تم إضافة الدورة بنجاح",
+                ),
+              ).then((_) {
+                formKey.currentState?.reset();
+                context.read<LevelCubit>().resetState();
+                      
+              });
+            }
+          }, builder: (context, state) {
+            final levelCubit = context.read<LevelCubit>();
+          
+            return OtrojaButton(
+              onPressed: () async {
+             
+                  if (levelCubit.startDate == '' ||!levelCubit.isAnyLevelSelected()|| levelCubit.name == '') {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('الرجاءادخال اسم و تحديد تاريخ البداية و تحديد مستوى واحد على الأقل' )),
+                    );
+                    return;
+                  }
+                  levelCubit.getSelectedLevelIds();
+                  print("tap");
+                  context.read<CourseCubit>().createCourse(
+                      levelCubit.startDate,
+                      levelCubit.name,
+                      levelCubit.levelsint);
+                
+              },
+              text: 'إنشاء حلقة',
+            );
+          }),
         ],
       ),
     );

@@ -15,7 +15,7 @@ class GroupStudentsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<ShowStudentsCubit>().getStudentsByGroupId(groupId);
+   
 
     return Scaffold(
       appBar: OtrojaAppBar(

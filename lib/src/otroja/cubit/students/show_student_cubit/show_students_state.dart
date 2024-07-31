@@ -10,6 +10,8 @@ final class ShowStudentsLoading extends ShowStudentsState {}
 final class ShowStudentsError extends ShowStudentsState {
 }
 
+final class StudentRemoved extends ShowStudentsState {
+}
 final class ShowStudentsLoaded extends ShowStudentsState {
   final List<ShowStudentModel> students;
   bool isLoadingMore;

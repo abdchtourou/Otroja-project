@@ -7,25 +7,19 @@ import 'package:admins/src/otroja/presentation/widgets/otroja_search_bar.dart';
 import 'package:admins/src/otroja/presentation/widgets/user_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../data/models/permission_model.dart';
 import '../../../widgets/buttons/otroja_button.dart';
 
 class ShowAuthorizedAdminsScreen extends StatelessWidget {
-  const ShowAuthorizedAdminsScreen({super.key});
+  Permission permission;
+  ShowAuthorizedAdminsScreen({super.key, required this.permission});
 
   @override
   Widget build(BuildContext context) {
-    List<String> students = [
-      "islam",
-      "Abd",
-      "islam",
-
-    ];
     return Scaffold(
       appBar: OtrojaAppBar(
-        mainText: "صلاحية إنشاء حساب طالب",
-        secText:
-            "بإمكان الشخص المعطى هذه الصلاحية بإنشاء حسابات للطلاب وتعديلها",
-      //  optionalWidget:EditeDescripton(onTap: (){}) ,
+        mainText: permission.name,
+        //  optionalWidget:EditeDescripton(onTap: (){}) ,
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -36,18 +30,22 @@ class ShowAuthorizedAdminsScreen extends StatelessWidget {
             SizedBox(height: 20.h),
             Expanded(
               child: ListView.builder(
-                itemCount: students.length,
+                itemCount: permission.staffs.length,
                 itemBuilder: (context, index) {
                   return UserCard(
-                    name: students[index],
+                    name:
+                        "${permission.staffs[index].firstName} ${permission.staffs[index].lastName}",
                     imagePath: "assets/images/kidsNew.png",
                     iconPath: "assets/icons/cancel.png",
-                    onPressed: () {},
+                    onItemPressed: () {},
                   );
                 },
               ),
             ),
-            OtrojaButton(onPressed: (){},text: "إضافة مسؤول",)
+            OtrojaButton(
+              onPressed: () {},
+              text: "إضافة مسؤول",
+            )
           ],
         ),
       ),

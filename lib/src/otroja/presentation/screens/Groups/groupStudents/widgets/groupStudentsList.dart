@@ -25,7 +25,8 @@ class GroupStudentsList extends StatelessWidget {
           name: "${student.firstName} ${student.lastName}",
           imagePath: "assets/images/kidsNew.png",
           iconPath: "assets/icons/cancel.png",
-          onPressed: () async {
+          onItemPressed: (){},
+          onIconPressed: () async {
             final shouldRemove =
                 await RemoveStudentDialog.show(context, student);
             if (shouldRemove) {

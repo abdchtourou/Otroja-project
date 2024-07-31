@@ -1,22 +1,23 @@
 import 'package:admins/src/otroja/core/routing/routes.dart';
 import 'package:admins/src/otroja/cubit/activityCubit/show_activity/show_activity_cubit.dart';
+import 'package:admins/src/otroja/cubit/add_staff/add_staff_cubit.dart';
 import 'package:admins/src/otroja/cubit/parentCubit/parent_cubit.dart';
+import 'package:admins/src/otroja/cubit/permissionCubit/permission_cubit.dart';
 import 'package:admins/src/otroja/cubit/recite/recite_cubit.dart';
 import 'package:admins/src/otroja/cubit/students/check_student/check_student_cubit.dart';
 import 'package:admins/src/otroja/cubit/students/edit_info_student_cubit/edit_info_student_cubit.dart';
 import 'package:admins/src/otroja/cubit/subjectCubit/subject_cubit.dart';
 import 'package:admins/src/otroja/data/models/course_model.dart';
-import 'package:admins/src/otroja/data/models/group_model.dart';
+import 'package:admins/src/otroja/data/models/permission_model.dart';
 import 'package:admins/src/otroja/data/models/student_model/show_students.dart';
-import 'package:admins/src/otroja/data/models/subject_model.dart';
 import 'package:admins/src/otroja/data/repository/level_repository.dart';
 import 'package:admins/src/otroja/data/repository/parent_repository.dart';
+import 'package:admins/src/otroja/data/repository/permission_repository.dart';
 import 'package:admins/src/otroja/data/repository/recite_repository.dart';
 import 'package:admins/src/otroja/data/repository/standard_repository.dart';
 import 'package:admins/src/otroja/data/repository/students_rpeos/show_students_repo.dart';
 import 'package:admins/src/otroja/data/repository/subject_repository.dart';
-import 'package:admins/src/otroja/presentation/Courses/AddCourses/addCoursesScreen.dart';
-import 'package:admins/src/otroja/presentation/Courses/ShowCourses/showCoursesScreen.dart';
+import 'package:admins/src/otroja/presentation/screens/Courses/AddCourses/addCoursesScreen.dart';
 import 'package:admins/src/otroja/presentation/screens/Home/homePage.dart';
 import 'package:admins/src/otroja/presentation/screens/activity/addActivity/addActivityScreen.dart';
 import 'package:admins/src/otroja/presentation/screens/activity/showActivities/activityScreen.dart';
@@ -32,14 +33,15 @@ import '../../cubit/groups/group_cubit.dart';
 import '../../cubit/levelCubit/level_cubit.dart';
 import '../../cubit/staff/staff_cubit.dart';
 import '../../cubit/standardCubit/standard_cubit.dart';
+import '../../cubit/students/add_studnet/add_studnet_cubit.dart';
 import '../../cubit/students/show_student_cubit/show_students_cubit.dart';
 import '../../data/datasource/api_services.dart';
 import '../../data/repository/course_repository.dart';
 import '../../data/repository/group_repository.dart';
 import '../../data/repository/staff_repository.dart';
+import '../../presentation/screens/management/management_screen.dart';
 import '../../presentation/screens/Courses/ShowCourses/show_courses.dart';
 import '../../presentation/screens/Groups/ShowGroups/GroupsScreen.dart';
-import '../../presentation/screens/Groups/ShowGroups/groups_tap.dart';
 import '../../presentation/screens/Groups/addGroup/add_group.dart';
 import '../../presentation/screens/Groups/addStudentToGroup/add_student_to_group_screen.dart';
 import '../../presentation/screens/Groups/groupStudents/group_students_screen.dart';
@@ -49,9 +51,9 @@ import '../../presentation/screens/absence/teachersAbsence/checkGroupsScreen.dar
 import '../../presentation/screens/parents/addParents/add_parents.dart';
 import '../../presentation/screens/permissions/ShowAuthorizedAdmins/show_authorized_admins.dart';
 import '../../presentation/screens/permissions/ShowPermissions/show_permissions_screen.dart';
+import '../../presentation/screens/staff/add_staff.dart';
+import '../../presentation/screens/student/add_student.dart';
 import '../../presentation/screens/student/show_students.dart';
-import '../../presentation/screens/subject/subject_classification/subject_classifications.dart';
-import '../../presentation/screens/subject/subjuctTap/subject_tap.dart';
 import '../../presentation/screens/subjectOrGroups/subject_or_group_screen.dart';
 import '../../presentation/screens/tasme3/tasmeaaScreen.dart';
 import '../../presentation/screens/tasme3/widgets/show_students_recit.dart';
@@ -64,6 +66,8 @@ class AppRouter {
   GroupCubit groupCubit = GroupCubit(GroupRepository(ApiService()));
   SubjectCubit subjectCubit = SubjectCubit(SubjectRepository(ApiService()));
   LevelCubit levelCubit = LevelCubit(LevelRepository(ApiService()));
+  PermissionCubit permissionCubit =
+      PermissionCubit(PermissionRepository(ApiService()));
 
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -205,9 +209,14 @@ class AppRouter {
                 value: showStudentsCubit, child: AddStudentToGroupScreen()));
 
       case Routes.groupStudents:
+        final groupId = settings.arguments as int;
         return MaterialPageRoute(
-            builder: (_) => GroupStudentsScreen(
-                  groupId: 1,
+            builder: (_) => BlocProvider(
+                  create: (context) =>
+                      getIt<ShowStudentsCubit>()..getStudentsByGroupId(groupId),
+                  child: GroupStudentsScreen(
+                    groupId: groupId,
+                  ),
                 ));
 
       case Routes.groups:
@@ -243,12 +252,37 @@ class AppRouter {
                 ));
 
       case Routes.showAuthorizedAdmins:
-        return MaterialPageRoute(builder: (_) => ShowAuthorizedAdminsScreen());
+        final permission = settings.arguments as Permission;
+        return MaterialPageRoute(
+            builder: (_) => ShowAuthorizedAdminsScreen(
+                  permission: permission,
+                ));
 
       case Routes.showPermissions:
-        return MaterialPageRoute(builder: (_) => ShowPermissionsScreen());
+        permissionCubit.getPermissions();
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider.value(
+                  value: permissionCubit,
+                  child: ShowPermissionsScreen(),
+                ));
+
+      case Routes.addStudent:
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) => getIt<AddStudentCubit>(),
+                  child: AddStudent(),
+                ));
+                 case Routes.addStaff:
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) => getIt<AddStaffCubit>(),
+                  child: AddStaff(),
+                ));
       case Routes.showSubject:
         return MaterialPageRoute(builder: (_) => ShowSubject());
+
+      case Routes.managemet:
+        return MaterialPageRoute(builder: (_) => ManagemetScreen());
     }
     return null;
   }

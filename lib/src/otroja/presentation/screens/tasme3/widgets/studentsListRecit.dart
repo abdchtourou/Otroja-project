@@ -27,7 +27,7 @@ class StudentsListRecit extends StatelessWidget {
             name: "${student.firstName} ${student.lastName}",
             imagePath: "assets/images/kidsNew.png",
             iconPath: "assets/icons/return.png",
-            onPressed: () {
+            onItemPressed: () {
               context.read<StandardCubit>().studentId = student.id!;
               context.pushNamed(Routes.tasmeaa);
             });

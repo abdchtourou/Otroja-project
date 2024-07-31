@@ -97,7 +97,7 @@ class HomePage extends StatelessWidget {
                   top: 225.h,
                   child: HomePageButton(
                     onPressed: () {
-                      context.pushNamed(Routes.activity);
+                      
                     },
                     width: 100.w,
                     height: 90.h,
@@ -119,7 +119,10 @@ class HomePage extends StatelessWidget {
                   child: HomePageButton(
                     width: 100.w,
                     height: 90.h,
-                    text: 'الطلاب',
+                    text: 'إدارة',
+                    onPressed: () {
+                      context.pushNamed(Routes.managemet);
+                    },
                   ),
                 ),
                 Positioned(
@@ -161,6 +164,9 @@ class HomePage extends StatelessWidget {
                   left: 50.w,
                   top: 210.h,
                   child: HomePageButton(
+                    onPressed: () {
+                      
+                    },
                     width: 80.w,
                     height: 75.h,
                     text: 'الصلاحيات',

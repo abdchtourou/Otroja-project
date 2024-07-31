@@ -4,7 +4,6 @@ import 'package:admins/src/otroja/presentation/widgets/user_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 class StudentsListWidget extends StatelessWidget {
   const StudentsListWidget({
     super.key,
@@ -27,9 +26,9 @@ class StudentsListWidget extends StatelessWidget {
         return UserCard(
           name: "${student.firstName} ${student.lastName}",
           imagePath: "assets/images/kidsNew.png",
-          iconPath: isSelected ? "assets/icons/minus.png" 
-          : "assets/icons/add.png",
-          onPressed: () {
+          iconPath:
+              isSelected ? "assets/icons/minus.png" : "assets/icons/add.png",
+          onItemPressed: () {
             context.read<ShowStudentsCubit>().toggleSelection(student.id!);
           },
         );
