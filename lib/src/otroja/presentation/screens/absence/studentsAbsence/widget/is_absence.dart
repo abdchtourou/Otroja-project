@@ -13,8 +13,8 @@ class IsAbsence extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: 35.w,
-        height: 35.h,
+        width: 40.w,
+        height: 40.h,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           border: Border.all(

@@ -16,10 +16,7 @@ class SubjectCubit extends Cubit<SubjectState> {
     try {
       final subjects = await repository.getSubjectsByCourseLevel(id);
       emit(SubjectsLoaded(subjects));
-      print("llllllllllllllllllllllllllllllllll");
-      print(subjects);
     } catch (e) {
-      print('eeeeeeeeeeeeeeeeeeeee');
       print(e);
       emit(SubjectError(e.toString()));
     }

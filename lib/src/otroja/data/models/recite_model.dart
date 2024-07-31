@@ -1,7 +1,8 @@
 class Recite  {
   final String date;
-  final String studentId;
+  final int studentId;
   final String reciteTypeId;
+  final int pageCount;
   final List<StandardCount> standardCounts;
 
   const Recite({
@@ -9,11 +10,13 @@ class Recite  {
     required this.studentId,
     required this.reciteTypeId,
     required this.standardCounts,
+    required this.pageCount,
   });
 
   factory Recite.fromJson(Map<String, dynamic> json) {
     return Recite(
       date: json['date'],
+      pageCount: json['page_number'],
       studentId: json['student_id'],
       reciteTypeId: json['recite_type_id'],
       standardCounts: (json['standard_ids'] as List)
@@ -27,6 +30,7 @@ class Recite  {
       'date': date,
       'student_id': studentId,
       'recite_type_id': reciteTypeId,
+      'page_number' : pageCount,
       'standard_ids': standardCounts.map((sc) => sc.toJson()).toList(),
     };
   }

@@ -29,7 +29,7 @@ class OtrojaDropdown extends StatelessWidget {
       children: [
         if (labelText != null)
           Padding(
-            padding: const EdgeInsets.only(bottom: 15),
+            padding: const EdgeInsets.only(bottom: 15,right: 15),
             child: Text(
               labelText!,
               style: const TextStyle(

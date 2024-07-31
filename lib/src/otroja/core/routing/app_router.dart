@@ -57,7 +57,6 @@ import '../../presentation/screens/tasme3/tasmeaaScreen.dart';
 import '../../presentation/screens/tasme3/widgets/show_students_recit.dart';
 import '../di/dependency_injection.dart';
 
-
 class AppRouter {
   ShowStudentsCubit showStudentsCubit =
       ShowStudentsCubit(ShowStudentsRepo(ApiService()));
@@ -85,6 +84,21 @@ class AppRouter {
                     ),
                   ],
                   child: AddCourses(),
+                ));
+
+      case Routes.showStudentsRecite:
+        showStudentsCubit.getStudents();
+        return MaterialPageRoute(
+            builder: (_) => MultiBlocProvider(
+                  providers: [
+                    BlocProvider.value(
+                      value: showStudentsCubit,
+                    ),
+                    BlocProvider.value(
+                      value: standardCubit,
+                    ),
+                  ],
+                  child: ShowStudentsRecite(),
                 ));
 
       case Routes.tasmeaa:
@@ -155,7 +169,11 @@ class AppRouter {
                 ));
 
       case Routes.checkStudents:
-        return MaterialPageRoute(builder: (_) => CheckStudentScreen());
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) => getIt<CheckStudentCubit>(),
+                  child: CheckStudentScreen(),
+                ));
 
       case Routes.checkGroups:
         return MaterialPageRoute(builder: (_) => CheckGroupsScreen());
@@ -200,6 +218,12 @@ class AppRouter {
             builder: (_) => BlocProvider(
                 create: (context) => getIt<AddActivityCubit>(),
                 child: AddActivityScreen()));
+
+      case Routes.activity:
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                create: (context) => getIt<ShowActivityCubit>(),
+                child: ActivityScreen()));
 
       case Routes.studentDetails:
         final ShowStudentModel? showStudentModel =

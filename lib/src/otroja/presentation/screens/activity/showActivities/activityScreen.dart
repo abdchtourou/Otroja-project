@@ -1,3 +1,4 @@
+import 'package:admins/src/otroja/core/helper/extensions.dart';
 import 'package:admins/src/otroja/cubit/activityCubit/show_activity/show_activity_cubit.dart';
 import 'package:admins/src/otroja/presentation/widgets/buttons/add_app_bar.dart';
 import 'package:admins/src/otroja/presentation/widgets/otroja_app_bar.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/routing/routes.dart';
 import '../../../widgets/otroja_circular_progress_indicator.dart';
 import 'widgets/activity_item.dart';
 
@@ -23,7 +25,9 @@ class ActivityScreen extends StatelessWidget {
           secText:
               'ابحث عن أي نشاط أو اضغط على زر الإضافة يمينا \n  لإضافة نشاط ',
           optionalWidget: AddAppBar(
-            onTap: () {},
+            onTap: () {
+               context.pushNamed(Routes.addActivity);
+            },
           )),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

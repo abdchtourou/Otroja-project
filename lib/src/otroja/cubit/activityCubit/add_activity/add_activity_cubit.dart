@@ -7,13 +7,13 @@ import 'package:flutter/material.dart';
 part 'add_activity_state.dart';
 
 class AddActivityCubit extends Cubit<AddActivityState> {
-  AddActivityCubit(this.addActivityRepo) : super(ActivityInitial()){
-    nameController=TextEditingController();
-    descriptionController=TextEditingController();
+  AddActivityCubit(this.addActivityRepo) : super(ActivityInitial()) {
+    nameController = TextEditingController();
+    descriptionController = TextEditingController();
   }
   AddActivityRepo addActivityRepo;
- late TextEditingController nameController;
- late TextEditingController descriptionController;
+  late TextEditingController nameController;
+  late TextEditingController descriptionController;
   int otrojaCount = 1;
 
   updateOtroja(bool increment) {
@@ -26,14 +26,23 @@ class AddActivityCubit extends Cubit<AddActivityState> {
       emit(UpdateOtrojaState());
     }
   }
- Future<void> addActivity()async{
+
+  resetState() {
+    nameController.text = '';
+    descriptionController.text = '';
+  }
+
+  Future<void> addActivity() async {
     emit(AddActivityLoading());
-    final dataActivity =AddActivityModel(name: nameController.text, description: descriptionController.text, points: otrojaCount);
-    try{
+    final dataActivity = AddActivityModel(
+        name: nameController.text,
+        description: descriptionController.text,
+        points: otrojaCount);
+    try {
       final response = await addActivityRepo.addActivity(dataActivity.toJson());
       emit(AddActivityLoaded());
       print('//////////////////////////////////////');
-    }catch(e){
+    } catch (e) {
       print(e);
     }
   }

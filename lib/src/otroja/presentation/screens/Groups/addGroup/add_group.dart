@@ -22,7 +22,6 @@ import '../../../widgets/otroja_seccuss_dialog.dart';
 class AddGroup extends StatelessWidget {
   AddGroup({Key? key}) : super(key: key);
 
-  static String id = 'AddGroupScreen';
   static final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override

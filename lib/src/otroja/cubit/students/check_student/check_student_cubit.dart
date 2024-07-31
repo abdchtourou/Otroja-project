@@ -14,7 +14,7 @@ class CheckStudentCubit extends Cubit<CheckStudentState> {
   CheckStudentCubit(this.absenceRepo) : super(CheckStudentInitial()) {
     getGroups();
   }
-  DateTime? dateTime=DateTime.now();
+  String? dateTime;
 
   AbsenceRepo absenceRepo;
 
@@ -24,10 +24,27 @@ class CheckStudentCubit extends Cubit<CheckStudentState> {
   int? idGroup;
 
   Future<void> getGroups() async {
+
     await absenceRepo.getGroups();
-    idGroup = absenceRepo.groupsName[0].id!;
+  idGroup = absenceRepo.groupsName[0].id!;
     groupsName.addAll(absenceRepo.groupsName);
     getStudents();
+
+  }
+
+  bool validation() {
+    if (dateTime == null || idGroup == null || isPresentList.contains(0)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  reset() {
+    dateTime = null;
+    idGroup = null;
+    studentsList = [];
+    emit(CheckStudentLoaded(isPresentList, studentsList));
   }
 
   Future<void> getStudents() async {
@@ -44,6 +61,7 @@ class CheckStudentCubit extends Cubit<CheckStudentState> {
       isPresentList = List<int>.filled(studentsList.length, 0);
       emit(CheckStudentLoaded(isPresentList, studentsList));
     } catch (error) {
+      print('kkkkkkkkkkkkkkkkkkkkkkkkkkkk');
       emit(CheckStudentError(error.toString()));
     }
   }
@@ -67,10 +85,13 @@ class CheckStudentCubit extends Cubit<CheckStudentState> {
   }
 
   post() async {
-    final data =
-        AbsenceModel(groupId: '2', studentIds: isAbsence, date: dateTime.toString());
-    print(data.toJson());
-    await absenceRepo.post(data.toJson());
-    emit(CheckStudentSend());
+    final data = AbsenceModel(
+        groupId: idGroup.toString(), studentIds: isAbsence, date: dateTime);
+    if (isAbsence.isNotEmpty) {
+      await absenceRepo.post(data.toJson());
+      emit(CheckStudentSend());
+    } else {
+      emit(CheckStudentSend());
+    }
   }
 }

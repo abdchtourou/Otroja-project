@@ -13,7 +13,7 @@ class Subject {
     return Subject(
       id: json['id'],
       name: json['name'],
-      categoryName: json['category_name'],
+      categoryName: json['category_name']['name'],
     );
   }
 

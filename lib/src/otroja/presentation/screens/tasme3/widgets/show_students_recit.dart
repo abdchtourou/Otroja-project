@@ -15,8 +15,6 @@ import 'studentsListRecit.dart';
 class ShowStudentsRecite extends StatelessWidget {
   ShowStudentsRecite({super.key});
 
-  final ValueNotifier<String> searchNotifier = ValueNotifier<String>('');
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

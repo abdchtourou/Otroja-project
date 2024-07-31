@@ -17,7 +17,6 @@ import 'widgets/page_count_widget.dart';
 import 'widgets/table_title_widget.dart';
 
 class TasmeaaScreen extends StatelessWidget {
-  TextEditingController _activityController = TextEditingController(text: '1');
 
   TasmeaaScreen({super.key});
 
@@ -69,7 +68,7 @@ class TasmeaaScreen extends StatelessWidget {
           Expanded(
             child: BlocBuilder<StandardCubit, StandardState>(
               builder: (context, state) {
-                if (state is StandardLoaded || state is PageCountUpdated) {
+                if (state is StandardLoaded ) {
                   context.read<StandardCubit>().standards.forEach((element) {
                     context.read<StandardCubit>().standardsCounts[element.id] =
                         0;
@@ -84,7 +83,7 @@ class TasmeaaScreen extends StatelessWidget {
                     },
                     itemCount: context.read<StandardCubit>().standards.length,
                   );
-                } else if (state is StandardUpdated) {
+                } else if (state is StandardUpdated || state is PageCountUpdated) {
                   return ListView.builder(
                     itemBuilder: (context, index) {
                       return StandardItem(
@@ -134,6 +133,7 @@ class TasmeaaScreen extends StatelessWidget {
                         context.read<ReciteCubit>().createRecite(Recite(
                             date: context.read<StandardCubit>().date,
                             studentId: context.read<StandardCubit>().studentId,
+                            pageCount:context.read<StandardCubit>().pageCount ,
                             reciteTypeId: "1",
                             standardCounts: standardCount));
                       });

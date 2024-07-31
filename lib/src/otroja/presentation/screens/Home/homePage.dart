@@ -96,9 +96,12 @@ class HomePage extends StatelessWidget {
                   left: 131.w,
                   top: 225.h,
                   child: HomePageButton(
+                    onPressed: () {
+                      context.pushNamed(Routes.activity);
+                    },
                     width: 100.w,
                     height: 90.h,
-                    text: 'الحلقات',
+                    text: 'الأنشطة',
                   ),
                 ),
                 Positioned(
@@ -123,6 +126,9 @@ class HomePage extends StatelessWidget {
                   left: 20.w,
                   top: 120.h,
                   child: HomePageButton(
+                    onPressed: () {
+                      context.pushNamed(Routes.showStudentsRecite);
+                    },
                     width: 100.w,
                     height: 90.h,
                     text: 'التسميع',
@@ -132,9 +138,12 @@ class HomePage extends StatelessWidget {
                   left: 230.w,
                   top: 47.h,
                   child: HomePageButton(
+                    onPressed: () {
+                      context.pushNamed(Routes.checkStudents);
+                    },
                     width: 80.w,
                     height: 75.h,
-                    text: 'الحسابات',
+                    text: 'تفقد الطلاب',
                     textSize: 9.sp,
                   ),
                 ),

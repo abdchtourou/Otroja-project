@@ -8,16 +8,18 @@ class SubjectRepository {
 
   Future<List<Subject>> getSubjectsByCourseLevel(int courseLevelId) async {
     try {
-      final response = await _apiService.get('subjects/course_level/$courseLevelId');
+      final response =
+          await _apiService.get('subjects/course_level/$courseLevelId');
       if (response.statusCode == 200) {
         final List<dynamic> subjectsJson = response.data['data'];
         return subjectsJson.map((json) => Subject.fromJson(json)).toList();
       } else {
-        throw Exception('Failed to load subjects for course level $courseLevelId');
+        throw Exception(
+            'Failed to load subjects for course level $courseLevelId');
       }
     } catch (e) {
-      throw Exception('Error fetching subjects for course level $courseLevelId: $e');
+      throw Exception(
+          'Error fetching subjects for course level $courseLevelId: $e');
     }
   }
-
 }
