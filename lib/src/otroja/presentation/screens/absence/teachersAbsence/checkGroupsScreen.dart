@@ -1,3 +1,6 @@
+import 'package:admins/src/otroja/cubit/groups/group_cubit.dart';
+import 'package:admins/src/otroja/presentation/screens/absence/studentsAbsence/widget/drop_down_group.dart';
+import 'package:admins/src/otroja/presentation/screens/absence/teachersAbsence/widgets/drop_down_course.dart';
 import 'package:admins/src/otroja/presentation/screens/absence/teachersAbsence/widgets/teachers_absence_item.dart';
 import 'package:admins/src/otroja/presentation/widgets/buttons/otroja_button.dart';
 import 'package:admins/src/otroja/presentation/widgets/otroja_app_bar.dart';
@@ -8,13 +11,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../cubit/absecne_staff/absence_staff_cubit.dart';
+import '../../../../cubit/course/course_cubit.dart';
+import '../../../widgets/add_user/custom_dialog.dart';
 import '../../../widgets/add_user/custom_drop_down.dart';
 import 'widgets/absence_date_picker.dart';
 import 'widgets/teachers_absence_table_title.dart';
+
 class CheckGroupsScreen extends StatelessWidget {
   CheckGroupsScreen({super.key});
-
-  List<bool> attendanceStatus = [false, false, false, true, true, false, false, true, true];
 
   @override
   Widget build(BuildContext context) {
@@ -39,54 +43,68 @@ class CheckGroupsScreen extends StatelessWidget {
                 borderThickness: 2,
                 borderColor: const Color(0xffE6E6E6),
                 imagePath: 'assets/icons/calendar.png',
-                textDirection: TextDirection.rtl, selectedDate: cubit.dateTime,
+                textDirection: TextDirection.rtl,
+                selectedDate: cubit.dateTime,
               ),
+              BlocConsumer<AbsenceStaffCubit, AbsenceStaffState>(
+    listener: (context, state) {
+      if(state is AbsenceStaffSend){
+        showDialog(
+          context: context,
+          builder: (BuildContext context) => MyDialog(
+            text: "تم التفقد بنجاح",
+          ),
+        );
+      }
+    },
+                builder: (context,state){
 
-               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10.0),
-                child: CustomDropdown(
-                  list: ["دورة وزدناهم هدى", "دورة يشفعان"],
-                  hint: "الدورة",
-                  labelText: "اختر دورة", onChanged: (String? value) {  },
+          return Column(
+            children: [
+              Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: DropDownCourse(
+                    list: cubit.listCourses,
+                    labelText: 'الدورة المرادة',
+                    hint: 'اختر دورة',
+                    onChanged: (value) {
+                      cubit.idCourse=value!.id;
+                      cubit.getGroupByCourseLevel();
+                    },
+                  )),
 
+              const TeachersAbsenceTableTitle(),
+              Container(
+                height: 320.h,
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 245, 236, 224),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: ListView.builder(
+                  itemBuilder: (context, index) {
+                    final list = cubit.listGroups[index];
+                    return TeachersAbsenceItem(
+                      onTap: () {},
+                      teachersName: list.staffName!,
+                      groupName: list.name,
+                      index: index,
+                      isAbsence: cubit.isPresentList[index],
+                    );
+                  },
+                  itemCount: cubit.listGroups.length,
                 ),
               ),
-             BlocBuilder<AbsenceStaffCubit, AbsenceStaffState>(
-               builder: (context, state) {
+            ],
+          );
 
-                  return  Column(
-                    children: [
-                      const TeachersAbsenceTableTitle(),
-                      Container(
-                        height: 320.h,
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 245, 236, 224),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: ListView.builder(
-
-                          itemBuilder: (context, index) {
-
-                            return TeachersAbsenceItem(
-                              absence: attendanceStatus[index],
-                              onTap: () {},
-                              teachersName: "إسلام العيسى",
-                              groupName: "الصحابة", index: index, isAbsence: cubit.isPresentList[index],
-                            );
-                          },
-
-                          itemCount: 2,
-                        ),
-                      ),
-                    ],
-                  );
-
-
-               },
-             ),
+                }
+              ),
               Padding(
-                padding: const EdgeInsets.only(top: 8.0,bottom: 10),
-                child: OtrojaButton(text: 'إنهاء التفقد', onPressed: () {}),
+                padding: const EdgeInsets.only(top: 8.0, bottom: 10),
+                child: OtrojaButton(text: 'إنهاء التفقد', onPressed: () {
+                cubit.post();
+
+                }),
               ),
             ],
           ),

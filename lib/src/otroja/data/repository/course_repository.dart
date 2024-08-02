@@ -57,6 +57,7 @@ class CourseRepository {
 
   Future<List<Course>> getAllCourses() async {
     try {
+
       final response = await _apiService.get('courses');
       if (response.statusCode == 200) {
         Map<String, dynamic> responseData = response.data;

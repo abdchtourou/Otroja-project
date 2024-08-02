@@ -23,30 +23,48 @@ class SubjectsTap extends StatelessWidget {
           if (state is SubjectLoading) {
             return const Center(child: OtrojaCircularProgressIndicator());
           } else if (state is SubjectsLoaded) {
-            return GridView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 15),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 1.5,
-                  crossAxisSpacing: 20,
-                  mainAxisSpacing: 20),
-              itemCount: state.subjects.length,
-              itemBuilder: (context, index) {
-                return InkWell(
+            return Directionality(
+              textDirection: TextDirection.rtl,
+
+              child: GridView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 15),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 1.5,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 20),
+                itemCount: state.subjects.length+1,
+                itemBuilder: (context, index) {
+                if(state.subjects.length>index){
+                  return InkWell(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) => AddSubjectDialog(
+                            optionalWidget: const SubjectDetail(),
+                            buttonText: 'خروج',
+                          ),
+                        );
+                      },
+                      child: SubjectCard(
+                        name: state.subjects[index].name!,
+                        category: state.subjects[index].name!,
+                      ));
+                }else{
+                  return AddSubjectCard(
                     onTap: () {
-                      // showDialog(
-                      //   context: context,
-                      //   builder: (BuildContext context) => AddSubjectDialog(
-                      //     optionalWidget: const SubjectDetail(),
-                      //     buttonText: 'خروج',
-                      //   ),
-                      // );
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) => AddSubjectDialog(
+                          optionalWidget: SubjectInputForm(),
+                          buttonText: 'إضافة المادة ',
+                        ),
+                      );
                     },
-                    child: SubjectCard(
-                      name: state.subjects[index].name,
-                      category: state.subjects[index].categoryName,
-                    ));
-              },
+                  );
+                }
+                },
+              ),
             );
           } else {
             return const Center(child: Text("Error loading students"));

@@ -58,7 +58,7 @@ class CheckStudentCubit extends Cubit<CheckStudentState> {
       absenceRepo.groupsName.clear();
       absenceRepo.studentsList.clear();
 
-      isPresentList = List<int>.filled(studentsList.length, 0);
+        isPresentList = List<int>.filled(studentsList.length, 0);
       emit(CheckStudentLoaded(isPresentList, studentsList));
     } catch (error) {
       print('kkkkkkkkkkkkkkkkkkkkkkkkkkkk');

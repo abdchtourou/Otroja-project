@@ -8,16 +8,14 @@ import '../../../../../cubit/students/check_student/check_student_cubit.dart';
 import '../../studentsAbsence/widget/checked.dart';
 
 class TeachersAbsenceItem extends StatelessWidget {
-  bool absence;
   VoidCallback onTap;
   String groupName;
   String teachersName;
   int index;
   int isAbsence;
 
-  TeachersAbsenceItem({
+    TeachersAbsenceItem({
     super.key,
-    required this.absence,
     required this.onTap,
     required this.groupName,
     required this.teachersName,
@@ -56,7 +54,7 @@ class TeachersAbsenceItem extends StatelessWidget {
                       onTap: () {
                         cubit.togglePresence(index, false);
                         cubit.addAbsence(
-                        1, false);
+                        cubit.listGroups[index].staffId!, false);
                       },
                       child: IsAbsence(
                         index: index,
@@ -70,7 +68,7 @@ class TeachersAbsenceItem extends StatelessWidget {
                       onTap: () {
                         cubit.togglePresence(index, true);
                         cubit.addAbsence(
-                            1, true);
+                            cubit.listGroups[index].staffId!, true);
                       },
                       child: Checked(
                         index: index,

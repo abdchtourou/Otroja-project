@@ -13,8 +13,10 @@ part 'absence_staff_state.dart';
 class AbsenceStaffCubit extends Cubit<AbsenceStaffState> {
   AbsenceStaffCubit(this.absenceStaffRepo) : super(AbsenceStaffInitial()) {
     getCourse();
+    print('//////////////////// in cont');
   }
 
+  AbsenceStaffRepo absenceStaffRepo;
   DateTime? dateTime=DateTime.now();
   int? idCourse;
 
@@ -24,6 +26,7 @@ class AbsenceStaffCubit extends Cubit<AbsenceStaffState> {
   List<Course> listCourses = [];
 
   Future<void> getCourse() async {
+    print('//////////////////////////// in course');
     listCourses.addAll(await absenceStaffRepo.getAllCourses());
     print(listCourses);
     idCourse = listCourses[0].id;
@@ -32,9 +35,12 @@ class AbsenceStaffCubit extends Cubit<AbsenceStaffState> {
   }
 
   Future<void> getGroupByCourseLevel() async {
+    print('////////////////////////// b g');
     listGroups.clear();
     listGroups.addAll(await absenceStaffRepo.getGroupsByCourseLevel(idCourse!));
     print(listGroups);
+    print('/////////////////////////a g'
+        '');
     isPresentList = List<int>.filled(listGroups.length, 0);
     emit(AbsenceStaffTest());
   }
@@ -61,6 +67,7 @@ class AbsenceStaffCubit extends Cubit<AbsenceStaffState> {
     final data =
     AbsenceStaffModel(CourseId:idCourse!.toString() , StaffIds: isAbsence, date: dateTime.toString());
     print(data.toJson());
+    print('/////////////////////////////////// post zed');
     await absenceStaffRepo.post(data.toJson());
     emit(AbsenceStaffSend());
   }
