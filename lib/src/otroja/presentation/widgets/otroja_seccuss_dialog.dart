@@ -34,6 +34,7 @@ class OtrojaSuccessDialog extends StatelessWidget {
                   ),
                 ),
               ),
+              Spacer(),
               Container(
                 width: MediaQuery.of(context).size.width,
                 decoration: const BoxDecoration(

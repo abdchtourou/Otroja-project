@@ -43,7 +43,7 @@ class DropDownCourse extends StatelessWidget {
               isExpanded: true,
               isDense: true,
               hint: Align(
-                alignment: Alignment.centerRight,
+                alignment: Alignment.center,
                 child: Text(
                   hint!,
                   style: const TextStyle(fontSize: 20,),

@@ -44,14 +44,14 @@ class _OtrojaDatePickerWidgetState extends State<OtrojaDatePickerWidget> {
       builder: (BuildContext context, Widget? child) {
         return Theme(
           data: ThemeData.light().copyWith(
-            colorScheme: ColorScheme.light(
+            colorScheme: const ColorScheme.light(
               primary: Color(0xff85313C), // لون الاختيار
               onPrimary: Colors.white, // لون النص عند الاختيار
               surface: Color.fromARGB(223, 239, 227, 211), // لون الخلفية
               onSurface: Colors.black, // لون النص عند عدم الاختيار
             ),
             dialogBackgroundColor:
-                Color.fromARGB(223, 239, 227, 211), // لون خلفية الحوار
+                const Color.fromARGB(223, 239, 227, 211), // لون خلفية الحوار
           ),
           child: child!,
         );
@@ -86,7 +86,7 @@ class _OtrojaDatePickerWidgetState extends State<OtrojaDatePickerWidget> {
           child: Container(
             width: widget.containerWidth,
             height: 50,
-            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
             decoration: BoxDecoration(
               color: widget.containerColor,
               border: Border.all(
@@ -106,14 +106,14 @@ class _OtrojaDatePickerWidgetState extends State<OtrojaDatePickerWidget> {
                 selectedDate == null
                     ? Text(
                         '${widget.hintText}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Color(0xFFC2C0C0),
                           fontSize: 16.0,
                         ),
                       )
                     : Text(
                         '${selectedDate!.day}-${selectedDate!.month}-${selectedDate!.year}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Color.fromARGB(255, 0, 0, 0),
                           fontSize: 16.0,
                         ),

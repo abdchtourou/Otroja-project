@@ -1,23 +1,20 @@
-import 'package:admins/src/otroja/data/datasource/api_services.dart';
-import 'package:admins/src/otroja/data/models/course_model.dart';
-import 'package:admins/src/otroja/data/models/group_model.dart';
-import 'package:admins/src/otroja/data/repository/absence/absence_staff_repo.dart';
-import 'package:admins/src/otroja/data/repository/group_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
 import '../../data/models/absence_model/absence_staff_model.dart';
+import '../../data/models/course_model.dart';
+import '../../data/models/group_model.dart';
+import '../../data/repository/absence/absence_staff_repo.dart';
 
 part 'absence_staff_state.dart';
 
 class AbsenceStaffCubit extends Cubit<AbsenceStaffState> {
   AbsenceStaffCubit(this.absenceStaffRepo) : super(AbsenceStaffInitial()) {
     getCourse();
-    print('//////////////////// in cont');
   }
 
   AbsenceStaffRepo absenceStaffRepo;
-  DateTime? dateTime=DateTime.now();
+  DateTime? dateTime = DateTime.now();
   int? idCourse;
 
   List<int> isPresentList = [];
@@ -26,32 +23,34 @@ class AbsenceStaffCubit extends Cubit<AbsenceStaffState> {
   List<Course> listCourses = [];
 
   Future<void> getCourse() async {
-    print('//////////////////////////// in course');
-    listCourses.addAll(await absenceStaffRepo.getAllCourses());
-    print(listCourses);
-    idCourse = listCourses[0].id;
-    emit(AbsenceStaffTest());
-    getGroupByCourseLevel();
+    emit(AbsenceStaffLoadingCourses());
+    try {
+      listCourses = await absenceStaffRepo.getAllCourses();
+      idCourse = listCourses[0].id;
+      emit(AbsenceStaffCoursesLoaded(listCourses));
+      getGroupByCourseLevel();
+    } catch (e) {
+      emit(AbsenceStaffError('Failed to load courses'));
+    }
   }
 
   Future<void> getGroupByCourseLevel() async {
-    print('////////////////////////// b g');
-    listGroups.clear();
-    listGroups.addAll(await absenceStaffRepo.getGroupsByCourseLevel(idCourse!));
-    print(listGroups);
-    print('/////////////////////////a g'
-        '');
-    isPresentList = List<int>.filled(listGroups.length, 0);
-    emit(AbsenceStaffTest());
+    emit(AbsenceStaffLoadingGroups());
+    try {
+      listGroups = await absenceStaffRepo.getGroupsByCourseLevel(idCourse!);
+      isPresentList = List<int>.filled(listGroups.length, 0);
+      emit(AbsenceStaffGroupsLoaded(listGroups));
+    } catch (e) {
+      emit(AbsenceStaffError('Failed to load groups'));
+    }
   }
 
   void togglePresence(int index, bool isPresent) {
     isPresentList[index] = isPresent ? 1 : 2;
-
-    emit(AbsenceStaffTest());
+    emit(AbsenceStaffGroupsLoaded(listGroups));
   }
 
-  addAbsence(int id, bool isPresent) {
+  void addAbsence(int id, bool isPresent) {
     if (isPresent) {
       if (!isAbsence.remove(id)) {
         isAbsence.add(id);
@@ -61,14 +60,19 @@ class AbsenceStaffCubit extends Cubit<AbsenceStaffState> {
         isAbsence.add(id);
       }
     }
-    print(isAbsence);
   }
-  post() async {
-    final data =
-    AbsenceStaffModel(CourseId:idCourse!.toString() , StaffIds: isAbsence, date: dateTime.toString());
-    print(data.toJson());
-    print('/////////////////////////////////// post zed');
-    await absenceStaffRepo.post(data.toJson());
-    emit(AbsenceStaffSend());
+
+  Future<void> postAbsenceData() async {
+    final data = AbsenceStaffModel(
+      CourseId: idCourse!.toString(),
+      StaffIds: isAbsence,
+      date: dateTime.toString(),
+    );
+    try {
+      await absenceStaffRepo.post(data.toJson());
+      emit(AbsenceStaffSend());
+    } catch (e) {
+      emit(AbsenceStaffError('Failed to post absence data'));
+    }
   }
 }

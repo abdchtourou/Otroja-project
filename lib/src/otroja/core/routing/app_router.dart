@@ -1,5 +1,6 @@
 import 'package:admins/src/otroja/core/routing/routes.dart';
 import 'package:admins/src/otroja/cubit/Exam_cubit/question_cubit.dart';
+import 'package:admins/src/otroja/cubit/absecne_staff/absence_staff_cubit.dart';
 import 'package:admins/src/otroja/cubit/activityCubit/show_activity/show_activity_cubit.dart';
 import 'package:admins/src/otroja/cubit/add_staff/add_staff_cubit.dart';
 import 'package:admins/src/otroja/cubit/parentCubit/parent_cubit.dart';
@@ -73,8 +74,8 @@ class AppRouter {
 
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case Routes.home:
-        return MaterialPageRoute(builder: (_) => const HomePage());
+      // case Routes.home:
+      //   return MaterialPageRoute(builder: (_) => const HomePage());
 
       case Routes.addCourses:
         levelCubit.getAllLevels();
@@ -181,8 +182,12 @@ class AppRouter {
                   child: CheckStudentScreen(),
                 ));
 
-      case Routes.checkGroups:
-        return MaterialPageRoute(builder: (_) => CheckGroupsScreen());
+      case Routes.home:
+        return MaterialPageRoute(builder: (_) =>
+            BlocProvider(
+              create: (context) => getIt<AbsenceStaffCubit>(),
+              child: CheckGroupsScreen(),
+            ));
 
       case Routes.addGroup:
         return MaterialPageRoute(

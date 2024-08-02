@@ -12,6 +12,7 @@ class CheckStudentCubit extends Cubit<CheckStudentState> {
   List<int> isPresentList = [];
 
   CheckStudentCubit(this.absenceRepo) : super(CheckStudentInitial()) {
+
     getGroups();
   }
   String? dateTime;
@@ -24,10 +25,12 @@ class CheckStudentCubit extends Cubit<CheckStudentState> {
   int? idGroup;
 
   Future<void> getGroups() async {
+    emit(CheckStudentLoadingGroup());
 
     await absenceRepo.getGroups();
   idGroup = absenceRepo.groupsName[0].id!;
     groupsName.addAll(absenceRepo.groupsName);
+    emit(CheckStudentGroupLoaded(groupsName));
     getStudents();
 
   }
@@ -90,6 +93,7 @@ class CheckStudentCubit extends Cubit<CheckStudentState> {
     if (isAbsence.isNotEmpty) {
       await absenceRepo.post(data.toJson());
       emit(CheckStudentSend());
+      emit(CheckStudentLoaded(isPresentList, studentsList));
     } else {
       emit(CheckStudentSend());
     }

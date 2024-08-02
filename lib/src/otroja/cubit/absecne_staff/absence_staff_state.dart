@@ -1,8 +1,23 @@
 part of 'absence_staff_cubit.dart';
 
 @immutable
-sealed class AbsenceStaffState {}
+abstract class AbsenceStaffState {}
 
-final class AbsenceStaffInitial extends AbsenceStaffState {}
-final class AbsenceStaffTest extends AbsenceStaffState {}
-final class AbsenceStaffSend extends AbsenceStaffState {}
+class AbsenceStaffInitial extends AbsenceStaffState {}
+class AbsenceStaffLoadingCourses extends AbsenceStaffState {}
+class AbsenceStaffCoursesLoaded extends AbsenceStaffState {
+  List<Course> listCourses = [];
+
+  AbsenceStaffCoursesLoaded(this.listCourses);
+}
+class AbsenceStaffLoadingGroups extends AbsenceStaffState {}
+class AbsenceStaffGroupsLoaded extends AbsenceStaffState {
+  List<Group> listGroups = [];
+
+  AbsenceStaffGroupsLoaded(this.listGroups);
+}
+class AbsenceStaffSend extends AbsenceStaffState {}
+class AbsenceStaffError extends AbsenceStaffState {
+  final String message;
+  AbsenceStaffError(this.message);
+}
