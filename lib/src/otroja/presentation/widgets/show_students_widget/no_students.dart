@@ -21,7 +21,7 @@ class NoStudents extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
           const Text(
-            "يبدو أنك لم تضف طالب حتى الأن قم بلضغط على زر الإضافة في الأعلى للقيام بذلك",
+            "يبدو أنك لم تضف طالب حتى الأن ",
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.grey,

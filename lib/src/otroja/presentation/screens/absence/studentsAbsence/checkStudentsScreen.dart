@@ -1,3 +1,4 @@
+import 'package:admins/src/otroja/presentation/widgets/show_students_widget/no_students.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -46,10 +47,10 @@ class CheckStudentScreen extends StatelessWidget {
           List<String> groupNames = [];
           Map<String, int> groupsId = {};
 
-          cubit.groupsName.forEach((element) {
+          for (var element in cubit.groupsName) {
             groupNames.add(element.name!);
             groupsId[element.name!] = element.id!;
-          });
+          }
 
           return SingleChildScrollView(
             child: Column(
@@ -104,7 +105,8 @@ class CheckStudentScreen extends StatelessWidget {
                             bottom: Radius.elliptical(10, 10),
                           ),
                         ),
-                        child: ListView.separated(
+                        child:state.studentsList.isNotEmpty?
+                        ListView.separated(
                           separatorBuilder: (context, index) => SizedBox(height: 18.w),
                           itemBuilder: (context, index) {
                             return Column(
@@ -169,7 +171,8 @@ class CheckStudentScreen extends StatelessWidget {
                             );
                           },
                           itemCount: cubit.studentsList.length,
-                        ),
+                        ):
+                            const NoStudents()
                       ),
                     ],
                   ),
