@@ -1,4 +1,5 @@
 import 'package:admins/src/otroja/core/routing/routes.dart';
+import 'package:admins/src/otroja/cubit/Exam_cubit/question_cubit.dart';
 import 'package:admins/src/otroja/cubit/activityCubit/show_activity/show_activity_cubit.dart';
 import 'package:admins/src/otroja/cubit/add_staff/add_staff_cubit.dart';
 import 'package:admins/src/otroja/cubit/parentCubit/parent_cubit.dart';
@@ -18,6 +19,7 @@ import 'package:admins/src/otroja/data/repository/standard_repository.dart';
 import 'package:admins/src/otroja/data/repository/students_rpeos/show_students_repo.dart';
 import 'package:admins/src/otroja/data/repository/subject_repository.dart';
 import 'package:admins/src/otroja/presentation/screens/Courses/AddCourses/addCoursesScreen.dart';
+import 'package:admins/src/otroja/presentation/screens/Exams/qustion/qustion.dart';
 import 'package:admins/src/otroja/presentation/screens/Home/homePage.dart';
 import 'package:admins/src/otroja/presentation/screens/activity/addActivity/addActivityScreen.dart';
 import 'package:admins/src/otroja/presentation/screens/activity/showActivities/activityScreen.dart';
@@ -72,7 +74,7 @@ class AppRouter {
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.home:
-        return MaterialPageRoute(builder: (_) => HomePage());
+        return MaterialPageRoute(builder: (_) => const HomePage());
 
       case Routes.addCourses:
         levelCubit.getAllLevels();
@@ -161,7 +163,7 @@ class AppRouter {
             builder: (_) => BlocProvider(
                   create: (context) =>
                       ParentCubit(ParentRepository(ApiService())),
-                  child: AddParents(),
+                  child: const AddParents(),
                 ));
 
       case Routes.showStudents:
@@ -206,7 +208,7 @@ class AppRouter {
         showStudentsCubit.getStudents();
         return MaterialPageRoute(
             builder: (_) => BlocProvider.value(
-                value: showStudentsCubit, child: AddStudentToGroupScreen()));
+                value: showStudentsCubit, child: const AddStudentToGroupScreen()));
 
       case Routes.groupStudents:
         final groupId = settings.arguments as int;
@@ -226,7 +228,7 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
                 create: (context) => getIt<AddActivityCubit>(),
-                child: AddActivityScreen()));
+                child: const AddActivityScreen()));
 
       case Routes.activity:
         return MaterialPageRoute(
@@ -270,13 +272,19 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
                   create: (context) => getIt<AddStudentCubit>(),
-                  child: AddStudent(),
+                  child: const AddStudent(),
+                ));
+        case Routes.question:
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) => getIt<QuestionCubit>(),
+                  child: const Question(),
                 ));
                  case Routes.addStaff:
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
                   create: (context) => getIt<AddStaffCubit>(),
-                  child: AddStaff(),
+                  child: const AddStaff(),
                 ));
       case Routes.showSubject:
         return MaterialPageRoute(builder: (_) => ShowSubject());

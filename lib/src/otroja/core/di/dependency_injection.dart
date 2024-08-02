@@ -1,3 +1,4 @@
+import 'package:admins/src/otroja/cubit/Exam_cubit/question_cubit.dart';
 import 'package:admins/src/otroja/cubit/activityCubit/show_activity/show_activity_cubit.dart';
 import 'package:admins/src/otroja/cubit/add_staff/add_staff_cubit.dart';
 import 'package:admins/src/otroja/cubit/students/add_studnet/add_studnet_cubit.dart';
@@ -44,8 +45,14 @@ Future<void> setUpGetIt()async{
   getIt.registerFactory<CheckStudentCubit>(()=>CheckStudentCubit(getIt()));
 
 
-  //check student
+  //check staff
   getIt.registerFactory<AbsenceStaffRepo>(()=>AbsenceStaffRepo(apiServices));
   getIt.registerFactory<AbsenceStaffCubit>(()=>AbsenceStaffCubit(getIt()));
+
+  // question
+  getIt.registerFactory<QuestionCubit>(()=>QuestionCubit());
+
+
+
 
 }
