@@ -96,9 +96,7 @@ class HomePage extends StatelessWidget {
                   left: 131.w,
                   top: 225.h,
                   child: HomePageButton(
-                    onPressed: () {
-                      
-                    },
+                    onPressed: () {},
                     width: 100.w,
                     height: 90.h,
                     text: 'الأنشطة',
@@ -164,9 +162,7 @@ class HomePage extends StatelessWidget {
                   left: 50.w,
                   top: 210.h,
                   child: HomePageButton(
-                    onPressed: () {
-                      
-                    },
+                    onPressed: () {},
                     width: 80.w,
                     height: 75.h,
                     text: 'الصلاحيات',
@@ -177,9 +173,12 @@ class HomePage extends StatelessWidget {
                   left: 50.w,
                   top: 45.h,
                   child: HomePageButton(
+                    onPressed: () {
+                      context.pushNamed(Routes.checkGroups);
+                    },
                     width: 80.w,
                     height: 75.h,
-                    text: 'التفقد',
+                    text: 'تفقد الأساتذة',
                     textSize: 9.sp,
                   ),
                 ),

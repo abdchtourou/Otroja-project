@@ -62,6 +62,14 @@ class AbsenceStaffCubit extends Cubit<AbsenceStaffState> {
     }
   }
 
+  bool validation() {
+    if (dateTime == null || idCourse == null || isPresentList.contains(0)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   Future<void> postAbsenceData() async {
     final data = AbsenceStaffModel(
       CourseId: idCourse!.toString(),

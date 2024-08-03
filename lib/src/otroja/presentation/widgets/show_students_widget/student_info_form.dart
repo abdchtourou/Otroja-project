@@ -246,17 +246,7 @@ class StudentInfoForm extends StatelessWidget {
                           phoneNumber: studentCubit.phone!,
                           groupId: studentCubit.groupId!
                         );
-                        print("tap");
-                        print(studentCubit.userName);
-                        print(studentCubit.firstName);
-                        print(studentCubit.lastName);
-                        print(studentCubit.birthDate);
-                        print(studentCubit.address);
-                        print(studentCubit.password);
-                        print(studentCubit.groupId);
-                        print(parentCubit.id);
-                        print(studentCubit.grade);
-                        print(studentCubit.phone);
+                    
                       }
                     });
               }),
