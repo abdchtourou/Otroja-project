@@ -8,11 +8,13 @@ class StudentRepository {
 
   Future<StudentInfo> getStudentInfo(int studentId) async {
     try {
-      final response = await _apiService.get('/student/stats', queryParameters: {
+      final response =
+          await _apiService.get('/student/stats', queryParameters: {
         'student_id': studentId,
       });
-
+      
       if (response.statusCode == 200) {
+        print(response.data['data']);
         return StudentInfo.fromJson(response.data['data']);
       } else {
         throw Exception('Failed to load student info');

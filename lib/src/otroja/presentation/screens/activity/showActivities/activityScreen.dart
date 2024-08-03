@@ -33,7 +33,6 @@ class ActivityScreen extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            OtrojaSearchBar(),
             BlocBuilder<ShowActivityCubit, ShowActivityState>(
               builder: (BuildContext context, ShowActivityState state) {
                 if (state is ShowActivityLoaded) {

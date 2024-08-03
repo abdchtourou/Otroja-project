@@ -1,3 +1,4 @@
+import 'package:admins/src/otroja/core/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class FilterBar extends StatelessWidget {
@@ -28,7 +29,7 @@ class FilterBar extends StatelessWidget {
                 child: Text(text!,
                     style: const TextStyle(
                       fontWeight: FontWeight.w500,
-                        color: Color(0xFFC2C0C0)
+                        color: OtrojaColors.primaryColor
                     )),
               ),
             ],

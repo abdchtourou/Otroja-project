@@ -22,12 +22,13 @@ class StudentDetails extends StatelessWidget {
 
   StudentDetails({super.key, required this.showStudentModel})
       : data = {
+        'الأتروجات' : showStudentModel.points!.toString(),
     'البريد الإلكتروني': showStudentModel.firstName!,
     'تاريخ الميلاد': showStudentModel.birthDate!,
     'رقم الهاتف': showStudentModel.phoneNumber!,
     'المدينة': showStudentModel.address!,
     // 'الحلقة': showStudentModel.groupId!.toString(),
-    'المستوى': showStudentModel.grade!,
+    'الصف': showStudentModel.grade!,
   };
 
 
@@ -35,7 +36,7 @@ class StudentDetails extends StatelessWidget {
     return Scaffold(
       appBar: OtrojaAppBar(
         mainText: 'معلومات الطالب',
-        secText: 'في حال اردت تعديل المعلومات اضغط على أيقونة القلم يمينا',
+   
       ),
       body: Column(
         children: [

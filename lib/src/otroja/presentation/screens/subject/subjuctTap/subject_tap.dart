@@ -49,7 +49,7 @@ class SubjectsTap extends StatelessWidget {
               },
             );
           } else {
-            return const Center(child: Text("Error loading students"));
+            return const Center(child: Text("Error loading subjects"));
           }
         },
       ),

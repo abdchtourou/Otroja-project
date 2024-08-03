@@ -19,18 +19,15 @@ class ShowStaffScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: OtrojaAppBar(
-        mainText: "حدد طلاب الحلقة",
-        secText:
-            "في حال أردت إضافة طالب جديد غير موجود مسبقا فاضغط على زر الإضافة يمينا",
-        optionalWidget: AddAppBar(onTap: () {}),
+        mainText: "حدد  المشرف",
+  
+          
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const OtrojaSearchBar(),
-            SizedBox(height: 20.h),
             Expanded(
               child: BlocBuilder<StaffCubit, StaffState>(
                 builder: (context, state) {

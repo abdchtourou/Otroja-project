@@ -46,7 +46,7 @@ class ShowCourses extends StatelessWidget {
                           );
                         });
                   } else {
-                    return const Center(child: Text("Error loading students"));
+                    return const Center(child: Text("Error loading courses"));
                   }
                 },
               ),

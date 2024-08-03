@@ -18,7 +18,7 @@ class ActivityItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      padding: const EdgeInsets.all( 8.0),
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(color: Color(0xff85313C), width: 2.w),
@@ -33,7 +33,7 @@ class ActivityItem extends StatelessWidget {
                       top: BorderSide(color: Color(0xFF85313C), width: 2.w))),
               child: Center(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 70),
+                  padding: const EdgeInsets.symmetric(vertical: 50),
                   child: Text(
                     textAlign: TextAlign.center,
                     activityDescrition,

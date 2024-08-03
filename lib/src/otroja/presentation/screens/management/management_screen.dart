@@ -15,8 +15,8 @@ class ManagemetScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: OtrojaAppBar(
-        mainText: "الدورات",
-        secText: "اختر دورة لعرض المعلومات",
+        mainText: "الإدارة",
+       
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

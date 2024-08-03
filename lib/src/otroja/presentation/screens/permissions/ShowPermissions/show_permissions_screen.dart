@@ -14,8 +14,8 @@ class ShowPermissionsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: OtrojaAppBar(
-        mainText: "الدورات",
-        secText: "اختر دورة لعرض المعلومات",
+        mainText: "الصلاحيات",
+        secText: "اختر صلاحية لعرض المعلومات",
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

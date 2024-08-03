@@ -58,6 +58,7 @@ class OtrojaAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         Column(
           children: [
+            SizedBox(height:10.h ,),
             Row(
               children: [
                 IconButton(

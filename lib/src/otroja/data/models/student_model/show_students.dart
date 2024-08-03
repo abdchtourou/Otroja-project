@@ -5,6 +5,7 @@ class ShowStudentModel {
   int? userId;
   int? parentId;
   int? groupId;
+  int? points;
   String? userName;
   String? firstName;
   String? lastName;
@@ -40,6 +41,7 @@ class ShowStudentModel {
     parentId = json['parent_id'];
     groupId = json['group_id'];
     firstName = json['first_name'];
+    points = json['points'];
     lastName = json['last_name'];
     email = json['email'];
     birthDate = json['birth_date'];

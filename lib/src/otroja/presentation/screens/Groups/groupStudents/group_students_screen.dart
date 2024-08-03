@@ -22,7 +22,6 @@ class GroupStudentsScreen extends StatelessWidget {
     return Scaffold(
       appBar: OtrojaAppBar(
         mainText: "طلاب الحلقة",
-        secText: "لإزالة طالب من الحلقة اضغط على ايقونة الحذف",
         optionalWidget: AddAppBar(
           onTap: () {
             context.pushNamed(Routes.addStudentToGroup).then(

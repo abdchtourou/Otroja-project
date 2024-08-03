@@ -27,5 +27,7 @@ class Routes {
   static const String managemet = "/managemet";
   static const String showParents = "/showParents";
   static const String showStaff = "/showStaff";
-
+  static const String studentPoints = "/studentPoints";
+  static const String studentAbsencsByGroup = "/studentAbsencsByGroup";
+  static const String studentAbsencsForGroup = "/studentAbsencsForGroup";
 }

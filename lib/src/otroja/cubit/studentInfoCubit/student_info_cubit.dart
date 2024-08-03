@@ -5,7 +5,6 @@ import 'package:meta/meta.dart';
 import '../../data/models/stuednt_info.dart';
 import '../../data/repository/student_info_repository.dart';
 
-
 part 'student_info_state.dart';
 
 class StudentInfoCubit extends Cubit<StudentInfoState> {
@@ -19,6 +18,8 @@ class StudentInfoCubit extends Cubit<StudentInfoState> {
       final studentInfo = await _repository.getStudentInfo(studentId);
       emit(StudentInfoLoaded(studentInfo));
     } catch (e) {
+      print("eeeeeeeeeeeeeeeeeeeeee");
+      print(e);
       emit(StudentInfoError(e.toString()));
     }
   }

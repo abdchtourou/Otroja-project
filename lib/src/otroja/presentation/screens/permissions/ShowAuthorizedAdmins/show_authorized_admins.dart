@@ -46,8 +46,7 @@ class ShowAuthorizedAdminsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const OtrojaSearchBar(),
-            SizedBox(height: 20.h),
+  
             Expanded(
               child: ListView.builder(
                 itemCount: permission.staffs.length,
@@ -71,10 +70,6 @@ class ShowAuthorizedAdminsScreen extends StatelessWidget {
                 },
               ),
             ),
-            OtrojaButton(
-              onPressed: () {},
-              text: "إضافة مسؤول",
-            )
           ],
         ),
       ),

@@ -21,7 +21,7 @@ class PermissionCard extends StatelessWidget {
       child: InkWell(
         onTap: onPressed,
         child: Container(
-          height: 30.h,
+          height: 40.h,
           decoration: BoxDecoration(
             color: Color(0xffEEEAE4),
             border: Border.all(
@@ -36,7 +36,8 @@ class PermissionCard extends StatelessWidget {
             children: [
               IconButton(
                 onPressed: onPressed,
-                icon: Image.asset("assets/icons/return.png",
+                icon: Image.asset(
+                  "assets/icons/return.png",
                 ),
               ),
               Expanded(
@@ -49,11 +50,11 @@ class PermissionCard extends StatelessWidget {
               const SizedBox(width: 10),
               Container(
                 width: 50.w,
-                 height: 50.h,
+                height: 50.h,
                 color: Color(0xFF85313C),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Image.asset(
                       "assets/icons/person.png",

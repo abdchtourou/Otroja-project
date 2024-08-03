@@ -21,8 +21,8 @@ class AddStaff extends StatelessWidget {
     StaffCubit staffCubit = context.read<StaffCubit>();
     return Scaffold(
       appBar: OtrojaAppBar(
-        mainText: "إضافة ولي أمر",
-        secText: "املأ الحقول الموجودة في الأسفل ثم اضغط على زر إضافة ولي أمر",
+        mainText: "إضافة  مشرف",
+        secText: "املأ الحقول الموجودة في الأسفل ثم اضغط على زر إضافة  مشرف",
       ),
       body: SingleChildScrollView(
         child: Form(

@@ -4,6 +4,7 @@ import 'package:admins/src/otroja/cubit/add_staff/add_staff_cubit.dart';
 import 'package:admins/src/otroja/cubit/parentCubit/parent_cubit.dart';
 import 'package:admins/src/otroja/cubit/permissionCubit/permission_cubit.dart';
 import 'package:admins/src/otroja/cubit/recite/recite_cubit.dart';
+import 'package:admins/src/otroja/cubit/studentInfoCubit/student_info_cubit.dart';
 import 'package:admins/src/otroja/cubit/students/add_studnet/cubit/add_student_cubit.dart';
 import 'package:admins/src/otroja/cubit/students/check_student/check_student_cubit.dart';
 import 'package:admins/src/otroja/cubit/students/edit_info_student_cubit/edit_info_student_cubit.dart';
@@ -11,15 +12,18 @@ import 'package:admins/src/otroja/cubit/subjectCubit/subject_cubit.dart';
 import 'package:admins/src/otroja/data/models/course_model.dart';
 import 'package:admins/src/otroja/data/models/permission_model.dart';
 import 'package:admins/src/otroja/data/models/student_model/show_students.dart';
+import 'package:admins/src/otroja/data/models/stuednt_info.dart';
 import 'package:admins/src/otroja/data/repository/level_repository.dart';
 import 'package:admins/src/otroja/data/repository/parent_repository.dart';
 import 'package:admins/src/otroja/data/repository/permission_repository.dart';
 import 'package:admins/src/otroja/data/repository/recite_repository.dart';
 import 'package:admins/src/otroja/data/repository/standard_repository.dart';
+import 'package:admins/src/otroja/data/repository/student_info_repository.dart';
 import 'package:admins/src/otroja/data/repository/students_rpeos/show_students_repo.dart';
 import 'package:admins/src/otroja/data/repository/subject_repository.dart';
 import 'package:admins/src/otroja/presentation/screens/Courses/AddCourses/addCoursesScreen.dart';
 import 'package:admins/src/otroja/presentation/screens/Home/homePage.dart';
+import 'package:admins/src/otroja/presentation/screens/absence/absencesDays/absences_days.dart';
 import 'package:admins/src/otroja/presentation/screens/activity/addActivity/addActivityScreen.dart';
 import 'package:admins/src/otroja/presentation/screens/activity/showActivities/activityScreen.dart';
 import 'package:admins/src/otroja/presentation/screens/parents/showPerants/show_perants.dart';
@@ -40,6 +44,8 @@ import '../../data/datasource/api_services.dart';
 import '../../data/repository/course_repository.dart';
 import '../../data/repository/group_repository.dart';
 import '../../data/repository/staff_repository.dart';
+import '../../presentation/screens/Exam/studentPoints/student_points.dart';
+import '../../presentation/screens/absence/absencesDays/absence_for_Group.dart';
 import '../../presentation/screens/management/management_screen.dart';
 import '../../presentation/screens/Courses/ShowCourses/show_courses.dart';
 import '../../presentation/screens/Groups/ShowGroups/GroupsScreen.dart';
@@ -74,6 +80,8 @@ class AppRouter {
 
   ParentCubit parentCubit = ParentCubit(ParentRepository(ApiService()));
 
+  StudentInfoCubit studentInfoCubit =
+      StudentInfoCubit(StudentRepository(ApiService()));
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.home:
@@ -250,9 +258,13 @@ class AppRouter {
       case Routes.studentDetails:
         final ShowStudentModel? showStudentModel =
             settings.arguments as ShowStudentModel?;
+        studentInfoCubit.fetchStudentInfo(showStudentModel!.id!);
         return MaterialPageRoute(
-            builder: (_) => StudentDetails(
-                  showStudentModel: showStudentModel!,
+            builder: (_) => BlocProvider.value(
+                  value: studentInfoCubit,
+                  child: StudentDetails(
+                    showStudentModel: showStudentModel,
+                  ),
                 ));
       case Routes.editStudentInfo:
         final studentId = settings.arguments as String;
@@ -327,6 +339,18 @@ class AppRouter {
 
       case Routes.managemet:
         return MaterialPageRoute(builder: (_) => ManagemetScreen());
+      case Routes.studentPoints:
+        final result = settings.arguments as List<Result>;
+        return MaterialPageRoute(
+            builder: (_) => StudentPointsScreen(results: result));
+      case Routes.studentAbsencsByGroup:
+        final absences = settings.arguments as List<Absence>;
+        return MaterialPageRoute(
+            builder: (_) => AbsenceDayesScreen(absence: absences));
+      case Routes.studentAbsencsForGroup:
+        final absences = settings.arguments as List<Absence>;
+        return MaterialPageRoute(
+            builder: (_) => StudentAbsencsForGroup(absence: absences));
     }
     return null;
   }

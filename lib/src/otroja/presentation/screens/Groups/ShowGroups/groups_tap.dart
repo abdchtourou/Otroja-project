@@ -37,7 +37,7 @@ class GroupsTapScreen extends StatelessWidget {
               itemCount: state.groups.length,
             );
           } else {
-            return const Center(child: Text("Error loading students"));
+            return const Center(child: Text("Error loading Groups"));
           }
         },
       ),

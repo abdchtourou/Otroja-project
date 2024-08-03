@@ -13,7 +13,7 @@ class CustomDataRow extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Container(
-        padding: const EdgeInsets.only(bottom: 30),
+        padding: const EdgeInsets.only(bottom: 15 ,top : 15),
         color: OtrojaColors.primary2Color,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
