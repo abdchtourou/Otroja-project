@@ -51,9 +51,11 @@ class ShowStudentModel {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
+  
 
   Map<String, dynamic> toJson() {
     return {
+      'student_id':id,
       'user_name': userName,
       'password': password,
       'password_confirmation': password,
@@ -66,6 +68,17 @@ class ShowStudentModel {
       'birth_date': birthDate,
       'grade': grade,
       'group_id': grade,
+    };
+  }
+    Map<String, dynamic> toJsonUpdate() {
+    return {
+      'student_id':id,
+      'first_name': firstName,
+      'last_name': lastName,
+      'phone_number': phoneNumber,
+      'address': address,
+      'birth_date': birthDate,
+      'grade': grade,
     };
   }
 }

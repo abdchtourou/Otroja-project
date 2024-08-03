@@ -1,15 +1,14 @@
 import 'package:admins/src/otroja/core/routing/routes.dart';
+import 'package:admins/src/otroja/cubit/EditStudentCubit/edit_student_cubit.dart';
 import 'package:admins/src/otroja/cubit/Exam_cubit/question_cubit.dart';
 import 'package:admins/src/otroja/cubit/absecne_staff/absence_staff_cubit.dart';
 import 'package:admins/src/otroja/cubit/activityCubit/show_activity/show_activity_cubit.dart';
-import 'package:admins/src/otroja/cubit/add_staff/add_staff_cubit.dart';
 import 'package:admins/src/otroja/cubit/parentCubit/parent_cubit.dart';
 import 'package:admins/src/otroja/cubit/permissionCubit/permission_cubit.dart';
 import 'package:admins/src/otroja/cubit/recite/recite_cubit.dart';
 import 'package:admins/src/otroja/cubit/studentInfoCubit/student_info_cubit.dart';
 import 'package:admins/src/otroja/cubit/students/add_studnet/cubit/add_student_cubit.dart';
 import 'package:admins/src/otroja/cubit/students/check_student/check_student_cubit.dart';
-import 'package:admins/src/otroja/cubit/students/edit_info_student_cubit/edit_info_student_cubit.dart';
 import 'package:admins/src/otroja/cubit/subjectCubit/subject_cubit.dart';
 import 'package:admins/src/otroja/data/models/course_model.dart';
 import 'package:admins/src/otroja/data/models/permission_model.dart';
@@ -21,12 +20,13 @@ import 'package:admins/src/otroja/data/repository/permission_repository.dart';
 import 'package:admins/src/otroja/data/repository/recite_repository.dart';
 import 'package:admins/src/otroja/data/repository/standard_repository.dart';
 import 'package:admins/src/otroja/data/repository/student_info_repository.dart';
+import 'package:admins/src/otroja/data/repository/students_rpeos/edit_info_student_repo.dart';
 import 'package:admins/src/otroja/data/repository/students_rpeos/show_students_repo.dart';
 import 'package:admins/src/otroja/data/repository/subject_repository.dart';
 import 'package:admins/src/otroja/presentation/screens/Courses/AddCourses/addCoursesScreen.dart';
 import 'package:admins/src/otroja/presentation/screens/Exams/qustion/qustion.dart';
 import 'package:admins/src/otroja/presentation/screens/Home/homePage.dart';
-import 'package:admins/src/otroja/presentation/screens/absence/absencesDays/absences_days.dart';
+import 'package:admins/src/otroja/presentation/screens/absence/absencesDays/absences_by_group.dart';
 import 'package:admins/src/otroja/presentation/screens/activity/addActivity/addActivityScreen.dart';
 import 'package:admins/src/otroja/presentation/screens/activity/showActivities/activityScreen.dart';
 import 'package:admins/src/otroja/presentation/screens/parents/showPerants/show_perants.dart';
@@ -195,11 +195,11 @@ class AppRouter {
                 ));
 
       case Routes.checkGroups:
-        return MaterialPageRoute(builder: (_) =>
-            BlocProvider(
-              create: (context) => getIt<AbsenceStaffCubit>(),
-              child: CheckGroupsScreen(),
-            ));
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) => getIt<AbsenceStaffCubit>(),
+                  child: CheckGroupsScreen(),
+                ));
 
       case Routes.addGroup:
         return MaterialPageRoute(
@@ -228,7 +228,8 @@ class AppRouter {
         showStudentsCubit.getStudents();
         return MaterialPageRoute(
             builder: (_) => BlocProvider.value(
-                value: showStudentsCubit, child: const AddStudentToGroupScreen()));
+                value: showStudentsCubit,
+                child: const AddStudentToGroupScreen()));
 
       case Routes.showParents:
         parentCubit.fetchAllParents();
@@ -274,14 +275,10 @@ class AppRouter {
                   ),
                 ));
       case Routes.editStudentInfo:
-        final studentId = settings.arguments as String;
+        final student = settings.arguments as ShowStudentModel;
         return MaterialPageRoute(
-            builder: (_) => BlocProvider(
-                  create: (context) => getIt<EditInfoStudentCubit>(),
-                  child: EditInformationStudent(
-                    studentId: studentId,
-                  ),
-                ));
+            builder: (_) => BlocProvider(create:(context) => EditStudentCubit(EditInfoStudentRepo(ApiService())),
+            child:EditInformationStudent(student: student,) ,));
 
       case Routes.showAuthorizedAdmins:
         final permission = settings.arguments as Permission;
@@ -325,9 +322,9 @@ class AppRouter {
                     BlocProvider.value(value: parentCubit)
                   ],
                   child: AddStudent(),
-            ));
-    
-        case Routes.question:
+                ));
+
+      case Routes.question:
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
                   create: (context) => getIt<QuestionCubit>(),

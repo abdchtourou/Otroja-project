@@ -2,7 +2,6 @@ import 'package:admins/src/otroja/cubit/Exam_cubit/question_cubit.dart';
 import 'package:admins/src/otroja/cubit/activityCubit/show_activity/show_activity_cubit.dart';
 import 'package:admins/src/otroja/cubit/add_staff/add_staff_cubit.dart';
 import 'package:admins/src/otroja/cubit/students/check_student/check_student_cubit.dart';
-import 'package:admins/src/otroja/cubit/students/edit_info_student_cubit/edit_info_student_cubit.dart';
 import 'package:admins/src/otroja/data/repository/absence/absence_repo.dart';
 import 'package:admins/src/otroja/data/repository/absence/absence_staff_repo.dart';
 import 'package:admins/src/otroja/data/repository/activity_repos/add_activity_repo.dart';
@@ -26,8 +25,6 @@ Future<void> setUpGetIt()async{
 
   // edit information
   getIt.registerFactory<EditInfoStudentRepo>(() => EditInfoStudentRepo(apiServices));
-  getIt.registerFactory<EditInfoStudentCubit>(()=>EditInfoStudentCubit(getIt()));
-
 
   getIt.registerFactory<AddStaffCubit>(()=>AddStaffCubit());
   // Add Activity

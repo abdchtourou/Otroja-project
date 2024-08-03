@@ -14,7 +14,7 @@ class StudentAbsencsForGroup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: OtrojaAppBar(mainText: "عدد أيام غياب الطالب لكل حلقة"),
+      appBar: OtrojaAppBar(mainText:"أيام الغياب" ),
       body: Column(
         children: [
           Expanded(

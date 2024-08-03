@@ -17,7 +17,7 @@ class AbsenceDayesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     absenceCount = countAbsencesByGroupName(absence);
     return Scaffold(
-      appBar: OtrojaAppBar(mainText:"أيام الغياب"),
+      appBar: OtrojaAppBar(mainText:"عدد أيام غياب الطالب لكل حلقة"),
       body: Column(
         children: [
           Expanded(

@@ -31,7 +31,8 @@ class AbsenceItem extends StatelessWidget {
                 children: [
                   Text(
                     date,
-                    style: const TextStyle(color: Color(0xFF85313C)),
+                    style: const TextStyle(
+                    fontWeight: FontWeight.w500 ,fontSize: 18),
                   ),
                   SizedBox(
                     width: 5.w,
@@ -42,15 +43,15 @@ class AbsenceItem extends StatelessWidget {
                   ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child:
-                    Text(
-                      groupName,
-                      style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w500),
-                    ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(vertical: 10),
+              //   child:
+              //       Text(
+              //         groupName,
+              //         style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w500),
+              //       ),
              
-              ),
+              // ),
             ],
           ),
         ),

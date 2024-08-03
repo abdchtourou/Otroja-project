@@ -12,9 +12,11 @@ class OtrojaTextFormField extends StatelessWidget {
     this.isRtl = true,
     this.controller,
     this.type,
+    this.initialValue,
     required this.label,
   });
   final TextEditingController? controller;
+  String? initialValue;
   final TextInputType? type;
   final String label;
   final String? hintText;
@@ -43,6 +45,7 @@ class OtrojaTextFormField extends StatelessWidget {
         Directionality(
           textDirection: isRtl ? TextDirection.rtl : TextDirection.ltr,
           child: TextFormField(
+            initialValue:initialValue ,
             controller: controller,
             obscureText: obscureText,
             style: const TextStyle(color: Colors.black),
