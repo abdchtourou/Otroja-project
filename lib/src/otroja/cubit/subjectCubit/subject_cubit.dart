@@ -10,15 +10,21 @@ class SubjectCubit extends Cubit<SubjectState> {
   final SubjectRepository repository;
 
   SubjectCubit(this.repository) : super(SubjectInitial());
+  var courseLevelId;
 
   Future<void> getSubjectsByCourseLeve(int id) async {
     emit(SubjectLoading());
     try {
-      final subjects = await repository.getSubjectsByCourseLevel(id);
+      List<Subject> subjects = await repository.getSubjectsByCourseLevel(id);
       emit(SubjectsLoaded(subjects));
     } catch (e) {
       print(e);
       emit(SubjectError(e.toString()));
     }
   }
+  addSubject(){
+    final data=Subject(id: 2, name: '', categoryName: '');
+
+  }
+
 }

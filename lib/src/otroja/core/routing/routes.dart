@@ -7,6 +7,7 @@ class Routes {
   static const String addGroup = "/addGroup";
   static const String addParents = "/addParents";
   static const String addStaff = "/addStaff";
+  static const String question = "/question";
   static const String home = "/";
   static const String checkStudents = "/checkStudents";
   static const String checkGroups = "/checkGroups";

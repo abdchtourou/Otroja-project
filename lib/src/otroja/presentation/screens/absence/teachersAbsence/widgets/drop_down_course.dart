@@ -1,22 +1,20 @@
-import 'package:admins/src/otroja/core/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 
-class OtrojaDropdown extends StatelessWidget {
-  final List<String> list;
+import '../../../../../core/utils/constants/colors.dart';
+import '../../../../../data/models/absence_model/get_groups.dart';
+import '../../../../../data/models/course_model.dart';
+class DropDownCourse extends StatelessWidget {
+  final List<Course> list;
   final String? labelText;
-  final String hint;
-  final ValueChanged<String?>? onChange;
-  final bool isRtl;
-  final String? value;
+  final String? hint;
+  final ValueChanged<Course?> onChanged;
 
-  const OtrojaDropdown({
+  DropDownCourse({
     Key? key,
     required this.list,
-    this.labelText,
+    required this.labelText,
     required this.hint,
-    this.onChange,
-    this.isRtl = true,
-    this.value,
+    required this.onChanged,
   }) : super(key: key);
 
   @override
@@ -34,33 +32,28 @@ class OtrojaDropdown extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
-                  color: Color(0xff85313C), // Updated color
                 ),
                 textAlign: TextAlign.right,
               ),
             ),
           Align(
             alignment: Alignment.center,
-            child: DropdownButtonFormField<String>(
+            child: DropdownButtonFormField<Course>(
+
               isExpanded: true,
               isDense: true,
-              value: value,
               hint: Align(
                 alignment: Alignment.center,
                 child: Text(
-                  hint,
-                  style: const TextStyle(
-                    fontSize: 17.75,
-                  ),
+                  hint!,
+                  style: const TextStyle(fontSize: 20,),
                   textAlign: TextAlign.center,
                 ),
               ),
               dropdownColor: OtrojaColors.primary2Color,
-              // Background color
               menuMaxHeight: 200,
               iconSize: 32,
               iconEnabledColor: const Color(0xFFE6E6E6),
-              // Icon color
               decoration: InputDecoration(
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
@@ -83,17 +76,18 @@ class OtrojaDropdown extends StatelessWidget {
                 fontSize: 17.75,
                 color: Colors.black,
               ),
-              onChanged: onChange,
-              items: list.map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  alignment: AlignmentDirectional.center,
-                  value: value,
-                  child: Text(
-                    value,
-                    textAlign: TextAlign.left,
-                  ),
-                );
-              }).toList(),
+              onChanged: onChanged,
+              items: [
+
+                ...list.map<DropdownMenuItem<Course>>((Course name) {
+
+                  return DropdownMenuItem<Course>(
+                    alignment: AlignmentDirectional.center,
+                    value: name,
+                    child: Text(name.name!,textAlign: TextAlign.left,),
+                  );
+                }).toList(),
+              ],
             ),
           ),
         ],

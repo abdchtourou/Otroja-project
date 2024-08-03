@@ -1,10 +1,10 @@
 class Course {
-  final int id;
-  final String name;
-  final String startDate;
+   var id;
+var name;
+ var startDate;
   final DateTime createdAt;
   final DateTime updatedAt;
-  final List<Level> levels;
+   List<Level> levels;
 
   Course(
       {required this.id,
@@ -56,8 +56,8 @@ class Course {
 }
 
 class Level {
-  final int? id;
-  final String name;
+ var id;
+  var name;
   final LevelPivot? pivot;
 
   Level({
@@ -81,9 +81,9 @@ class Level {
   }
 }
 class LevelPivot {
-  final int courseId;
-  final int levelId;
-  final int id;
+  var courseId;
+  var levelId;
+  var id;
 
   LevelPivot({
     required this.id,

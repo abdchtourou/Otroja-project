@@ -14,6 +14,7 @@ class CheckStudentGroupLoaded extends CheckStudentState {
   CheckStudentGroupLoaded(this.groupsName);
 }
 
+class CheckStudentLoadingGroup extends CheckStudentState {}
 class CheckStudentLoading extends CheckStudentState {}
 class CheckStudentSend extends CheckStudentState {}
 
