@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../cubit/students/add_studnet/add_studnet_cubit.dart';
+
 import '../../../cubit/students/edit_info_student_cubit/edit_info_student_cubit.dart';
 import '../../widgets/add_user/add_parent.dart';
 import '../../widgets/add_user/custom_dialog.dart';
@@ -66,14 +66,7 @@ class EditInformationStudent extends StatelessWidget {
                       ],
                     ),
                     StudentInfoForm(
-                      fullNameController: cubit.fullNameController,
-                      emailController: cubit.emailController,
-                      passwordController: cubit.passwordController,
-                      phoneNumberController: cubit.phoneNumberController,
-                      dateController: cubit.dateController,
-                      onChanged: (value) {
-                        cubit.address = value!;
-                      },
+                    
                     ),
                     SaveCancelButtons(
                       onPressedSave: () {

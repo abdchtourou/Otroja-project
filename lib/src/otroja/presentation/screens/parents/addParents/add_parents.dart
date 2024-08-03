@@ -1,3 +1,4 @@
+import 'package:admins/src/otroja/core/helper/extensions.dart';
 import 'package:admins/src/otroja/cubit/add_staff/add_staff_cubit.dart';
 import 'package:admins/src/otroja/cubit/parentCubit/parent_cubit.dart';
 import 'package:admins/src/otroja/presentation/widgets/otroja_app_bar.dart';
@@ -139,11 +140,12 @@ class AddParents extends StatelessWidget {
                     showDialog(
                       context: context,
                       builder: (context) => OtrojaSuccessDialog(
-                        text: "!تم إضافة الحلقة بنجاح",
+                        text: "!تم إضافة ولي الأمر بنجاح",
                       ),
                     ).then((_) {
                       formKey.currentState?.reset();
                       context.read<ParentCubit>().resetState();
+                      context.pop();
                     });
                   }
                 }, builder: (context, state) {

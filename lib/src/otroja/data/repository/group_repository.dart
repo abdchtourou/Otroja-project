@@ -13,6 +13,19 @@ class GroupRepository {
     return data.map((json) => Group.fromJson(json)).toList();
   }
 
+Future<List<Group>> getAllGroups() async {
+    try {
+      final response = await _apiService.get('all_groups');
+      if (response.data['status'] == 200) {
+        final List<dynamic> groupsData = response.data['data'];
+        return groupsData.map((json) => Group.fromJson(json)).toList();
+      } else {
+        throw Exception('Failed to fetch groups: ${response.data['msg']}');
+      }
+    } catch (e) {
+      throw Exception('Failed to fetch groups: $e');
+    }
+  }
   Future<List<Group>> getGroupsByCourseLevel(int courseLevelId) async {
     final response =
         await _apiService.get('groups',queryParameters:  {'course_level_id': courseLevelId.toString()});

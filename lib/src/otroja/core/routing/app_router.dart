@@ -4,6 +4,7 @@ import 'package:admins/src/otroja/cubit/add_staff/add_staff_cubit.dart';
 import 'package:admins/src/otroja/cubit/parentCubit/parent_cubit.dart';
 import 'package:admins/src/otroja/cubit/permissionCubit/permission_cubit.dart';
 import 'package:admins/src/otroja/cubit/recite/recite_cubit.dart';
+import 'package:admins/src/otroja/cubit/students/add_studnet/cubit/add_student_cubit.dart';
 import 'package:admins/src/otroja/cubit/students/check_student/check_student_cubit.dart';
 import 'package:admins/src/otroja/cubit/students/edit_info_student_cubit/edit_info_student_cubit.dart';
 import 'package:admins/src/otroja/cubit/subjectCubit/subject_cubit.dart';
@@ -21,6 +22,7 @@ import 'package:admins/src/otroja/presentation/screens/Courses/AddCourses/addCou
 import 'package:admins/src/otroja/presentation/screens/Home/homePage.dart';
 import 'package:admins/src/otroja/presentation/screens/activity/addActivity/addActivityScreen.dart';
 import 'package:admins/src/otroja/presentation/screens/activity/showActivities/activityScreen.dart';
+import 'package:admins/src/otroja/presentation/screens/parents/showPerants/show_perants.dart';
 import 'package:admins/src/otroja/presentation/screens/student/edit_information_student.dart';
 import 'package:admins/src/otroja/presentation/screens/student/student_details.dart';
 import 'package:admins/src/otroja/presentation/screens/subject/show_subjects/show_subject.dart';
@@ -33,7 +35,6 @@ import '../../cubit/groups/group_cubit.dart';
 import '../../cubit/levelCubit/level_cubit.dart';
 import '../../cubit/staff/staff_cubit.dart';
 import '../../cubit/standardCubit/standard_cubit.dart';
-import '../../cubit/students/add_studnet/add_studnet_cubit.dart';
 import '../../cubit/students/show_student_cubit/show_students_cubit.dart';
 import '../../data/datasource/api_services.dart';
 import '../../data/repository/course_repository.dart';
@@ -52,6 +53,7 @@ import '../../presentation/screens/parents/addParents/add_parents.dart';
 import '../../presentation/screens/permissions/ShowAuthorizedAdmins/show_authorized_admins.dart';
 import '../../presentation/screens/permissions/ShowPermissions/show_permissions_screen.dart';
 import '../../presentation/screens/staff/add_staff.dart';
+import '../../presentation/screens/staff/showStaff/show_staff_screen.dart';
 import '../../presentation/screens/student/add_student.dart';
 import '../../presentation/screens/student/show_students.dart';
 import '../../presentation/screens/subjectOrGroups/subject_or_group_screen.dart';
@@ -68,6 +70,9 @@ class AppRouter {
   LevelCubit levelCubit = LevelCubit(LevelRepository(ApiService()));
   PermissionCubit permissionCubit =
       PermissionCubit(PermissionRepository(ApiService()));
+  StaffCubit staffCubit = StaffCubit(StaffRepository(ApiService()));
+
+  ParentCubit parentCubit = ParentCubit(ParentRepository(ApiService()));
 
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -158,9 +163,8 @@ class AppRouter {
 
       case Routes.addParents:
         return MaterialPageRoute(
-            builder: (_) => BlocProvider(
-                  create: (context) =>
-                      ParentCubit(ParentRepository(ApiService())),
+            builder: (_) => BlocProvider.value(
+                  value: parentCubit,
                   child: AddParents(),
                 ));
 
@@ -186,9 +190,12 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => MultiBlocProvider(
             providers: [
+              BlocProvider.value(
+                value: showStudentsCubit,
+              ),
               BlocProvider(
                 create: (BuildContext context) =>
-                    StaffCubit(StaffRepository(ApiService())),
+                    StaffCubit(StaffRepository(ApiService()))..getTeachers(),
               ),
               BlocProvider(
                 create: (context) =>
@@ -208,12 +215,18 @@ class AppRouter {
             builder: (_) => BlocProvider.value(
                 value: showStudentsCubit, child: AddStudentToGroupScreen()));
 
+      case Routes.showParents:
+        parentCubit.fetchAllParents();
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider.value(
+                value: parentCubit, child: ShowParentsScreen()));
+
       case Routes.groupStudents:
         final groupId = settings.arguments as int;
+        showStudentsCubit.getStudentsByGroupId(groupId);
         return MaterialPageRoute(
-            builder: (_) => BlocProvider(
-                  create: (context) =>
-                      getIt<ShowStudentsCubit>()..getStudentsByGroupId(groupId),
+            builder: (_) => BlocProvider.value(
+                  value: showStudentsCubit,
                   child: GroupStudentsScreen(
                     groupId: groupId,
                   ),
@@ -254,8 +267,19 @@ class AppRouter {
       case Routes.showAuthorizedAdmins:
         final permission = settings.arguments as Permission;
         return MaterialPageRoute(
-            builder: (_) => ShowAuthorizedAdminsScreen(
-                  permission: permission,
+            builder: (_) => MultiBlocProvider(
+                  providers: [
+                    BlocProvider.value(
+                      value: staffCubit,
+                    ),
+                    BlocProvider(
+                      create: (context) =>
+                          PermissionCubit(PermissionRepository(ApiService())),
+                    ),
+                  ],
+                  child: ShowAuthorizedAdminsScreen(
+                    permission: permission,
+                  ),
                 ));
 
       case Routes.showPermissions:
@@ -268,15 +292,35 @@ class AppRouter {
 
       case Routes.addStudent:
         return MaterialPageRoute(
-            builder: (_) => BlocProvider(
-                  create: (context) => getIt<AddStudentCubit>(),
+            builder: (_) => MultiBlocProvider(
+                  providers: [
+                    BlocProvider(
+                      create: (context) =>
+                          GroupCubit(GroupRepository(ApiService()))
+                            ..fetchAllGroups(),
+                    ),
+                    BlocProvider(
+                      create: (context) =>
+                          AddStudentCubit(ShowStudentsRepo(ApiService())),
+                    ),
+                    BlocProvider.value(value: parentCubit)
+                  ],
                   child: AddStudent(),
                 ));
-                 case Routes.addStaff:
+      case Routes.addStaff:
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
-                  create: (context) => getIt<AddStaffCubit>(),
+                  create: (context) =>
+                      StaffCubit(StaffRepository(ApiService())),
                   child: AddStaff(),
+                ));
+
+      case Routes.showStaff:
+        staffCubit.getAllStaff();
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider.value(
+                  value: staffCubit,
+                  child: ShowStaffScreen(),
                 ));
       case Routes.showSubject:
         return MaterialPageRoute(builder: (_) => ShowSubject());

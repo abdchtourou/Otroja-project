@@ -48,7 +48,7 @@ class OtrojaTextFormField extends StatelessWidget {
             style: const TextStyle(color: Colors.black),
             validator: (value) {
               if (value!.isEmpty) {
-                return 'field is required';
+                return 'الحقل مطلوب';
               }
             },
             keyboardType: type,

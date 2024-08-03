@@ -1,3 +1,5 @@
+import 'package:admins/src/otroja/core/helper/extensions.dart';
+import 'package:admins/src/otroja/core/routing/routes.dart';
 import 'package:admins/src/otroja/presentation/screens/Groups/groupStudents/widgets/RemoveConfirmationDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,7 +27,9 @@ class GroupStudentsList extends StatelessWidget {
           name: "${student.firstName} ${student.lastName}",
           imagePath: "assets/images/kidsNew.png",
           iconPath: "assets/icons/cancel.png",
-          onItemPressed: (){},
+          onItemPressed: () {
+            context.pushNamed(Routes.studentDetails, arguments: student);
+          },
           onIconPressed: () async {
             final shouldRemove =
                 await RemoveStudentDialog.show(context, student);

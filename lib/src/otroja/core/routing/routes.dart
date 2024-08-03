@@ -24,5 +24,8 @@ class Routes {
   static const String addCourses = "/AddCourses";
   static const String showLevels = "/showLevels";
   static const String subjectOrGroup = "/subjectOrGroup";
-  static const String managemet = "/accountManagemet";
+  static const String managemet = "/managemet";
+  static const String showParents = "/showParents";
+  static const String showStaff = "/showStaff";
+
 }

@@ -153,9 +153,8 @@ class AddGroup extends StatelessWidget {
                               onTap: () {
                                 context.pushNamed(Routes.addStudentToGroup);
                               },
-                              icon:
-                                  AssetImage('assets/icons/student.png'),
-                              backgroundColor:const Color(0xffEEEAE4) ,
+                              icon: AssetImage('assets/icons/student.png'),
+                              backgroundColor: const Color(0xffEEEAE4),
                               text: "إضافة طلاب للحلقة",
                               textColor: const Color(0xFF85313C),
                             ),
@@ -170,38 +169,39 @@ class AddGroup extends StatelessWidget {
                                   text: "!تم إضافة الحلقة بنجاح",
                                 ),
                               ).then((_) {
+                                context
+                                    .read<ShowStudentsCubit>()
+                                    .selectedStudents = [];
                                 formKey.currentState?.reset();
                                 context.read<GroupCubit>().resetState();
                               });
                             }
                           }, builder: (context, state) {
-                          
-                            return  OtrojaButton(
-                                onPressed: () async {
-                                  if (formKey.currentState!.validate()) {
-                                    final groupCubit =
-                                        context.read<GroupCubit>();
-                                    final studentCubit =
-                                        context.read<ShowStudentsCubit>();
-                                    groupCubit.createGroupWithStudents(Group(
-                                        staffId: groupCubit.selectedTeacher!.id,
-                                        courseLevelId:
-                                            groupCubit.selectedCourseLevelId!,
-                                        name: groupCubit.groupName!,
-                                        studentIds:
-                                            studentCubit.selectedStudents));
+                            return OtrojaButton(
+                              onPressed: () async {
+                                if (formKey.currentState!.validate()) {
+                                  final groupCubit = context.read<GroupCubit>();
+                                  final studentCubit =
+                                      context.read<ShowStudentsCubit>();
+                                  groupCubit.createGroupWithStudents(Group(
+                                      staffId: groupCubit.selectedTeacher!.id,
+                                      courseLevelId:
+                                          groupCubit.selectedCourseLevelId!,
+                                      name: groupCubit.groupName!,
+                                      studentIds:
+                                          studentCubit.selectedStudents));
 
-                                     print("tap");
-                                    // print(groupCubit.groupName);
-                                    // print(
-                                    //     groupCubit.selectedTeacher!.firstName);
-                                    // print(groupCubit.selectedCourseLevelId);
-                                    // print(studentCubit.selectedStudents.length);
-                                  }
-                                },
-                                text: 'إنشاء حلقة',
-                              );
-                           
+                
+                                  print("tap");
+                                  // print(groupCubit.groupName);
+                                  // print(
+                                  //     groupCubit.selectedTeacher!.firstName);
+                                  // print(groupCubit.selectedCourseLevelId);
+                                  // print(studentCubit.selectedStudents.length);
+                                }
+                              },
+                              text: 'إنشاء حلقة',
+                            );
                           })
                         ],
                       ),

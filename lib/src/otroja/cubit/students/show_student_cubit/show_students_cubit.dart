@@ -12,7 +12,6 @@ class ShowStudentsCubit extends Cubit<ShowStudentsState> {
   bool isLoadingMore = false;
 
   ShowStudentsCubit(this.showStudentsRepo) : super(ShowStudentsInitial()) {
-   
     // getStudentsIslam();
     scrollController.addListener(_onScroll);
   }
@@ -103,13 +102,12 @@ class ShowStudentsCubit extends Cubit<ShowStudentsState> {
     }
   }
 
-
   void toggleSelection(int id) {
     if (selectedStudents.contains(id)) {
       selectedStudents.remove(id);
     } else {
       selectedStudents.add(id);
-      print(selectedStudents.length);
+      // print(selectedStudents.length);
     }
 
     emit(UpdateSelectedStudentState(List.from(selectedStudents)));
@@ -121,6 +119,22 @@ class ShowStudentsCubit extends Cubit<ShowStudentsState> {
           await showStudentsRepo.removeStudentFromGroup(studentId, groupId);
       if (success) {
         emit(StudentRemoved());
+        getStudentsByGroupId(groupId);
+      } else {
+        emit(ShowStudentsError());
+      }
+    } catch (e) {
+      print(e);
+      emit(ShowStudentsError());
+    }
+  }
+
+  Future<void> addStudentsToGroup(int groupId, List<int> studentIds) async {
+    emit(ShowStudentsLoading());
+    try {
+      final success =
+          await showStudentsRepo.addStudentsToGroup(groupId, studentIds);
+      if (success) {
         getStudentsByGroupId(groupId);
       } else {
         emit(ShowStudentsError());

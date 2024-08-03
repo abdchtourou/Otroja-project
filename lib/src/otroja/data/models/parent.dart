@@ -1,26 +1,31 @@
 // lib/models/parent.dart
 
 class Parent {
-  final String userName;
-  final String email;
-  final String password;
-  final String firstName;
-  final String lastName;
-  final String phoneNumber;
-  final String profession;
+   int? id;
+   int? userId;
+   String ?userName;
+   String? email;
+   String? password;
+   String? firstName;
+   String? lastName;
+   String? phoneNumber;
+   String? profession;
 
   Parent({
-    required this.userName,
-    required this.email,
-    required this.password,
-    required this.firstName,
-    required this.lastName,
-    required this.phoneNumber,
-    required this.profession,
+    this.id,
+    this.userId,
+     this.userName,
+     this.email,
+     this.password,
+     this.firstName,
+     this.lastName,
+     this.phoneNumber,
+     this.profession,
   });
 
   Map<String, dynamic> toJson() {
     return {
+
       'user_name': userName,
       'email': email,
       'password': password,
@@ -34,6 +39,8 @@ class Parent {
 
   factory Parent.fromJson(Map<String, dynamic> json) {
     return Parent(
+      id: json['id'],
+      userId: json['user_id'],
       userName: json['user_name'],
       email: json['email'],
       password: json['password'],

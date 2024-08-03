@@ -10,6 +10,7 @@ class ParentCubit extends Cubit<ParentState> {
   final ParentRepository repository;
   ParentCubit(this.repository) : super(ParentInitial());
 
+  int? id;
   String? firstName;
   String? lastName;
   String? userName;
@@ -19,25 +20,35 @@ class ParentCubit extends Cubit<ParentState> {
   String? phone;
   String? profession;
 
-
   Future<void> addParent(Parent parent) async {
     try {
-      await repository.addParent(parent);
+      Parent newParent = await repository.addParent(parent);
+      id = newParent.id!;
       emit(ParentCreated());
     } catch (e) {
       emit(ParentError(e.toString()));
     }
   }
 
+  Future<void> fetchAllParents() async {
+    try {
+      emit(ParentLoading());
+      final parents = await repository.getAllParents();
+      emit(ParentsLoaded(parents));
+    } catch (e) {
+      emit(ParentError(e.toString()));
+    }
+  }
+
   void resetState() {
-    firstName=null;
-   lastName=null;
-   userName=null;
-   email=null;
-   password=null;
-   confirmPassword=null;
-   phone=null;
-   profession=null;
-   emit(ParentInitial());
+    firstName = null;
+    lastName = null;
+    userName = null;
+    email = null;
+    password = null;
+    confirmPassword = null;
+    phone = null;
+    profession = null;
+    emit(ParentInitial());
   }
 }

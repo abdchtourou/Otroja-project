@@ -25,3 +25,5 @@ final class UpdateSelectedStudentState extends ShowStudentsState {
 
   UpdateSelectedStudentState(this.selectedStudents);
 }
+
+class StudentsAdded extends ShowStudentsState {}

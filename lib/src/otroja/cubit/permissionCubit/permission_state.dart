@@ -11,7 +11,8 @@ class PermissionLoaded extends PermissionState {
 
   PermissionLoaded(this.permissions);
 }
-
+class PermissionAdded extends PermissionState {}
+class PermissionRemoved extends PermissionState {}
 class PermissionError extends PermissionState {
   final String message;
 

@@ -8,7 +8,22 @@ class ParentRepository {
 
   ParentRepository(this._apiService);
 
-  Future<int> addParent(Parent parent) async {
+  Future<List<Parent>> getAllParents() async {
+    try {
+      final response = await _apiService.get('parents');
+      if (response.data['status'] == 200) {
+        final List<dynamic> parentsData = response.data['data'];
+        print(response);
+        return parentsData.map((json) => Parent.fromJson(json)).toList();
+      } else {
+        throw Exception('Failed to fetch parents: ${response.data['msg']}');
+      }
+    } catch (e) {
+      throw Exception('Failed to fetch parents: $e');
+    }
+  }
+
+  Future<Parent> addParent(Parent parent) async {
     try {
       print(parent.toJson());
       final response = await _apiService.post(
@@ -16,7 +31,7 @@ class ParentRepository {
         data: parent.toJson(),
       );
       print(response);
-      return response.data['status'];
+      return Parent.fromJson(response.data['data']['parent']);
     } catch (e) {
       throw Exception('Failed to register parent: $e');
     }

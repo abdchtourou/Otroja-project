@@ -98,6 +98,16 @@ class GroupCubit extends Cubit<GroupState> {
     }
   }
 
+
+Future<void> fetchAllGroups() async {
+    emit(GroupLoading());
+    try {
+      final groups = await repository.getAllGroups();
+      emit(GroupsLoaded(groups));
+    } catch (e) {
+      emit(GroupError(e.toString()));
+    }
+  }
   void resetState() {
     groupName = null;
     selectedTeacher = null;

@@ -11,6 +11,29 @@ class PermissionCubit extends Cubit<PermissionState> {
 
   PermissionCubit(this._repository) : super(PermissionInitial());
 
+  int? permissionId;
+  List<int> staffIds = [];
+
+
+ Future<void> removePermission(int permissionId, int staffId) async {
+    try {
+      emit(PermissionLoading());
+      await _repository.removePermissionFromStaff(permissionId, staffId);
+      emit(PermissionRemoved()); // Emit a state indicating success
+    } catch (e) {
+      emit(PermissionError(e.toString()));
+    }
+  }
+  Future<void> addPermission(int permissionId, List<int> staffIds) async {
+    try {
+      emit(PermissionLoading());
+      await _repository.addPermissionToStaff(permissionId, staffIds);
+      emit(PermissionAdded()); // Emit a state indicating success
+    } catch (e) {
+      emit(PermissionError(e.toString()));
+    }
+  }
+
   Future<void> getPermissions() async {
     try {
       print('ggg');

@@ -1,10 +1,15 @@
-class   ShowStudentModel {
+import 'dart:math';
+
+class ShowStudentModel {
   int? id;
   int? userId;
   int? parentId;
   int? groupId;
+  String? userName;
   String? firstName;
   String? lastName;
+  String? email;
+  String? password;
   String? birthDate;
   String? grade;
   String? address;
@@ -14,17 +19,20 @@ class   ShowStudentModel {
 
   ShowStudentModel(
       {this.id,
-        this.userId,
-        this.parentId,
-        this.groupId,
-        this.firstName,
-        this.lastName,
-        this.birthDate,
-        this.grade,
-        this.address,
-        this.phoneNumber,
-        this.createdAt,
-        this.updatedAt});
+      this.userName,
+      this.userId,
+      this.parentId,
+      this.groupId,
+      this.firstName,
+      this.lastName,
+      this.email,
+      this.password,
+      this.birthDate,
+      this.grade,
+      this.address,
+      this.phoneNumber,
+      this.createdAt,
+      this.updatedAt});
 
   ShowStudentModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -33,6 +41,7 @@ class   ShowStudentModel {
     groupId = json['group_id'];
     firstName = json['first_name'];
     lastName = json['last_name'];
+    email = json['email'];
     birthDate = json['birth_date'];
     grade = json['grade'];
     address = json['address'];
@@ -42,19 +51,19 @@ class   ShowStudentModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['user_id'] = this.userId;
-    data['parent_id'] = this.parentId;
-    data['group_id'] = this.groupId;
-    data['first_name'] = this.firstName;
-    data['last_name'] = this.lastName;
-    data['birth_date'] = this.birthDate;
-    data['grade'] = this.grade;
-    data['address'] = this.address;
-    data['phone_number'] = this.phoneNumber;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    return data;
+    return {
+      'user_name': userName,
+      'password': password,
+      'password_confirmation': password,
+      'first_name': firstName,
+      'last_name': lastName,
+      'email': email,
+      'parent_id': parentId,
+      'phone_number': phoneNumber,
+      'address': address,
+      'birth_date': birthDate,
+      'grade': grade,
+      'group_id': grade,
+    };
   }
 }

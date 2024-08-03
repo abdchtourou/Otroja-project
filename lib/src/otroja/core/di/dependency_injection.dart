@@ -1,6 +1,5 @@
 import 'package:admins/src/otroja/cubit/activityCubit/show_activity/show_activity_cubit.dart';
 import 'package:admins/src/otroja/cubit/add_staff/add_staff_cubit.dart';
-import 'package:admins/src/otroja/cubit/students/add_studnet/add_studnet_cubit.dart';
 import 'package:admins/src/otroja/cubit/students/check_student/check_student_cubit.dart';
 import 'package:admins/src/otroja/cubit/students/edit_info_student_cubit/edit_info_student_cubit.dart';
 import 'package:admins/src/otroja/data/repository/absence/absence_repo.dart';
@@ -21,7 +20,7 @@ Future<void> setUpGetIt()async{
   ApiService apiServices = ApiService();
   getIt.registerLazySingleton<ShowStudentsRepo>(() => ShowStudentsRepo(apiServices));
   getIt.registerLazySingleton<ShowStudentsCubit>(() => ShowStudentsCubit( getIt()));
-  getIt.registerLazySingleton<AddStudentCubit>(()=>AddStudentCubit());
+ 
 
   // edit information
   getIt.registerFactory<EditInfoStudentRepo>(() => EditInfoStudentRepo(apiServices));

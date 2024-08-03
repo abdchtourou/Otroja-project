@@ -1,22 +1,26 @@
 class Staff {
-  final int id;
-  final int userId;
-  final int roleId;
-  final String firstName;
-  final String lastName;
-  final String phoneNumber;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+   int? id;
+   int? userId;
+   int? roleId;
+   String? firstName;
+   String? lastName;
+   String? userName;
+   String? password;
+   String? phoneNumber;
+   DateTime? createdAt;
+   DateTime? updatedAt;
 
   Staff({
-    required this.id,
-    required this.userId,
-    required this.roleId,
-    required this.firstName,
-    required this.lastName,
-    required this.phoneNumber,
-    required this.createdAt,
-    required this.updatedAt,
+     this.id,
+     this.userId,
+     this.roleId,
+     this.firstName,
+     this.lastName,
+     this.phoneNumber,
+     this.userName,
+     this.password,
+     this.createdAt,
+     this.updatedAt,
   });
 
   factory Staff.fromJson(Map<String, dynamic> json) {
@@ -34,14 +38,14 @@ class Staff {
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
-      'user_id': userId,
+      'user_name': userName,
+      'password': password,
+      'password_confirmation': password,
       'role_id': roleId,
       'first_name': firstName,
       'last_name': lastName,
       'phone_number': phoneNumber,
-      'created_at': createdAt.toIso8601String(),
-      'updated_at': updatedAt.toIso8601String(),
+     
     };
   }
 }

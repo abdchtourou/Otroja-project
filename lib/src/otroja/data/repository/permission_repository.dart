@@ -22,4 +22,32 @@ class PermissionRepository {
       throw Exception('Failed to load permissions: $e');
     }
   }
+
+  Future<void> addPermissionToStaff(int permissionId, List<int> staffIds) async {
+    try {
+      final response = await _apiService.post('/permission/staffs',data:  {
+        'permission_id': permissionId,
+        'staff_ids': staffIds,
+      });
+      if (response.statusCode != 200) {
+        throw Exception('Failed to add permission to staff');
+      }
+    } catch (e) {
+      throw Exception('Failed to add permission to staff: $e');
+    }
+  }
+
+  Future<void> removePermissionFromStaff(int permissionId, int staffId) async {
+    try {
+      final response = await _apiService.post('/permission/staffs/remove', data: {
+        'permission_id': permissionId,
+        'staff_id': staffId,
+      });
+      if (response.statusCode != 200) {
+        throw Exception('Failed to remove permission from staff');
+      }
+    } catch (e) {
+      throw Exception('Failed to remove permission from staff: $e');
+    }
+  }
 }
