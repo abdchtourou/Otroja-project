@@ -5,7 +5,6 @@ import '../../core/helper/constant.dart';
 class ApiService {
   final Dio _dio = Dio();
 
-
   ApiService() {
     _dio.options.baseUrl = baseUrl;
     _dio.options.connectTimeout = const Duration(seconds: 100);
@@ -23,6 +22,7 @@ class ApiService {
       print('after response');
       return response;
     } on DioException catch (e) {
+      print("eeeeeeeeeeeeeeeeeeeeeeeeee");
       print(e.message);
       throw _handleError(e);
     }

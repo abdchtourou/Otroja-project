@@ -14,7 +14,7 @@ class AbsenceRepo {
 
   getGroups() async {
     final responseGroups = await apiService.get('group/get_groups_by_teacher',
-        queryParameters: {"teacher_id": "2"}
+       // queryParameters: {}
     );
 
     final Map<String, dynamic> responseData = responseGroups.data;

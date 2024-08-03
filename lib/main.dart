@@ -44,10 +44,7 @@ class MyApp extends StatelessWidget {
               fontFamily: 'DIN Next LT Arabic',
             ),
             onGenerateRoute: appRouter.generateRoute,
-            home: BlocProvider(
-              create: (context) => getIt<CheckStudentCubit>(),
-              child: CheckStudentScreen(),
-            ),
+           
           );
         });
   }

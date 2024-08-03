@@ -87,8 +87,8 @@ class AppRouter {
       StudentInfoCubit(StudentRepository(ApiService()));
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      // case Routes.home:
-      //   return MaterialPageRoute(builder: (_) => const HomePage());
+      case Routes.home:
+        return MaterialPageRoute(builder: (_) => const HomePage());
 
       case Routes.addCourses:
         levelCubit.getAllLevels();
@@ -194,7 +194,7 @@ class AppRouter {
                   child: CheckStudentScreen(),
                 ));
 
-      case Routes.home:
+      case Routes.checkGroups:
         return MaterialPageRoute(builder: (_) =>
             BlocProvider(
               create: (context) => getIt<AbsenceStaffCubit>(),
