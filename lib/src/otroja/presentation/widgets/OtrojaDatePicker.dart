@@ -40,7 +40,7 @@ class _OtrojaDatePickerWidgetState extends State<OtrojaDatePickerWidget> {
       firstDate: DateTime(2000),
       lastDate: DateTime(2101),
 
-      
+
       builder: (BuildContext context, Widget? child) {
         return Theme(
           data: ThemeData.light().copyWith(
@@ -85,7 +85,7 @@ class _OtrojaDatePickerWidgetState extends State<OtrojaDatePickerWidget> {
           onTap: () => _selectDate(context),
           child: Container(
             width: widget.containerWidth,
-            height: 50,
+            height: 45.h,
             padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
             decoration: BoxDecoration(
               color: widget.containerColor,

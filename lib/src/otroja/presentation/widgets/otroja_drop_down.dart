@@ -7,10 +7,12 @@ class OtrojaDropdown extends StatelessWidget {
   final String hint;
   final ValueChanged<String?>? onChange;
   final bool isRtl;
+  String? Function(String?)? validator;
   final String? value;
 
-  const OtrojaDropdown({
+   OtrojaDropdown({
     Key? key,
+    this.validator,
     required this.list,
     this.labelText,
     required this.hint,
@@ -34,7 +36,6 @@ class OtrojaDropdown extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
-                  color: Color(0xff85313C), // Updated color
                 ),
                 textAlign: TextAlign.right,
               ),
@@ -55,13 +56,16 @@ class OtrojaDropdown extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               ),
-              dropdownColor: OtrojaColors.primary2Color,
+              dropdownColor: Colors.white,
               // Background color
+
               menuMaxHeight: 200,
               iconSize: 32,
               iconEnabledColor: const Color(0xFFE6E6E6),
               // Icon color
               decoration: InputDecoration(
+              filled: true,
+              fillColor: Colors.white,
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                   borderSide: const BorderSide(
@@ -77,6 +81,7 @@ class OtrojaDropdown extends StatelessWidget {
                   ),
                 ),
               ),
+              validator:validator ,
               icon: const Icon(Icons.keyboard_arrow_down_outlined),
               elevation: 0,
               style: const TextStyle(

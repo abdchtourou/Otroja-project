@@ -5,7 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../cubit/Exam_cubit/question_cubit.dart';
 import '../../../../../cubit/Exam_cubit/question_state.dart';
 import '../../../../widgets/buttons/otroja_button.dart';
+import '../../../../widgets/otroja_drop_down.dart';
 import 'answer_field.dart';
+import 'enhanced_circular_indicator.dart';
 import 'question_field.dart';
 
 class QuestionTicket extends StatelessWidget {
@@ -13,9 +15,7 @@ class QuestionTicket extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => QuestionCubit(),
-      child: BlocBuilder<QuestionCubit, QuestionState>(
+    return  BlocBuilder<QuestionCubit, QuestionState>(
         builder: (context, state) {
           final cubit = context.read<QuestionCubit>();
 
@@ -33,6 +33,29 @@ class QuestionTicket extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
+                      if(state.currentQuestionIndex==0) ...[
+                        if(state is QuestionSubjectLoaded)
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: OtrojaDropdown(
+                            list: cubit.subjectNames,
+                            labelText: 'حدد المادة',
+                            hint: "حدد المادة",
+                            onChange: (value) {
+
+                              cubit.subjectId = cubit.subjectsId[value]!;
+
+                              print(cubit.subjectId);
+                            },
+                          ),
+                        ),
+                        const Divider(
+                          // height: 2,
+                          thickness: 2,
+                        )
+
+
+                      ],
                       Text(
                         "السؤال ${state.currentQuestionIndex + 1}",
                         style: const TextStyle(
@@ -72,12 +95,8 @@ class QuestionTicket extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Container(
-                            width: 10,
-                            height: 10,
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle, color: Colors.green),
-                          )
+                          const EnhancedCircularIndicator()
+
                         ],
                       ),
                       QuestionField(
@@ -116,11 +135,11 @@ class QuestionTicket extends StatelessWidget {
                         child: InkWell(
                           onTap: cubit.goBack,
                           child: Container(
-                            margin: EdgeInsets.all(4),
+                            margin: const EdgeInsets.all(4),
                             height: 60,
                             decoration: BoxDecoration(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(15)),
+                                  const BorderRadius.all(Radius.circular(15)),
                               border: Border.all(
                                   color: const Color(0xFF85313C), width: 2),
                             ),
@@ -148,14 +167,16 @@ class QuestionTicket extends StatelessWidget {
                   OtrojaButton(
                     text: "انهاء",
                     onPressed: () {
-                      print(state.qaList);
+                      cubit.printQuestion();
+                      // cubit.postQuestionAnswers();
+                      // print(state.qaList[0].answers[1].isCorrect);
                     },
                   ),
               ],
             ),
           );
         },
-      ),
-    );
+      );
+
   }
 }

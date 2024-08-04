@@ -1,7 +1,14 @@
 import 'package:admins/src/otroja/core/di/dependency_injection.dart';
 import 'package:admins/src/otroja/core/routing/app_router.dart';
+import 'package:admins/src/otroja/cubit/Exam_cubit/create_exam/create_exam_cubit.dart';
+import 'package:admins/src/otroja/cubit/Exam_cubit/question_cubit.dart';
 import 'package:admins/src/otroja/cubit/absecne_staff/absence_staff_cubit.dart';
+import 'package:admins/src/otroja/cubit/course/course_cubit.dart';
 import 'package:admins/src/otroja/cubit/students/check_student/check_student_cubit.dart';
+import 'package:admins/src/otroja/presentation/screens/Exams/create_exam.dart';
+import 'package:admins/src/otroja/presentation/screens/Exams/exam.dart';
+import 'package:admins/src/otroja/presentation/screens/Exams/qustion/qustion.dart';
+import 'package:admins/src/otroja/presentation/screens/Groups/ShowGroups/GroupsScreen.dart';
 import 'package:admins/src/otroja/presentation/screens/absence/studentsAbsence/checkStudentsScreen.dart';
 import 'package:admins/src/otroja/presentation/screens/absence/teachersAbsence/checkGroupsScreen.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +27,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   MyApp({super.key, required this.appRouter});
+
   final AppRouter appRouter;
 
   // This widget is the root of your application.
@@ -29,7 +37,7 @@ class MyApp extends StatelessWidget {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent, // Make status bar transparent
       statusBarIconBrightness:
-          Brightness.dark, // Optionally, set status bar icons to dark
+      Brightness.dark, // Optionally, set status bar icons to dark
     ));
 
     return ScreenUtilInit(
@@ -38,16 +46,23 @@ class MyApp extends StatelessWidget {
         splitScreenMode: true,
         builder: (_, child) {
           return MaterialApp(
-            title: 'Flutter Demo',
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              fontFamily: 'DIN Next LT Arabic',
-            ),
-            onGenerateRoute: appRouter.generateRoute,
-            home: BlocProvider(
-              create: (context) => getIt<CheckStudentCubit>(),
-              child: CheckStudentScreen(),
-            ),
+              title: 'Flutter Demo',
+              debugShowCheckedModeBanner: false,
+              theme: ThemeData(
+                fontFamily: 'DIN Next LT Arabic',
+              ),
+              onGenerateRoute: appRouter.generateRoute,
+          //     home: MultiBlocProvider(
+          //         providers: [
+          //         BlocProvider(
+          //         create: (context) => CreateExamCubit(),) ,
+          //           BlocProvider(
+          //         create: (context) => getIt<CourseCubit>(),)
+          //
+          // ],
+          // child: CreateExam(),
+          //
+          // ),
           );
         });
   }

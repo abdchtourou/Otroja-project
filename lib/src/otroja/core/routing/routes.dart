@@ -8,6 +8,7 @@ class Routes {
   static const String addParents = "/addParents";
   static const String addStaff = "/addStaff";
   static const String question = "/question";
+  static const String questionBank = "/questionBank";
   static const String home = "/";
   static const String checkStudents = "/checkStudents";
   static const String checkGroups = "/checkGroups";
@@ -26,4 +27,5 @@ class Routes {
   static const String showLevels = "/showLevels";
   static const String subjectOrGroup = "/subjectOrGroup";
   static const String managemet = "/accountManagemet";
+  static const String createExam = "/createExam";
 }

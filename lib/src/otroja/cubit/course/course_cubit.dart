@@ -11,6 +11,9 @@ class CourseCubit extends Cubit<CourseState> {
   CourseCubit(this.repository) : super(CourseInitial()) {
     getAllCourses();
   }
+  List<String> coursesNames = [];
+  Map<String, int> coursesId = {};
+
 
   Future<void> createCourse(
       String startDate, String name, List<int> levelIds) async {
@@ -24,10 +27,16 @@ class CourseCubit extends Cubit<CourseState> {
     }
   }
 
+  var courseId;
   Future<void> getAllCourses() async {
+
     try {
       emit(CourseLoading());
       final courses = await repository.getAllCourses();
+      for (var element in courses) {
+        coursesNames.add(element.name);
+        coursesId[element.name!] = element.id!;
+      }
 
       print('jjjjjjjjjjjjjjjjjjjjjjjjjjjjjj');
       print(courses);

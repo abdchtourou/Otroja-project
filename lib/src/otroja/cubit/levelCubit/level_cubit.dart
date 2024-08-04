@@ -12,6 +12,7 @@ class LevelCubit extends Cubit<LevelState> {
   String name = '';
   String startDate = '';
   List<int> levelsint = [];
+  List<String> levelsName = [];
 
   LevelCubit(this.repository) : super(LevelInitial());
 
@@ -45,11 +46,20 @@ class LevelCubit extends Cubit<LevelState> {
     }
     emit(LevelUpdated(levels));
   }
+  Map<String,int> levelsId={};
 
   Future<void> getLevelsByCourseId(int courseId) async {
     try {
       emit(LevelLoading());
+      print('////////////////////////////////////////////////////////////');
       final levels = await repository.getLevelsByCourseId(courseId);
+      levelsName.clear();
+      for (var element in levels) {
+        levelsName.add(element.name!);
+        levelsId[element.name]=element.pivot!.id;
+      }
+      print('///////////////////////////////////////////////////////aaaaaaaaaaa');
+      // print(levelsName);
       emit(LevelLoaded(levels));
     } catch (e) {
       emit(LevelError(e.toString()));

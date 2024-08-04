@@ -1,4 +1,6 @@
 import 'package:admins/src/otroja/core/routing/routes.dart';
+import 'package:admins/src/otroja/cubit/Exam_cubit/create_exam/create_exam_cubit.dart';
+import 'package:admins/src/otroja/cubit/Exam_cubit/question_bank/question_bank_cubit.dart';
 import 'package:admins/src/otroja/cubit/Exam_cubit/question_cubit.dart';
 import 'package:admins/src/otroja/cubit/absecne_staff/absence_staff_cubit.dart';
 import 'package:admins/src/otroja/cubit/activityCubit/show_activity/show_activity_cubit.dart';
@@ -20,6 +22,7 @@ import 'package:admins/src/otroja/data/repository/standard_repository.dart';
 import 'package:admins/src/otroja/data/repository/students_rpeos/show_students_repo.dart';
 import 'package:admins/src/otroja/data/repository/subject_repository.dart';
 import 'package:admins/src/otroja/presentation/screens/Courses/AddCourses/addCoursesScreen.dart';
+import 'package:admins/src/otroja/presentation/screens/Exams/question_bank.dart';
 import 'package:admins/src/otroja/presentation/screens/Exams/qustion/qustion.dart';
 import 'package:admins/src/otroja/presentation/screens/Home/homePage.dart';
 import 'package:admins/src/otroja/presentation/screens/activity/addActivity/addActivityScreen.dart';
@@ -42,6 +45,7 @@ import '../../data/datasource/api_services.dart';
 import '../../data/repository/course_repository.dart';
 import '../../data/repository/group_repository.dart';
 import '../../data/repository/staff_repository.dart';
+import '../../presentation/screens/Exams/create_exam.dart';
 import '../../presentation/screens/management/management_screen.dart';
 import '../../presentation/screens/Courses/ShowCourses/show_courses.dart';
 import '../../presentation/screens/Groups/ShowGroups/GroupsScreen.dart';
@@ -182,12 +186,12 @@ class AppRouter {
                   child: CheckStudentScreen(),
                 ));
 
-      case Routes.home:
-        return MaterialPageRoute(builder: (_) =>
-            BlocProvider(
-              create: (context) => getIt<AbsenceStaffCubit>(),
-              child: CheckGroupsScreen(),
-            ));
+      case Routes.checkGroups:
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) => getIt<AbsenceStaffCubit>(),
+                  child: CheckGroupsScreen(),
+                ));
 
       case Routes.addGroup:
         return MaterialPageRoute(
@@ -213,7 +217,8 @@ class AppRouter {
         showStudentsCubit.getStudents();
         return MaterialPageRoute(
             builder: (_) => BlocProvider.value(
-                value: showStudentsCubit, child: const AddStudentToGroupScreen()));
+                value: showStudentsCubit,
+                child: const AddStudentToGroupScreen()));
 
       case Routes.groupStudents:
         final groupId = settings.arguments as int;
@@ -227,7 +232,32 @@ class AppRouter {
                 ));
 
       case Routes.groups:
-        return MaterialPageRoute(builder: (_) => GroupsScreen());
+        final isSelectedGroup = settings.arguments as bool;
+
+        return MaterialPageRoute(
+            builder: (_) => MultiBlocProvider(
+                  providers: [
+                    BlocProvider(
+                      create: (context) =>
+                          CourseCubit(CourseRepository(ApiService())),
+                    ),
+                    BlocProvider.value(
+                      // create: (context)=>GroupCubit(GroupRepository(ApiService())),
+                      value: groupCubit,
+                    ),
+                    BlocProvider.value(
+                      // create: (context)=>GroupCubit(GroupRepository(ApiService())),
+                      value: levelCubit,
+                    ),
+                    BlocProvider.value(
+                      // create: (context)=>GroupCubit(GroupRepository(ApiService())),
+                      value: getIt<CreateExamCubit>(),
+                    ),
+                  ],
+                  child: GroupsScreen(
+                    isSelectedGroup: isSelectedGroup,
+                  ),
+                ));
 
       case Routes.addActivity:
         return MaterialPageRoute(
@@ -279,13 +309,13 @@ class AppRouter {
                   create: (context) => getIt<AddStudentCubit>(),
                   child: const AddStudent(),
                 ));
-        case Routes.question:
+      case Routes.question:
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
                   create: (context) => getIt<QuestionCubit>(),
                   child: const Question(),
                 ));
-                 case Routes.addStaff:
+      case Routes.addStaff:
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
                   create: (context) => getIt<AddStaffCubit>(),
@@ -296,7 +326,39 @@ class AppRouter {
 
       case Routes.managemet:
         return MaterialPageRoute(builder: (_) => ManagemetScreen());
+      case Routes.home:
+        return MaterialPageRoute(
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => getIt<CreateExamCubit>(),
+              ),
+              BlocProvider(
+                  create: (context) => CourseCubit(
+                        CourseRepository(ApiService()),
+                      ))
+            ],
+            child: CreateExam(),
+          ),
+        );
+      case Routes.questionBank:
+        final bool isAdd = settings.arguments as bool;
+        return MaterialPageRoute(
+            builder: (_) => MultiBlocProvider(
+                  providers: [
+                    BlocProvider(
+                      create: (context) => getIt<CreateExamCubit>(),
+                    ),
+                    BlocProvider(
+                      create: (context) => getIt<QuestionBankCubit>(),
+                    ),
+                  ],
+                  child: QuestionBank(
+                    isAdd: isAdd,
+                  ),
+                ));
     }
+
     return null;
   }
 }

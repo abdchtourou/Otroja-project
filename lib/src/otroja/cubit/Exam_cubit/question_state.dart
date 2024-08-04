@@ -1,7 +1,10 @@
+import 'package:admins/src/otroja/data/models/questinos_model.dart';
 import 'package:equatable/equatable.dart';
 
+import '../../data/models/subjects_model.dart';
+
 class QuestionState extends Equatable {
-  final List<Map<String, String>> qaList;
+  final List<QuestionModel> qaList;
   final int currentQuestionIndex;
   final int totalQuestions;
   final int selectedAnswerIndex;
@@ -14,7 +17,7 @@ class QuestionState extends Equatable {
   });
 
   QuestionState copyWith({
-    List<Map<String, String>>? qaList,
+    List<QuestionModel>? qaList,
     int? currentQuestionIndex,
     int? totalQuestions,
     int? selectedAnswerIndex,
@@ -29,4 +32,8 @@ class QuestionState extends Equatable {
 
   @override
   List<Object?> get props => [qaList, currentQuestionIndex, totalQuestions, selectedAnswerIndex];
+}
+class QuestionSubjectLoading extends QuestionState{}
+class QuestionSubjectLoaded extends QuestionState{
+
 }

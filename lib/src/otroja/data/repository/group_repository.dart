@@ -17,7 +17,6 @@ class GroupRepository {
     final response =
         await _apiService.get('groups',queryParameters:  {'course_level_id': courseLevelId.toString()});
     final List<dynamic> data = response.data['data'];
-    print(response.data['data']);
     return data.map((json) => Group.fromJson(json)).toList();
   }
 

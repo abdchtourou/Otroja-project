@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+  import 'package:flutter/material.dart';
 class StudentCard extends StatelessWidget {
   final String name;
   final int id;
