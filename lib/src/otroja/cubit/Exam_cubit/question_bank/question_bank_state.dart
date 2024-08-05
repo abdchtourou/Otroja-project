@@ -1,4 +1,4 @@
-import '../../../data/models/question_bank_model/question_bank_model.dart';
+import '../../../data/models/Exam/question_bank_model/question_bank_model.dart';
 
 
 

@@ -91,6 +91,7 @@ class CheckStudentCubit extends Cubit<CheckStudentState> {
     final data = AbsenceModel(
         groupId: idGroup.toString(), studentIds: isAbsence, date: dateTime);
     if (isAbsence.isNotEmpty) {
+      print(data.toJson());
       await absenceRepo.post(data.toJson());
       emit(CheckStudentSend());
       emit(CheckStudentLoaded(isPresentList, studentsList));

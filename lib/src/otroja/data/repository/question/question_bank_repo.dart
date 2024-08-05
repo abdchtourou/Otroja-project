@@ -6,7 +6,7 @@ import 'package:admins/src/otroja/data/models/questinos_model.dart';
 
 import '../../../presentation/screens/Exams/qustion/qustion.dart';
 import '../../datasource/api_services.dart';
-import '../../models/question_bank_model/question_bank_model.dart';
+import '../../models/Exam/question_bank_model/question_bank_model.dart';
 class QuestionBankRepository {
   ApiService apiService;
 

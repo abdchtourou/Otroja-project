@@ -34,6 +34,6 @@ class QuestionState extends Equatable {
   List<Object?> get props => [qaList, currentQuestionIndex, totalQuestions, selectedAnswerIndex];
 }
 class QuestionSubjectLoading extends QuestionState{}
+class QuestionSubjectSend extends QuestionState{}
 class QuestionSubjectLoaded extends QuestionState{
-
 }

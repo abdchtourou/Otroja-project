@@ -19,6 +19,7 @@ class QuestionCubit extends Cubit<QuestionState> {
   QuestionCubit(this.subjectsRepo) : super(const QuestionState()) {
     _updateControllers();
     getAllSubjects();
+    print('//////////////////////////////////// zed|');
   }
 
   void addQuestionAnswer(BuildContext context) {
@@ -143,8 +144,9 @@ class QuestionCubit extends Cubit<QuestionState> {
         ),
         data: data,
       );
+      emit(QuestionSubjectSend());
 
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
         print(json.encode(response.data));
       } else {
         print(response.statusMessage);
@@ -196,6 +198,7 @@ class QuestionCubit extends Cubit<QuestionState> {
   Future<void> getAllSubjects() async{
     emit(QuestionSubjectLoading());
     try{
+      print('//////////////////////////// cinit');
       listSubject = await subjectsRepo.getSubjects();
       emit(QuestionSubjectLoaded());
 

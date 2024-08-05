@@ -4,6 +4,7 @@ import 'package:admins/src/otroja/cubit/add_staff/add_staff_cubit.dart';
 import 'package:admins/src/otroja/cubit/students/add_studnet/add_studnet_cubit.dart';
 import 'package:admins/src/otroja/cubit/students/check_student/check_student_cubit.dart';
 import 'package:admins/src/otroja/cubit/students/edit_info_student_cubit/edit_info_student_cubit.dart';
+import 'package:admins/src/otroja/data/repository/Exam/create_exam_repo.dart';
 import 'package:admins/src/otroja/data/repository/absence/absence_repo.dart';
 import 'package:admins/src/otroja/data/repository/absence/absence_staff_repo.dart';
 import 'package:admins/src/otroja/data/repository/activity_repos/add_activity_repo.dart';
@@ -64,7 +65,8 @@ Future<void> setUpGetIt()async{
   getIt.registerFactory<QuestionBankCubit>(()=>QuestionBankCubit(getIt()));
 
   //create exam
-  getIt.registerFactory<CreateExamCubit>(()=>CreateExamCubit());
+  getIt.registerFactory<CreateExamRepo>(()=>CreateExamRepo(apiServices));
+  getIt.registerFactory<CreateExamCubit>(()=>CreateExamCubit(getIt()));
 
 
 

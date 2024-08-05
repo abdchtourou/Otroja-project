@@ -113,17 +113,22 @@ class CheckStudentScreen extends StatelessWidget {
                               children: [
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                                   textDirection: TextDirection.rtl,
                                   children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(bottom: 20, right: 5),
-                                      child: Text(
-                                        cubit.studentsList[index].firstName ?? '',
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontStyle: FontStyle.normal,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 15.sp,
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(bottom: 20, right: 5),
+                                        child: Text(
+                                          cubit.studentsList[index].firstName ?? '',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontStyle: FontStyle.normal,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 15.sp,
+
+                                          ),
+                                          textAlign: TextAlign.end,
                                         ),
                                       ),
                                     ),

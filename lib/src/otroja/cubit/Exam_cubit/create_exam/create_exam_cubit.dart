@@ -1,3 +1,5 @@
+import 'package:admins/src/otroja/data/models/Exam/create_exam.dart';
+import 'package:admins/src/otroja/data/repository/Exam/create_exam_repo.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
@@ -5,16 +7,18 @@ import '../../../data/models/group_model.dart';
 import 'create_exam_state.dart';
 
 class CreateExamCubit extends Cubit<CreateExamState> {
-  CreateExamCubit() : super(CreateExamInitial());
+  CreateExamCubit(this.createExamRepo) : super(CreateExamInitial());
 
   final TextEditingController examNameController = TextEditingController();
   String? selectedSubject;
+  var subjectId;
   bool isSelectByCourse = true;
   static List<Group> listGroups = [];
   static List<int> questionsId = [];
   bool isSelected = false;
-  List<int> GroupsId=<int>[];
-
+  static List<int> GroupsId = <int>[];
+  int? courseId;
+  CreateExamRepo createExamRepo;
 
   void addToList({Group? group, int? questionId}) {
     bool itemAdded = false;
@@ -22,6 +26,7 @@ class CreateExamCubit extends Cubit<CreateExamState> {
     if (group != null && !listGroups.contains(group)) {
       listGroups.add(group);
       GroupsId.add(group.id!);
+      print(GroupsId);
       itemAdded = true;
     }
 
@@ -61,16 +66,48 @@ class CreateExamCubit extends Cubit<CreateExamState> {
   }
 
   bool validate() {
-    if (examNameController.text.isEmpty || selectedSubject == null) {
-      emit(CreateExamError('لو سمحت أملأ كل الحقول'));
+    print('///////////////////////////');
+    if (examNameController.text.isEmpty) {
+      emit(CreateExamError('لو سمحت أملأ عنوان الامتحان'));
       return false;
     }
+
+    if (subjectId == null) {
+      emit(CreateExamError('لو سمحت اختر المادة'));
+      return false;
+    }
+
+    if (isSelectByCourse && courseId == null) {
+      emit(CreateExamError('لو سمحت اختر الدورة'));
+      return false;
+    }
+
+    if (!isSelectByCourse && GroupsId.isEmpty) {
+      emit(CreateExamError('لو سمحت اختر على الأقل مجموعة واحدة'));
+      return false;
+    }
+
+    if (questionsId.isEmpty) {
+      emit(CreateExamError('لو سمحت اختر على الأقل سؤال واحد'));
+      return false;
+    }
+
     return true;
   }
 
-  void submit() {
+  void submit() async {
     if (validate()) {
-      emit(CreateExamLoading());
+    print(GroupsId);
+    emit(CreateExamLoading());
+      final data = CreateExamModel(
+          name: examNameController.text,
+          subjectId: subjectId,
+          date: '2001-09-28',
+          questionIds: questionsId,
+          duration: 20,
+          groupIds: GroupsId);
+      await createExamRepo.postData(data.toJson());
+
       emit(CreateExamLoaded());
     }
   }

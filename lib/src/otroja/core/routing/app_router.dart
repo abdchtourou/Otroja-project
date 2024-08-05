@@ -336,7 +336,11 @@ class AppRouter {
               BlocProvider(
                   create: (context) => CourseCubit(
                         CourseRepository(ApiService()),
-                      ))
+                      )),
+              BlocProvider(
+                  create: (context) => levelCubit),
+              BlocProvider(
+                  create: (context) => getIt<QuestionCubit>()),
             ],
             child: CreateExam(),
           ),

@@ -1,4 +1,5 @@
 import 'package:admins/src/otroja/cubit/Exam_cubit/create_exam/create_exam_state.dart';
+import 'package:admins/src/otroja/presentation/widgets/show_students_widget/no_students.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -81,6 +82,8 @@ class GroupsScreen extends StatelessWidget {
                   labelText: 'اسم الدورة',
                   hint: "اختر دورة",
                   onChange: (value) {
+                    print('////////////////////////////////////////');
+
                     context.read<LevelCubit>().getLevelsByCourseId(
                         context.read<CourseCubit>().coursesId[value]!);
                   },
@@ -98,13 +101,17 @@ class GroupsScreen extends StatelessWidget {
       child: BlocBuilder<GroupCubit, GroupState>(
         builder: (context, state) {
           if (state is GroupsLoaded) {
-            return ListView.separated(
-              separatorBuilder: (context, index) => const SizedBox(height: 18),
-              padding: const EdgeInsets.all(10),
-              itemCount: state.groups.length,
-              itemBuilder: (context, index) =>
-                  _buildGroupItem(context, state.groups[index]),
-            );
+            if(state.groups.isNotEmpty){
+              return ListView.separated(
+                separatorBuilder: (context, index) => const SizedBox(height: 18),
+                padding: const EdgeInsets.all(10),
+                itemCount: state.groups.length,
+                itemBuilder: (context, index) =>
+                    _buildGroupItem(context, state.groups[index]),
+              );
+            }else{
+              return NoStudents();
+            }
           } else if (state is GroupLoading) {
             return const Expanded(
                 child: Center(child: CircularProgressIndicator()));

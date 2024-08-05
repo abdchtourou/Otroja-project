@@ -13,6 +13,7 @@ class AbsenceModel {
   }
 
   Map<String, dynamic> toJson() {
+
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['group_id'] = this.groupId;
     data['student_ids'] = this.studentIds;

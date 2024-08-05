@@ -4,7 +4,6 @@
 import 'package:admins/src/otroja/cubit/Exam_cubit/question_bank/question_bank_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../data/models/question_bank_model/question_bank_model.dart';
 import '../../../data/repository/question/question_bank_repo.dart';
 
 class QuestionBankCubit extends Cubit<QuestionBankState> {

@@ -16,6 +16,7 @@ class CreateExamInitial extends CreateExamState {}
 class CreateExamLoading extends CreateExamState {}
 
 class CreateExamLoaded extends CreateExamState {}
+class CreateExamSend extends CreateExamState {}
 
 class CreateExamError extends CreateExamState {
   final String message;
