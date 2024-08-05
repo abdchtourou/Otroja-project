@@ -17,13 +17,18 @@ class GroupCubit extends Cubit<GroupState> {
   int? selectedCourseLevelId;
   List<int> selectedStudents = [];
 
-  GroupCubit(this.repository) : super(GroupInitial());
+  GroupCubit(this.repository) : super(GroupInitial()){
+
+  }
 
   // Future<void> getGroups() async {
   //   emit(GroupLoading());
   //   try {
+  //     print('////////////////////////');
   //     final groups = await repository.getGroups();
-  //     emit(GroupsLoaded(groups));
+  //     print('zzzzzzzzzzzzzzzzzzzzzzz');
+  //     print(groups);
+  //     emit(GroupsAllGroupsLoaded(groups));
   //   } catch (e) {
   //     emit(GroupError(e.toString()));
   //   }
@@ -32,8 +37,10 @@ class GroupCubit extends Cubit<GroupState> {
     emit(GroupLoading());
     try {
       final groups = await repository.getGroupsByCourseLevel(id);
+      print(groups);
+      print('///////////////////////// group zed');
 
-      emit(GroupsLoaded(groups));
+        emit(GroupsLoaded(groups));
     } catch (e) {
       print(e);
       emit(GroupError(e.toString()));

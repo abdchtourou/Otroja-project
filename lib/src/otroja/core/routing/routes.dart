@@ -31,4 +31,5 @@ class Routes {
   static const String studentPoints = "/studentPoints";
   static const String studentAbsencsByGroup = "/studentAbsencsByGroup";
   static const String studentAbsencsForGroup = "/studentAbsencsForGroup";
+  static const String questionBank = "/questionBank";
 }

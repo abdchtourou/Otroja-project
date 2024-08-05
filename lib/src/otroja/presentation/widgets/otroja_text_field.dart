@@ -83,9 +83,10 @@ class OtrojaTextFormField extends StatelessWidget {
               border: const OutlineInputBorder(
                 borderSide: BorderSide(color: Color(0xFFE6E6E6)),
               ),
-              contentPadding: isRtl
-                  ? const EdgeInsets.only(right: 16.0)
-                  : const EdgeInsets.only(left: 16.0),
+              contentPadding: const EdgeInsets.symmetric(
+                vertical:15.0,
+                horizontal: 16.0,
+              ),
             ),
             textAlign: isRtl ? TextAlign.right : TextAlign.left,
           ),

@@ -7,6 +7,11 @@ final class GroupInitial extends GroupState {}
 
 final class GroupLoading extends GroupState {}
 final class StudentAddedToGroup extends GroupState {}
+final class GroupsAllGroupsLoaded extends GroupState {
+  final List<Group> groups;
+
+  GroupsAllGroupsLoaded(this.groups);
+}
 final class GroupsLoaded extends GroupState {
   final List<Group> groups;
 

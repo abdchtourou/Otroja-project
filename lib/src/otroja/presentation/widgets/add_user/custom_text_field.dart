@@ -1,18 +1,21 @@
+import 'package:admins/src/otroja/core/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  CustomTextFormField({
-    super.key,
-    this.labelText,
-    this.hintText,
-    this.onChange,
-    this.obscureText = false,
-    this.prefixIcon,
-    this.suffixIcon,
-    this.isRtl = true,
-    this.type,
-    required this.myController,
-  });
+  CustomTextFormField(
+      {super.key,
+      this.labelText,
+      this.hintText,
+      this.onChange,
+      this.obscureText = false,
+      this.prefixIcon,
+      this.suffixIcon,
+      this.isRtl = true,
+      this.type,
+      required this.myController,
+      this.validator});
+
+  String? Function(String?)? validator;
 
   final String? labelText;
   final String? hintText;
@@ -33,7 +36,9 @@ class CustomTextFormField extends StatelessWidget {
         children: [
           if (labelText != null)
             Padding(
-              padding: const EdgeInsets.only(bottom: 20.0, right: 15),
+              // padding: const EdgeInsets.only(bottom: 20.0, right: 15),
+              padding: const EdgeInsets.only(bottom: 15.0, right: 15),
+
               child: Text(
                 labelText!,
                 style: const TextStyle(
@@ -47,12 +52,7 @@ class CustomTextFormField extends StatelessWidget {
             controller: myController,
             obscureText: obscureText,
             style: const TextStyle(color: Colors.black),
-            validator: (value) {
-              if (value!.isEmpty) {
-                return 'field is required';
-              }
-              return null;
-            },
+            validator: validator,
             onChanged: onChange,
             decoration: InputDecoration(
               hintText: hintText,
@@ -63,12 +63,21 @@ class CustomTextFormField extends StatelessWidget {
                 borderSide: BorderSide(color: Color(0xFFE6E6E6)),
                 borderRadius: BorderRadius.all(Radius.circular(18)),
               ),
+              focusedBorder: const OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: OtrojaColors.primaryColor,
+                ),
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
               border: const OutlineInputBorder(
                 borderSide: BorderSide(color: Color(0xFFE6E6E6)),
               ),
               contentPadding: const EdgeInsets.symmetric(
-                  vertical: 20.0,
-                  horizontal: 16.0), // Adjust padding to increase height
+                vertical:15.0,
+                horizontal: 16.0,
+              ),
+              fillColor: Colors.white,
+              filled: true, // Ensure the background color is applied
             ),
             textAlign: isRtl ? TextAlign.right : TextAlign.left,
             keyboardType: type,
