@@ -38,7 +38,6 @@ class GroupCubit extends Cubit<GroupState> {
     try {
       final groups = await repository.getGroupsByCourseLevel(id);
       print(groups);
-      print('///////////////////////// group zed');
 
         emit(GroupsLoaded(groups));
     } catch (e) {

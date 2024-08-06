@@ -127,5 +127,5 @@ class OtrojaAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(100); // Adjust height if needed
+  Size get preferredSize => const Size.fromHeight(120); // Adjust height if needed
 }

@@ -96,6 +96,7 @@ class CreateExamCubit extends Cubit<CreateExamState> {
   }
 
   void submit() async {
+    print('..................................');
     if (validate()) {
     print(GroupsId);
     emit(CreateExamLoading());
@@ -107,8 +108,7 @@ class CreateExamCubit extends Cubit<CreateExamState> {
           duration: 20,
           groupIds: GroupsId);
       await createExamRepo.postData(data.toJson());
-
-      emit(CreateExamLoaded());
+      emit(CreateExamSend());
     }
   }
 }

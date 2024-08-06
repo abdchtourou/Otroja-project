@@ -37,6 +37,20 @@ class CreateExam extends StatelessWidget {
                   return OtrojaSuccessDialog(text: "تمت اضافة الامتحان بنجاح");
                 });
           }
+          if(state is CreateExamError){
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Center(
+                  child: Text(
+                    state.message,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                backgroundColor: OtrojaColors.primaryColor,
+                duration: Duration(seconds: 2),
+              ),
+            );
+          }
         },
         builder: (context, state) {
           final cubit = context.read<CreateExamCubit>();
