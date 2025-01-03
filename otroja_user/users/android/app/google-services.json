@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "125629291629",
+    "project_id": "otrojah-5c407",
+    "storage_bucket": "otrojah-5c407.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:125629291629:android:a57dca0ccb9d17e503b364",
+        "android_client_info": {
+          "package_name": "com.example.otroja_users"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6W1myiMC5MiLa0X0_jaieFPuRnX9QNTg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:125629291629:android:b4d717fc76f4acf503b364",
+        "android_client_info": {
+          "package_name": "com.example.untitled"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6W1myiMC5MiLa0X0_jaieFPuRnX9QNTg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
